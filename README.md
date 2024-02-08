@@ -68,3 +68,11 @@ A comprehensive application for individuals to anonymously review and seek opini
 - Forced Log-in -> Account creation if no log-in is available
 - Profile -> Text field to be modified.
 - Settings -> Toggle settings
+
+# 4. Wireframes
+## Low Fidelity 
+![Search](Home&Reviews.png)
+![Register](Register.png)
+![Profile&Settings](Profile&Settings.png)
+![Search](Search.png)
+![Notifications](Notifications.png)
