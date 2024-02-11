@@ -79,5 +79,20 @@ A comprehensive application for individuals to anonymously review and seek opini
 ![Profile](Profile.jpg)
 
 ## High Fidelity 
+![Register](Register(HiFi).png)
+![Login](Login(HiFi).png)
+![Homepage](Homepage(HiFi).png)
+![Search](Search(HiFi).png)
+![SearchResults](SearchResults(HiFi).png)
+![UserProfile](UserProfile(HiFi).png)
+![BusinessProfile](BusinessProfile(HiFi).png)
+![Forum](ForumPage(HiFi).png)
+![AddForum](AddForum(HiFi).png)
+![AddReview](AddReview(HiFi).png)
+![ReviewPage](ReviewPage(HiFi).png)
+![Notifications](Notifications(HiFi).png)
+![Settings](Settings(HiFi).png)
+
 
 ## Interactive Prototype 
+![InteractivePrototype](StyledBy_InteractivePrototype.gif)
