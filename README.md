@@ -73,6 +73,11 @@ A comprehensive application for individuals to anonymously review and seek opini
 ## Low Fidelity 
 ![Search](Home&Reviews.png)
 ![Register](Register.png)
-![Profile&Settings](Profile&Settings.png)
+![Add](Profile&Settings.png)
 ![Search](Search.png)
 ![Notifications](Notifications.png)
+![Profile](Profile.jpg)
+
+## High Fidelity 
+
+## Interactive Prototype 
