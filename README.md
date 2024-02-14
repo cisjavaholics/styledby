@@ -224,3 +224,38 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Settings Screen**
 - (Read/GET) Query user settings.
 - (Update/PUT) Update user settings.
+
+### Existing API Endpoints
+
+**Google Places API**
+Base URL: https://maps.googleapis.com/
+| **HTTP Verb** | **Endpoint**                      | **Description**                                               |
+|-----------|---------------------------------------|---------------------------------------------------------------|
+| GET       | /api/places/search                    | Allows users to search for businesses                         |
+| GET       | /api/businesses/:placeId              | Retrieves detailed information about a specific business      |
+| GET       | /api/businesses/:placeId/reviews      | Retrieves reviews for a specific business                     |
+| GET       | /api/businesses/:placeId/photos       | Retrieves photos of a specific business                       |
+| GET       | /api/places/autocomplete              | Provides autocomplete suggestions for business names/addresses|
+
+**Instagram Basic API**
+
+
+Base URL: https://graph.instagram.com/
+| **HTTP Verb** | **Endpoint**                                | **Description**                                                 |
+|-----------|-------------------------------------------------|-----------------------------------------------------------------|
+| GET       | /users/self/media/recent                        | Retrieves recent media uploaded by the authenticated user       |
+| GET       | /users/self                                     | Retrieves details about the authenticated user's profile        |
+| GET       | /users/{user-id}/media/recent                   | Retrieves recent media uploaded by a specific user              |
+| GET       | /users/{user-id}                                | Retrieves details about a specific user's profile               |
+| GET       | /media/{media-id}                               | Retrieves details about a specific media object                 |
+| GET       | /media/{media-id}/comments                      | Retrieves a list of comments for a specific media object        |
+| GET       | /media/{media-id}/likes                         | Retrieves a list of users who have liked a specific media object|
+| GET       | /locations/{location-id}                        | Retrieves details about a specific location                     |
+| GET       | /locations/{location-id}/media/recent           | Retrieves recent media uploaded from a specific location        |
+| GET       | /tags/{tag-name}                                | Retrieves details about a specific tag                          |
+| GET       | /tags/{tag-name}/media/recent                   | Retrieves recent media with a specific tag                      |
+| GET       | /businesses/{business-id}                       | Retrieves details about a specific business profile             |
+| GET       | /businesses/{business-id}/media                 | Retrieves recent media uploaded by a specific business          |
+| GET       | /businesses/{business-id}/locations             | Retrieves locations associated with a specific business         |
+| GET       | /businesses/{business-id}/insights              | Retrieves insights for a specific business                      |
+
