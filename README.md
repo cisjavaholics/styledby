@@ -1,16 +1,23 @@
-# StyledBy Overview
-# Description 
+
+## Table of Contents
+1. [Overview](#styledby-overview)
+2. [Product Spec](#product-spec)
+4. [Wireframes](#wireframes)
+5. [Schema](#schema)
+
+## StyledBy Overview
+### Description 
 A comprehensive application for individuals to anonymously review and seek opinions on local service providers, fostering a community-driven approach to sharing experiences with barbers, stylists, nail techs, and more. The app creates a space for users to rate and provide unbiased feedback on these professionals, facilitating informed decisions for others seeking quality services. 
 
-# App Evaluation
+## App Evaluation
 - **Category**: Lifestyle/Social Forum & Community Chats
 - **Story**: Allows users to anonymously review local service providers and share/inquire about experiences and recommendations.
 - **Market**: Any individual in the local community interested in cosmetic services could choose to use this app.
 - **Habit**: This app could be used as often as the user wanted depending on how frequently they use local services.
 - **Scope**: This app would start off serving local (Tallahassee) citizens and will then branch out to support other local communities throughout the country.
 
-# Product Spec
-# 1. User Stories (Required and Optional)
+## Product Spec
+### 1. User Stories (Required and Optional)
 **Required Must-have Stories**
 - User login
 - Homepage feed (recent reviews and popular community forum posts)
@@ -26,7 +33,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 - Updates on review interactions (likes, comments, replies)
 - Automated forum responses based on generalized reviews
 
-# 2. Screens
+## 2. Screens
 - Login
 - Register - User signs up or logs into their account
   - Upon Download/Reopening of the application, the user is prompted to log in to         gain access to their profile information.
@@ -48,7 +55,7 @@ A comprehensive application for individuals to anonymously review and seek opini
   - Top Right Icon in Profile
   - Lets people change language and app notification settings.
 
-# 3. Navigation
+## 3. Navigation
 **Tab Navigation** (Tab to Screen)
 - Homepage
 - Notifications
@@ -69,21 +76,16 @@ A comprehensive application for individuals to anonymously review and seek opini
 - Profile -> Text field to be modified.
 - Settings -> Toggle settings
 
-- Forced Log-in -> Account creation if no log-in is available
-- Profile -> Text field to be modified.
-- Settings -> Toggle settings
-
-## Low Fidelity 
+## Wireframes
+### Low Fidelity 
 ![Search](Home&Reviews.png)
 ![Register](Register.png)
-![Profile&Settings](Profile&Settings.png)
 ![Add](Profile&Settings.png)
 ![Search](Search.png)
 ![Notifications](Notifications.png)
-
 ![Profile](Profile.jpg)
 
-## High Fidelity 
+### High Fidelity 
 ![Register](Register(HiFi).png)
 ![Login](Login(HiFi).png)
 ![Homepage](Homepage(HiFi).png)
@@ -99,74 +101,6 @@ A comprehensive application for individuals to anonymously review and seek opini
 ![Settings](Settings(HiFi).png)
 
 
-## Interactive Prototype 
-![InteractivePrototype](StyledBy_InteractivePrototype.gif)
-
-# StyledBy Overview
-# Description 
-## Table of Contents
-1. [Overview](#styledby-overview)
-2. [Product Spec](#product-spec)
-4. [Wireframes](#wireframes)
-5. [Schema](#schema)
-
-## StyledBy Overview
-### Description 
-A comprehensive application for individuals to anonymously review and seek opinions on local service providers, fostering a community-driven approach to sharing experiences with barbers, stylists, nail techs, and more. The app creates a space for users to rate and provide unbiased feedback on these professionals, facilitating informed decisions for others seeking quality services. 
-
-# App Evaluation
-## App Evaluation
-- **Category**: Lifestyle/Social Forum & Community Chats
-- **Story**: Allows users to anonymously review local service providers and share/inquire about experiences and recommendations.
-- **Market**: Any individual in the local community interested in cosmetic services could choose to use this app.
-- **Habit**: This app could be used as often as the user wanted depending on how frequently they use local services.
-- **Scope**: This app would start off serving local (Tallahassee) citizens and will then branch out to support other local communities throughout the country.
-
-# Product Spec
-# 1. User Stories (Required and Optional)
-## Product Spec
-### 1. User Stories (Required and Optional)
-**Required Must-have Stories**
-- User login
-- Homepage feed (recent reviews and popular community forum posts)
-- Updates on review interactions (likes, comments, replies)
-- Automated forum responses based on generalized reviews
-
-# 2. Screens
-## 2. Screens
-- Login
-- Register - User signs up or logs into their account
-  - Upon Download/Reopening of the application, the user is prompted to log in to gain access to their profile information.
-  - Top Right Icon in Profile
-  - Lets people change language and app notification settings.
-
-# 3. Navigation
-## 3. Navigation
-**Tab Navigation** (Tab to Screen)
-- Homepage
-- Notifications
-- Profile -> Text field to be modified.
-- Settings -> Toggle settings
-
-# 4. Wireframes
-## Low Fidelity 
-## Wireframes
-### Low Fidelity 
-![Search](Home&Reviews.png)
-![Register](Register.png)
-![Add](Profile&Settings.png)
-![Notifications](Notifications.png)
-![Profile](Profile.jpg)
-
-## High Fidelity 
-### High Fidelity 
-![Register](Register(HiFi).png)
-![Login](Login(HiFi).png)
-![Homepage](Homepage(HiFi).png)
-![Settings](Settings(HiFi).png)
-
-
-## Interactive Prototype 
 ### Interactive Prototype 
 ![InteractivePrototype](StyledBy_InteractivePrototype.gif)
 
@@ -291,7 +225,6 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Settings Screen**
 - (Read/GET) Query user settings.
 - (Update/PUT) Update user settings.
-
 
 ### Existing API Endpoints
 
