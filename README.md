@@ -80,7 +80,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 ### Low Fidelity 
 ![Search](Home&Reviews.png)
 ![Register](Register.png)
-![Add](Profile&Settings.png)
+![Add](images/Profile&Settings.png)
 ![Search](Search.png)
 ![Notifications](Notifications.png)
 ![Profile](Profile.jpg)
@@ -102,7 +102,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 
 
 ### Interactive Prototype 
-![InteractivePrototype](StyledBy_InteractivePrototype.gif)
+![InteractivePrototype](images/StyledBy_InteractivePrototype.gif)
 
 ## Schema 
 ### Data Models 
