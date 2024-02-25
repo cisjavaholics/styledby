@@ -1,10 +1,9 @@
 package cis.javaholics.models.users;
 
+import cis.javaholics.models.reviews.Reviews;
+import cis.javaholics.models.saves.Saves;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import cis.javaholics.models.Reviews;
-import cis.javaholics.models.Forums;
-import cis.javaholics.models.Saves;
 
 
 import java.util.List;
@@ -13,12 +12,12 @@ import java.util.List;
 @NoArgsConstructor //creates no argument constructor automatically
 public class Users extends AUsers {
     private List<Reviews> reviews;
-    private List<Forums> forums;
+    private List<ForumPosts> forums;
     private List<Saves> saved;
     private int numReviews;
     private int numForums;
     private int numSaved;
-    public Users(String userId, String username, String email, List<String> roles, List<Reviews> reviews, List<Forums> forums, List<Saves> saved, int numReviews, int numForums, int numSaved) {
+    public Users(String userId, String username, String email, List<String> roles, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, int numReviews, int numForums, int numSaved) {
         super(userId, username, email, roles);
         this.reviews = reviews;
         this.forums = forums;

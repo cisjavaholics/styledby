@@ -1,4 +1,4 @@
-package cis.javaholics.models.reviewPosts;
+package cis.javaholics.models.reviews;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public abstract class AReviewPosts {
+public abstract class AReviews {
 
     @DocumentId
     private String rPostId;

@@ -1,5 +1,6 @@
 package cis.javaholics.models.saves;
 
+import cis.javaholics.models.users.Users;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentReference;
 import lombok.Data;

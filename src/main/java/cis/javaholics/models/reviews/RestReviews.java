@@ -1,9 +1,7 @@
-package cis.javaholics.models.reviewPosts;
+package cis.javaholics.models.reviews;
 
 import cis.javaholics.util.Utility;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.firebase.database.annotations.NotNull;
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RestReviewPosts extends AReviewPosts{
+public class RestReviews extends AReviews {
+    private DocumentReference createdBy;
     private List<DocumentReference> likes;
     private List<DocumentReference> comments;
 
+    public void setMentionedBy(String createdBy) {
+        this.createdBy = Utility.retrieveDocumentReference("Users", createdBy);
+    }
     public void setLikes(ArrayList<String> likes) {
 
         this.likes = new ArrayList<>();

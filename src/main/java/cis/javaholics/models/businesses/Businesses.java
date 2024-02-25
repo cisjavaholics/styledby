@@ -1,11 +1,9 @@
 package cis.javaholics.models.businesses;
 
+import cis.javaholics.models.mentions.Mentions;
+import cis.javaholics.models.reviews.Reviews;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import cis.javaholics.models.Reviews;
-import cis.javaholics.models.Forums;
-import cis.javaholics.models.Mentions;
-
 
 import java.util.List;
 

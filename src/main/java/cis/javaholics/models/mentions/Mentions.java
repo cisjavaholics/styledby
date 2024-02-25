@@ -2,7 +2,6 @@ package cis.javaholics.models.mentions;
 
 import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.users.Users;
-import cis.javaholics.models.forums.Forums;
 import cis.javaholics.models.reviews.Reviews;
 
 import com.google.cloud.Timestamp;
@@ -17,11 +16,11 @@ public class Mentions extends AMentions {
     private Users userId;
     private List<Users> mentionedUsers;
     private List<Businesses> mentionedBus;
-    private Forums forumId;
-    public Mentions(String mentionId, Timestamp mentionedAt, Users userId, List<Users> mentionedsers, List<Businesses> mentionedBus, Forums forumId) {
+    private ForumPosts forumId;
+    public Mentions(String mentionId, Timestamp mentionedAt, Users userId, List<Users> mentionedUsers, List<Businesses> mentionedBus, ForumPosts forumId) {
         super(mentionId, mentionedAt);
         this.userId = userId;
-        this.mentionedUsers = mentionedsers;
+        this.mentionedUsers = mentionedUsers;
         this.mentionedBus = mentionedBus;
         this.forumId = forumId;
     }
