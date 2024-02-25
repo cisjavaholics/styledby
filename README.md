@@ -144,7 +144,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 | rPostId         | String          | Unique identifier for post                            |
 | createdBy       | User            | Reference to user that posted the review              |
 | business        | Business        | Reference to business reviewed                        |
-| serviceType     | List\<String\>  | Type of service (Hair, Skin, Nails, Other)           |
+| serviceType     | String          | Type of service (Hair, Skin, Nails, Other)           |
 | description     | String          | Content of review                                    |
 | rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)          |
 | likes           | List\<Likes\>   | Array of likes                                       |
