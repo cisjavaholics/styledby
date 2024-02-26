@@ -12,8 +12,8 @@ public class Saves extends ASaves{
     private Users userId;
     private ForumPosts forumId;
 
-    public Saves(String savedId, Timestamp savedAt, Users userId, ForumPosts forumId) {
-        super(savedId, savedAt);
+    public Saves(String saveId, Timestamp savedAt, Users userId, ForumPosts forumId) {
+        super(saveId, savedAt);
         this.userId = userId;
         this.forumId = forumId;
     }

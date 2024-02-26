@@ -12,7 +12,7 @@ import java.text.ParseException;
 @NoArgsConstructor
 @Data
 public abstract class ASaves {
-    private String savedId;
+    private String saveId;
     private Timestamp savedAt;
 
     public void setPostedAt(String savedAt) throws ParseException {

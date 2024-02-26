@@ -17,7 +17,7 @@ public abstract class AReviews {
 
     @DocumentId
     private String rPostId;
-    private String topic;
+    private String type;
     private String description;
     private @Nullable List<String> photos;
     private String title;
