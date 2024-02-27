@@ -35,19 +35,18 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/{rPostId}")
-    public ResponseEntity<Reviews> getReviewById(@PathVariable String rPostId) {
+    public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable String rPostId) {
         try {
             Reviews review = reviewsService.getReviewById(rPostId);
             if (review != null) {
-                return new ResponseEntity<>(review, HttpStatus.OK)
-                        .body(new ApiResponseFormat<>(true, "Review found.",review, null));
+                return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND)
-                        .body(new ApiResponseFormat<>(true, "No Reviews found.",review, null));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponseFormat<>(false, "No Reviews found.",null, null));
             }
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving review.",null, e));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()))
         }
     }
 
@@ -60,19 +59,18 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/users/{userId}")
-    public ResponseEntity<Reviews> getReviewByUserId(@PathVariable String createdBy) {
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable String createdBy) {
         try {
             Reviews review = reviewsService.getReviewById(createdBy);
             if (review != null) {
-                return new ResponseEntity<>(review, HttpStatus.OK)
-                        .body(new ApiResponseFormat<>(true, "Review found.",review, null));
+                return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND)
-                        .body(new ApiResponseFormat<>(true, "No Reviews found.",review, null));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponseFormat<>(false, "No Reviews found.",null, null));
             }
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving review.",null, e));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()));
         }
     }
     @Operation(summary = "Get a review by business")
@@ -84,19 +82,18 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/businesses/{businessId}")
-    public ResponseEntity<Reviews> getReviewByBusiness(@PathVariable String businessId) {
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable String businessId) {
         try {
             Reviews review = reviewsService.getReviewById(businessId);
             if (review != null) {
-                return new ResponseEntity<>(review, HttpStatus.OK)
-                        .body(new ApiResponseFormat<>(true, "Review found.",review, null));
+                return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND)
-                        .body(new ApiResponseFormat<>(true, "No reviews found..",review, null));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponseFormat<>(false, "No Reviews found.",null, null));
             }
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving review.",null, e));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()))
         }
     }
 
@@ -109,39 +106,38 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/")
-    public ResponseEntity<List<Reviews>> getAllReviews() {
+    public ResponseEntity<ApiResponseFormat<Reviews>> getAllReviews() {
         try {
-            List<Reviews> reviews = reviewsService.getAllReviews();
-            return new ResponseEntity<>(reviews, HttpStatus.OK)
-                    .body(new ApiResponseFormat<>(true, "Review successfully created.",reviews, null));
+            List<Reviews> reviewList = reviewsService.getAllReviews();
+            return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review successfully created.",reviewList, null));
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Review successfully created.",null, e));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error Retreiving users",null, e));
         }
     }
 
     @Operation(summary = "Create a review")
     @PostMapping("/")
-    public ResponseEntity<String> addReview(@RequestBody Reviews review) {
+    public ResponseEntity<ApiResponseFormat<String>> addReview(@RequestBody Reviews review) {
         try {
             String reviewId = reviewsService.createReview(review);
-            return new ResponseEntity<>(reviewId, HttpStatus.CREATED)
+            return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ApiResponseFormat<>(true, "Review successfully created.",reviewId, null));
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiResponseFormat<>(false, "Error creating review.", null, e));
         }
     }
 
     @Operation(summary = "Delete a review")
     @DeleteMapping("/{rPostId}")
-    public ResponseEntity<Void> deleteReview(@PathVariable String rPostId) {
+    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable String rPostId) {
         try {
             reviewsService.deleteReview(rPostId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT)
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(new ApiResponseFormat<>(true, "Review successfully deleted.",null, null));
         } catch (ExecutionException | InterruptedException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponseFormat<>(false, "Error deleting review.",null, e));
         }
     }
