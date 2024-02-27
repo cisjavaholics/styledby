@@ -13,11 +13,20 @@ import java.util.List;
 @Data
 public class RestReviews extends AReviews {
     private DocumentReference createdBy;
+    private DocumentReference business;
+    private DocumentReference rating;
     private List<DocumentReference> likes;
     private List<DocumentReference> comments;
 
-    public void setMentionedBy(String createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = Utility.retrieveDocumentReference("Users", createdBy);
+    }
+    public void setBusiness(String business) {
+        this.business = Utility.retrieveDocumentReference("Businesses", business);
+    }
+
+    public void setRating(String rating) {
+        this.rating = Utility.retrieveDocumentReference("Ratings", rating);
     }
     public void setLikes(ArrayList<String> likes) {
 
@@ -33,4 +42,6 @@ public class RestReviews extends AReviews {
             this.comments.add(Utility.retrieveDocumentReference("Comments", comment));
         }
     }
+
+
 }

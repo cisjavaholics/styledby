@@ -144,12 +144,13 @@ A comprehensive application for individuals to anonymously review and seek opini
 | rPostId         | String          | Unique identifier for post                            |
 | createdBy       | User            | Reference to user that posted the review              |
 | business        | Business        | Reference to business reviewed                        |
-| serviceType     | String          | Type of service (Hair, Skin, Nails, Other)           |
-| description     | String          | Content of review                                    |
-| rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)          |
-| likes           | List\<Likes\>   | Array of likes                                       |
-| comments        | List\<Comments\>| Array of comments                                    |
-| photos          | List\<String\>  | Array of Strings, File path to photo                 |
+| serviceType     | String          | Type of service (Hair, Skin, Nails, Other)            |
+| description     | String          | Content of review                                     |
+| rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)           |
+| likes           | List\<Likes\>   | Array of likes                                        |
+| comments        | List\<Comments\>| Array of comments                                     |
+| photos          | List\<String\>  | Array of Strings, File path to photo                  |
+| createdAt       | Timestamp       | Time review was created at                            |
 
 **Notification**
 | Property         | Type       | Description                                    |
@@ -170,7 +171,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Like**
 | Property     | Type       | Description                                           |
 |--------------|------------|-------------------------------------------------------|
-| LikeId       | String     | Unique identifier for like                            |
+| likeId       | String     | Unique identifier for like                            |
 | senderId     | User       | UserId of user sending the like                       |
 | receiverId   | User       | UserId of user receiving the like                     |
 | time         | Timestamp  | Timestamp of when the like was made                   |
