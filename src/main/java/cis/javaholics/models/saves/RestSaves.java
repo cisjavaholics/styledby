@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class RestSaves extends ASaves{
+
     private DocumentReference userId;
     private DocumentReference forumId;
 

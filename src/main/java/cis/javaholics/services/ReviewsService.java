@@ -28,7 +28,7 @@ public class ReviewsService {
         if (document.exists()) {
             Users createdBy = null;
             Businesses business = null;
-            Rating rating = null;
+            Ratings rating = null;
             List<Comments> comments = new ArrayList<>();
             List<Likes> likes = new ArrayList<>();
 
@@ -86,8 +86,7 @@ public class ReviewsService {
                     document.getString("type"),
                     document.getString("description"),
                     (List<String>)document.get("photos"),
-                    document.getString("title"),
-                    document.getTimestamp("postedAt"),
+                    document.getTimestamp("createdAt"),
                     createdBy,
                     business,
                     rating,
