@@ -93,7 +93,7 @@ public class ReviewsController {
             }
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()))
+                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()));
         }
     }
 
