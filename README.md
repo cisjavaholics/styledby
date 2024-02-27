@@ -138,16 +138,18 @@ A comprehensive application for individuals to anonymously review and seek opini
 | comments    | List\<Comments\>| Array of comments                                  |
 | postedAt    | Timestamp       | Timestamp of when post was made                    |
 
-**Review Post**
+**Review**
 | Property        | Type            | Description                                           |
 |-----------------|-----------------|-------------------------------------------------------|
 | rPostId         | String          | Unique identifier for post                            |
-| postedBy        | String          | Reference to user that posted the review              |
-| business        | String          | Reference to business reviewed                        |
-| type            | String          | Type of service (Hair, Skin, Nails, Other)            |                    
+| createdBy       | User            | Reference to user that posted the review              |
+| business        | Business        | Reference to business reviewed                        |
+| serviceType     | String          | Type of service (Hair, Skin, Nails, Other)            |
 | description     | String          | Content of review                                     |
-| Photos          | List\<String\>  | List of photos of service (file paths)                |
-| rating          | List\<Int\>     | Numerical rating of service (1, 2, 3, 4, 5)           |
+| rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)           |
+| likes           | List\<Likes\>   | Array of likes                                        |
+| comments        | List\<Comments\>| Array of comments                                     |
+| photos          | List\<String\>  | Array of Strings, File path to photo                  |
 | createdAt       | Timestamp       | Time review was created at                            |
 
 **Notification**
@@ -179,8 +181,26 @@ A comprehensive application for individuals to anonymously review and seek opini
 |----------------|------------|-------------------------------------------------------|
 | ratingId       | String     | Unique identifier for rating                          |
 | userId         | User       | UserId of user who created the rating                 |
+| business       | Business   | businessId of business rating is for                  |
 | ratingTime     | Timestamp  | Timestamp of when the rating was created              |
-| ratingNum      | Array\<Int\>| Array of integers representing the rating (0-5)       |
+| ratingNum      | Array\<Int\>| Array of integers representing the rating (0-5)      |
+
+**Mention**
+| Property       | Type       | Description                                           |
+|----------------|------------|-------------------------------------------------------|
+| mentionId      | String     | Unique identifier for mention                         |
+| mentionedBy    | User       | UserId of user who created the mention                |
+| mentionedUser  | User       | UserId of user who created the mention                |
+| mentionedBus   | Business   | UserId of user who created the mention                |
+| mentionedAt    | Timestamp  | Timestamp of when the mention was created             |
+
+**Saves**
+| Property       | Type       | Description                                           |
+|----------------|------------|-------------------------------------------------------|
+| saveId         | String     | Unique identifier for save                            |
+| userId         | User       | UserId of user who created the save                   |
+| savedAt        | Timestamp  | Timestamp of when the rating was created              |
+| forumId        | ForumPost  | fPostId for post that was saved                       |
 
 ### Networking
 **List of network requests by screen:**
