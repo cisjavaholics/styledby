@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="StyledBy" />
+        <module name="TaskManager" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="StyledBy" options="-parameters" />
+      <module name="TaskManager" options="-parameters" />
       <module name="styledby" options="-parameters" />
     </option>
   </component>
