@@ -14,7 +14,7 @@ import java.util.List;
 @Data //creates setters and getters automatically
 @AllArgsConstructor //creates constructor with all values automatically
 @NoArgsConstructor //creates no argument constructor automatically
-public class AMentions {
+public abstract class AMentions {
     @DocumentId
     private @Nullable String mentionId;
     private Timestamp mentionedAt;
