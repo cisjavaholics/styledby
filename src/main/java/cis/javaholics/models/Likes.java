@@ -20,5 +20,4 @@ public class Likes {
     private String receiverId;
     private Timestamp time;
 
-
 }
