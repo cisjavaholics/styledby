@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 public class RestComments extends AComments {
     private DocumentReference senderId;
-    private DocumentReference receiverId;
+    private DocumentReference forumId;
 
     public void setSenderId(String senderId) {
         // Perform Firebase Firestore query to retrieve DocumentReference for createBy
         this.senderId = Utility.retrieveDocumentReference("Users", senderId);
     }
-    public void setReceiverId(String receiverId) {
+    public void setforumId(String forumId) {
         // Perform Firebase Firestore query to retrieve DocumentReference for createBy
-        this.receiverId = Utility.retrieveDocumentReference("Users", receiverId);
+        this.forumId = Utility.retrieveDocumentReference("Users", forumId);
     }
 
 

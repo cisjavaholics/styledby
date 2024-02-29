@@ -15,17 +15,17 @@ public class Comments extends AComments{
     @Schema(example = "12345", description = "Unique ID of the sender")
     private Users senderId;
     @Schema(example = "12345", description = "Unique ID of the receiver")
-    private Users receiverId;
+    private Users forumId;
 
-    public Comments(String commentId, String content, Timestamp time, Users senderId, Users receiverId) {
+    public Comments(String commentId, String content, Timestamp time, Users senderId, Users forumId) {
         super(commentId, content, time);
         this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.forumId = forumId;
     }
 
-    public Comments(Users senderId, Users receiverId) {
+    public Comments(Users senderId, Users forumId) {
         this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.forumId = forumId;
     }
 }
 
