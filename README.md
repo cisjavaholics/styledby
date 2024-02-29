@@ -21,7 +21,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Required Must-have Stories**
 - User login
 - Homepage feed (recent reviews and popular community forum posts)
-- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures)
+- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures) (Completed)
 - User/Business Profile
 - Community Forum
 - Settings (Accessibility, Notification, General, etc.
