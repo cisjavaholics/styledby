@@ -1,5 +1,7 @@
 package cis.javaholics.models.reviews;
 
+import cis.javaholics.models.Likes;
+import cis.javaholics.models.Ratings;
 import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.comments.Comments;
 import cis.javaholics.models.users.Users;

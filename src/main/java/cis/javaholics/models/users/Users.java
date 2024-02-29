@@ -1,5 +1,6 @@
 package cis.javaholics.models.users;
 
+import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.saves.Saves;
 import lombok.Data;

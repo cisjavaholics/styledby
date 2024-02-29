@@ -35,7 +35,7 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/{rPostId}")
-    public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable String rPostId) {
+    public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable (name = "rPostId")String rPostId) {
         try {
             Reviews review = reviewsService.getReviewById(rPostId);
             if (review != null) {
@@ -59,7 +59,7 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/users/{userId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable String createdBy) {
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable (name = "userId") String createdBy) {
         try {
             List<Reviews> review = reviewsService.getReviewByUserId(createdBy);
             if (review != null) {
@@ -82,7 +82,7 @@ public class ReviewsController {
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
     @GetMapping("/businesses/{businessId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable String businessId) {
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable (name = "businessId")String businessId) {
         try {
             List<Reviews> review = reviewsService.getReviewByBusiness(businessId);
             if (review != null) {
@@ -131,7 +131,7 @@ public class ReviewsController {
 
     @Operation(summary = "Delete a review")
     @DeleteMapping("/{rPostId}")
-    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable String rPostId) {
+    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable (name = "rPostId") String rPostId) {
         try {
             reviewsService.deleteReview(rPostId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
