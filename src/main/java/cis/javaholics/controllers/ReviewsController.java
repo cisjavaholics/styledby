@@ -61,7 +61,7 @@ public class ReviewsController {
     @GetMapping("/users/{userId}")
     public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable String createdBy) {
         try {
-            Reviews review = reviewsService.getReviewById(createdBy);
+            List<Reviews> review = reviewsService.getReviewByUserId(createdBy);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
@@ -84,7 +84,7 @@ public class ReviewsController {
     @GetMapping("/businesses/{businessId}")
     public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable String businessId) {
         try {
-            Reviews review = reviewsService.getReviewById(businessId);
+            List<Reviews> review = reviewsService.getReviewByBusiness(businessId);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
@@ -93,7 +93,7 @@ public class ReviewsController {
             }
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()));
+                    .body(new ApiResponseFormat<>(false, "Error retrieving review", null, e.getMessage()));
         }
     }
 
@@ -109,7 +109,7 @@ public class ReviewsController {
     public ResponseEntity<ApiResponseFormat<Reviews>> getAllReviews() {
         try {
             List<Reviews> reviewList = reviewsService.getAllReviews();
-            return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review successfully created.",reviewList, null));
+            return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review successfully retrieved.",reviewList, null));
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponseFormat<>(false, "Error Retreiving users",null, e));
