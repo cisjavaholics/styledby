@@ -1,5 +1,7 @@
 package cis.javaholics.services;
 
+import cis.javaholics.models.Likes;
+import cis.javaholics.models.Ratings;
 import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.comments.Comments;
 import cis.javaholics.models.reviews.Reviews;
@@ -24,7 +26,7 @@ public class ReviewsService {
     }
 
     @Nullable
-    private Reviews documentSnapshotToTask(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    private Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             Users createdBy = null;
             Businesses business = null;
