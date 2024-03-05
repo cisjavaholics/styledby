@@ -15,8 +15,6 @@ public class RestReviews extends AReviews {
     private DocumentReference createdBy;
     private DocumentReference business;
     private DocumentReference rating;
-    private List<DocumentReference> likes;
-    private List<DocumentReference> comments;
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = Utility.retrieveDocumentReference("Users", createdBy);
@@ -27,20 +25,6 @@ public class RestReviews extends AReviews {
 
     public void setRating(String rating) {
         this.rating = Utility.retrieveDocumentReference("Ratings", rating);
-    }
-    public void setLikes(ArrayList<String> likes) {
-
-        this.likes = new ArrayList<>();
-        for(String like : likes) {
-            this.likes.add(Utility.retrieveDocumentReference("Likes", like));
-        }
-    }
-    public void setComments(ArrayList<String> comments) {
-
-        this.comments = new ArrayList<>();
-        for(String comment : comments) {
-            this.comments.add(Utility.retrieveDocumentReference("Comments", comment));
-        }
     }
 
 
