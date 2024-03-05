@@ -34,7 +34,7 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/{rPostId}")
+    @GetMapping("rPostId/{rPostId}")
     public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable (name = "rPostId")String rPostId) {
         try {
             Reviews review = reviewsService.getReviewById(rPostId);
@@ -58,10 +58,10 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable (name = "userId") String createdBy) {
+    @GetMapping("/user_id/{user_id}")
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewsByUserId(@PathVariable (name = "userId") String createdBy) {
         try {
-            List<Reviews> review = reviewsService.getReviewByUserId(createdBy);
+            List<Reviews> review = reviewsService.getReviewsByUserId(createdBy);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
@@ -81,10 +81,10 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/businesses/{businessId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable (name = "businessId")String businessId) {
+    @GetMapping("/business_id/{business_id}")
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewsByBusiness(@PathVariable (name = "businessId")String businessId) {
         try {
-            List<Reviews> review = reviewsService.getReviewByBusiness(businessId);
+            List<Reviews> review = reviewsService.getReviewsByBusiness(businessId);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {

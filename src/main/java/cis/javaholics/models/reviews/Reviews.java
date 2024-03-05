@@ -23,25 +23,17 @@ public class Reviews extends AReviews {
     private Businesses business;
     @Schema(example = "12345", description = "Unique ID of the review")
     private Ratings rating;
-    @Schema(example = "12345,12345,12345", description = "List of IDs of likes on post")
-    private @Nullable List<Likes> likes;
-    @Schema(example = "12345,12345,12345,12345", description = "List of IDs of comments on post")
-    private @Nullable List<Comments> comments;
 
-    public Reviews(String rPostId, String type, String description, @jakarta.annotation.Nullable List<String> photos, Timestamp createdAt, Users createdBy, Businesses business, Ratings rating, List<Likes> likes, List<Comments> comments) {
+    public Reviews(String rPostId, String type, String description, @jakarta.annotation.Nullable List<String> photos, Timestamp createdAt, Users createdBy, Businesses business, Ratings rating) {
         super(rPostId, type, description, photos, createdAt);
         this.createdBy = createdBy;
         this.business = business;
         this.rating = rating;
-        this.likes = likes;
-        this.comments = comments;
     }
 
-    public Reviews(Users createdBy, Businesses business, Ratings rating, List<Likes> likes, List<Comments> comments) {
+    public Reviews(Users createdBy, Businesses business, Ratings rating) {
         this.createdBy = createdBy;
         this.business = business;
         this.rating = rating;
-        this.likes = likes;
-        this.comments = comments;
     }
 }
