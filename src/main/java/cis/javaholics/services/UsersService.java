@@ -5,13 +5,13 @@ import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.saves.Saves;
 import cis.javaholics.models.users.Users;
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import io.micrometer.common.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -105,6 +105,30 @@ public class UsersService {
         DocumentSnapshot documentSnapshot = future.get();
         return documentSnapshotToUser(documentSnapshot);
     }
+    public String createUser(Users user) throws ExecutionException, InterruptedException {
+        CollectionReference usersCollection = firestore.collection("Users");
+        ApiFuture<DocumentReference> future = usersCollection.add(user);
+        DocumentReference docRef = future.get();
+        return docRef.getId();
+    }
 
+    public WriteResult updateUser(String id, Map<String, Object> updateValues) throws ExecutionException, InterruptedException {
+
+        String[] allowed = {"username", "email", "businesses", "reviews", "forumPosts", "saved"};
+
+        List<String> allowedFields = Arrays.asList(allowed);
+        Map<String, Object> formattedValues = new HashMap<>();
+
+        for(Map.Entry<String, Object> entry : updateValues.entrySet()) {
+            String key = entry.getKey();
+            if(allowedFields.contains(key)) {
+                formattedValues.put(key, entry.getValue());
+
+            }
+        }
+        DocumentReference userDoc = firestore.collection("Users").document(id);
+        ApiFuture<WriteResult> result = userDoc.update(formattedValues);
+        return result.get();
+    }
 
 }
