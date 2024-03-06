@@ -1,5 +1,6 @@
 package cis.javaholics.models.users;
 
+import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.saves.Saves;
@@ -15,14 +16,16 @@ public class Users extends AUsers {
     private List<Reviews> reviews;
     private List<ForumPosts> forums;
     private List<Saves> saved;
+    private List<Businesses> businesses;
     private int numReviews;
     private int numForums;
     private int numSaved;
-    public Users(String userId, String username, String email, List<String> roles, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, int numReviews, int numForums, int numSaved) {
-        super(userId, username, email, roles);
+    public Users(String userId, String username, String email, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, List<Businesses> businesses, int numReviews, int numForums, int numSaved) {
+        super(userId, username, email);
         this.reviews = reviews;
         this.forums = forums;
         this.saved = saved;
+        this.businesses = businesses;
         this.numReviews = numReviews;
         this.numForums = numForums;
         this.numSaved = numSaved;
