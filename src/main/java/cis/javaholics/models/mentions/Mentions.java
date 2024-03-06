@@ -1,6 +1,7 @@
 package cis.javaholics.models.mentions;
 
 import cis.javaholics.models.businesses.Businesses;
+import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.models.reviews.Reviews;
 

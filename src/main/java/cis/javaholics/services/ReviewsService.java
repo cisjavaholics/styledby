@@ -1,9 +1,12 @@
 package cis.javaholics.services;
 
+import cis.javaholics.models.Likes;
+import cis.javaholics.models.Ratings;
 import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.comments.Comments;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
+import cis.javaholics.util.Utility;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -24,13 +27,11 @@ public class ReviewsService {
     }
 
     @Nullable
-    private Reviews documentSnapshotToTask(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    private Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             Users createdBy = null;
             Businesses business = null;
             Ratings rating = null;
-            List<Comments> comments = new ArrayList<>();
-            List<Likes> likes = new ArrayList<>();
 
             // Retrieve createdBy user details
             DocumentReference userRef = (DocumentReference) document.get("createdBy");
@@ -59,29 +60,6 @@ public class ReviewsService {
                 }
             }
 
-            //Retrieve likes
-            List<DocumentReference> reviewLikes = (List<DocumentReference>) document.get("likes");
-            for(DocumentReference reviewLike :reviewLikes)
-            {
-                DocumentSnapshot itemSnapshot = reviewLike.get().get();
-                if(itemSnapshot.exists())
-                {
-                    likes.add(itemSnapshot.toObject(Likes.class));
-                }
-            }
-
-            //Retrieve comments
-            List<DocumentReference> reviewComments = (List<DocumentReference>) document.get("comments");
-            for(DocumentReference reviewComment : reviewComments)
-            {
-                DocumentSnapshot itemSnapshot = reviewComment.get().get();
-                if(itemSnapshot.exists())
-                {
-                    comments.add(itemSnapshot.toObject(Comments.class));
-                }
-            }
-
-
             return( new Reviews(document.getId(),
                     document.getString("type"),
                     document.getString("description"),
@@ -89,9 +67,7 @@ public class ReviewsService {
                     document.getTimestamp("createdAt"),
                     createdBy,
                     business,
-                    rating,
-                    likes,
-                    comments
+                    rating
             ) );
         }
         return null;
@@ -99,21 +75,23 @@ public class ReviewsService {
 
     @Nullable
     public Reviews getReviewById(String rPostId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = firestore.collection("Reviews").document(rPostId);
-        DocumentSnapshot documentSnapshot = reviewRef.get().get();
-        if (documentSnapshot.exists()) {
-            return documentSnapshot.toObject(Reviews.class);
-        } else {
-            return null;
-        }
+        CollectionReference reviewsCollection = firestore.collection("rPostId");
+        ApiFuture<DocumentSnapshot> future = reviewsCollection.document(rPostId).get();
+        DocumentSnapshot document = future.get();
+        return documentSnapshotToReview(document);
     }
-    public List<Reviews> getReviewByUserId(String createdBy) throws ExecutionException, InterruptedException {
-        Query query = firestore.collection("Reviews").whereEqualTo("createdBy", createdBy);
+
+    @Nullable
+    public List<Reviews> getReviewsByUserId(String userId) throws ExecutionException, InterruptedException {
+        DocumentReference reviewRef = Utility.retrieveDocumentReference("Reviews", userId);
+        Query query = firestore.collection("Reviews").whereEqualTo("createdBy", userId);
         return getReviewList(query);
     }
 
-    public List<Reviews> getReviewByBusiness(String businessId) throws ExecutionException, InterruptedException {
-        Query query = firestore.collection("Businesses").whereEqualTo("businessId", businessId);
+    @Nullable
+    public List<Reviews> getReviewsByBusiness(String businessId) throws ExecutionException, InterruptedException {
+        DocumentReference reviewRef = Utility.retrieveDocumentReference("Reviews", businessId);
+        Query query = firestore.collection("Reviews").whereEqualTo("businessId", businessId);
         return getReviewList(query);
     }
 

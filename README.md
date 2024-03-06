@@ -21,7 +21,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Required Must-have Stories**
 - User login
 - Homepage feed (recent reviews and popular community forum posts)
-- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures)
+- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures) (Completed)
 - User/Business Profile
 - Community Forum
 - Settings (Accessibility, Notification, General, etc.
@@ -78,27 +78,25 @@ A comprehensive application for individuals to anonymously review and seek opini
 
 ## Wireframes
 ### Low Fidelity 
-![Search](Home&Reviews.png)
-![Register](Register.png)
-![Add](images/Profile&Settings.png)
-![Search](Search.png)
-![Notifications](Notifications.png)
-![Profile](Profile.jpg)
+![Search](images/Home&Reviews.PNG)
+![Add](images/AddScreens.png)
+![Notifications](images/NotificationScreen.png)
+![Profile](images/Profile.jpg)
 
 ### High Fidelity 
-![Register](Register(HiFi).png)
-![Login](Login(HiFi).png)
-![Homepage](Homepage(HiFi).png)
-![Search](Search(HiFi).png)
-![SearchResults](SearchResults(HiFi).png)
-![UserProfile](UserProfile(HiFi).png)
-![BusinessProfile](BusinessProfile(HiFi).png)
-![Forum](ForumPage(HiFi).png)
-![AddForum](AddForum(HiFi).png)
-![AddReview](AddReview(HiFi).png)
-![ReviewPage](ReviewPage(HiFi).png)
-![Notifications](Notifications(HiFi).png)
-![Settings](Settings(HiFi).png)
+![Register](images/Register(HiFi).png)
+![Login](images/Login%20(HiFi).png)
+![Homepage](images/Homepage(HiFi).png)
+![Search](images/Search%20(HiFi).png)
+![SearchResults](images/SearchResults(HiFi).png)
+![UserProfile](images/UserProfile(HiFi).png)
+![BusinessProfile](images/BusinessProfile(HiFi).png)
+![Forum](images/ForumPage(HiFi).png)
+![AddForum](images/AddForum(HiFi).png)
+![AddReview](images/AddReview(HiFi).png)
+![ReviewPage](images/ReviewPage(HiFi).png)
+![Notifications](images/Notifications(HiFi).png)
+![Settings](images/Settings(HiFi).png)
 
 
 ### Interactive Prototype 
