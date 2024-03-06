@@ -18,8 +18,8 @@ public class RestBusinesses extends ABusinesses {
     private int numReviews;
     private int numMentions;
 
-    public RestBusinesses(String businessId, String category, int rating, List<DocumentReference> reviews, List<DocumentReference> mentions, int numReviews, int numMentions) {
-        super(businessId, category);
+    public RestBusinesses(String businessId, String name, String category, int rating, List<DocumentReference> reviews, List<DocumentReference> mentions, int numReviews, int numMentions) {
+        super(businessId, name, category);
         this.rating = rating;
         this.reviews = reviews;
         this.mentions = mentions;
