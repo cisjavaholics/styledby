@@ -117,7 +117,7 @@ public class ReviewsController {
     }
 
     @Operation(summary = "Create a review")
-    public ResponseEntity<ApiResponseFormat<String>> addReview(@RequestBody Reviews review) {
+    public ResponseEntity<ApiResponseFormat<String>> createReview(@RequestBody Reviews review) {
         try {
             String reviewId = reviewsService.createReview(review);
             return ResponseEntity.status(HttpStatus.CREATED)

@@ -96,8 +96,16 @@ public class ReviewsService {
     }
 
     public List<Reviews> getAllReviews() throws ExecutionException, InterruptedException {
-        CollectionReference reviewsCollection = firestore.collection("Reviews");
-        return getReviewList(reviewsCollection);
+        CollectionReference reviewCollection = firestore.collection("Reviews");
+        ApiFuture<QuerySnapshot> future = reviewCollection.get();
+        List<Reviews> reviewList = new ArrayList<>();
+        for (DocumentSnapshot document : future.get().getDocuments()) {
+            Reviews review = documentSnapshotToReview(document);
+            if (review != null) {
+                reviewList.add(review);
+            }
+        }
+        return reviewList;
     }
 
 
