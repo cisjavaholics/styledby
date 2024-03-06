@@ -14,5 +14,6 @@ import java.util.List;
 public abstract class ABusinesses {
     @DocumentId
     private @Nullable String businessId;
+    private String name;
     private String category;
 }

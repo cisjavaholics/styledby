@@ -3,6 +3,8 @@ package cis.javaholics.controllers;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.services.UsersService;
 import cis.javaholics.util.ApiResponseFormat;
+import cis.javaholics.util.Utility;
+import com.google.cloud.firestore.WriteResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -11,12 +13,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -68,6 +68,32 @@ public class UsersController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()));
         }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<ApiResponseFormat<String>> addUser(@RequestBody Users user) {
+        try{
+            String id = usersService.createUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ApiResponseFormat<>(true, "User successfully created.", id, null));
+        }
+        catch(ExecutionException | InterruptedException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error creating user.", null, e));
+        }
+    }
+
+    @PutMapping(path="/{user_id}", produces = Utility.DEFAULT_MEDIA_TYPE, consumes =  Utility.DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<ApiResponseFormat<WriteResult>> updateUser(@PathVariable(name="user_id") String id, @RequestBody Map<String,Object> updateValues){
+        try {
+            WriteResult result = usersService.updateUser(id, updateValues);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiResponseFormat<>(true, "User successfully updated.", result, null));
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error updating user.", null, e));
+        }
+
     }
 }
 

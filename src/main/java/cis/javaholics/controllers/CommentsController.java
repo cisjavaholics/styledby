@@ -60,7 +60,7 @@ public class CommentsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("forum_id/{{forum_id}")
+    @GetMapping("forum_id/{forum_id}")
     public ResponseEntity<ApiResponseFormat<Comments>> getAllCommentsOnPost(@PathVariable (name = "forum_id") String forumId) {
         try {
             List<Comments> comments = commentsService.getAllCommentsOnPost(forumId);
