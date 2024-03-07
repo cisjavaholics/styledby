@@ -130,6 +130,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 | Property    | Type            | Description                                        |
 |-------------|-----------------|----------------------------------------------------|
 | fPostId     | String          | Unique identifier for post                         |
+| postedBy    | User            | Reference to user that posted the forum post       |
 | topic       | String          | Topic of post (can be null)                        |
 | description | String          | Description of post                                |
 | photos      | List\<String\>  | Array of Strings, File path to photo               |
@@ -171,8 +172,8 @@ A comprehensive application for individuals to anonymously review and seek opini
 |--------------|------------|-------------------------------------------------------|
 | LikeId       | String     | Unique identifier for like                            |
 | senderId     | User       | UserId of user sending the like                       |
-| receiverId   | User       | UserId of user receiving the like                     |
-| time         | Timestamp  | Timestamp of when the like was made                   |
+| postId       | User       | UserId of user receiving the like                     |
+| likedAt      | Timestamp  | Timestamp of when the like was made                   |
 
 **Rating**
 | Property       | Type       | Description                                           |
