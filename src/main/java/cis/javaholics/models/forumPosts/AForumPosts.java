@@ -1,6 +1,5 @@
 package cis.javaholics.models.forumPosts;
 
-import cis.javaholics.models.Likes;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.protobuf.util.Timestamps;
