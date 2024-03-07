@@ -34,8 +34,8 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/{rPostId}")
-    public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable String rPostId) {
+    @GetMapping("rPostId/{rPostId}")
+    public ResponseEntity<ApiResponseFormat<Object>> getReviewById(@PathVariable (name = "rPostId")String rPostId) {
         try {
             Reviews review = reviewsService.getReviewById(rPostId);
             if (review != null) {
@@ -46,7 +46,7 @@ public class ReviewsController {
             }
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()))
+                    .body(new ApiResponseFormat<>(false, "Error retrieving user", null, e.getMessage()));
         }
     }
 
@@ -58,10 +58,10 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByUserId(@PathVariable String createdBy) {
+    @GetMapping("/user_id/{user_id}")
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewsByUserId(@PathVariable (name = "user_id") String createdBy) {
         try {
-            List<Reviews> review = reviewsService.getReviewByUserId(createdBy);
+            List<Reviews> review = reviewsService.getReviewsByUserId(createdBy);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
@@ -81,10 +81,10 @@ public class ReviewsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("/businesses/{businessId}")
-    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewByBusiness(@PathVariable String businessId) {
+    @GetMapping("/business_id/{business_id}")
+    public ResponseEntity<ApiResponseFormat<Reviews>> getReviewsByBusiness(@PathVariable (name = "business_id")String businessId) {
         try {
-            List<Reviews> review = reviewsService.getReviewByBusiness(businessId);
+            List<Reviews> review = reviewsService.getReviewsByBusiness(businessId);
             if (review != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review found.",review, null));
             } else {
@@ -112,13 +112,12 @@ public class ReviewsController {
             return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review successfully retrieved.",reviewList, null));
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error Retreiving users",null, e));
+                    .body(new ApiResponseFormat<>(false, "Error retrieving users",null, e));
         }
     }
 
     @Operation(summary = "Create a review")
-    @PostMapping("/")
-    public ResponseEntity<ApiResponseFormat<String>> addReview(@RequestBody Reviews review) {
+    public ResponseEntity<ApiResponseFormat<String>> createReview(@RequestBody Reviews review) {
         try {
             String reviewId = reviewsService.createReview(review);
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -130,8 +129,7 @@ public class ReviewsController {
     }
 
     @Operation(summary = "Delete a review")
-    @DeleteMapping("/{rPostId}")
-    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable String rPostId) {
+    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable (name = "rPostId") String rPostId) {
         try {
             reviewsService.deleteReview(rPostId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT)

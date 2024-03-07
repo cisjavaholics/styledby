@@ -1,5 +1,6 @@
 package cis.javaholics.models.comments;
 
+import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.users.Users;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentReference;
@@ -15,17 +16,17 @@ public class Comments extends AComments{
     @Schema(example = "12345", description = "Unique ID of the sender")
     private Users senderId;
     @Schema(example = "12345", description = "Unique ID of the receiver")
-    private Users receiverId;
+    private ForumPosts forumId;
 
-    public Comments(String commentId, String content, Timestamp time, Users senderId, Users receiverId) {
+    public Comments(String commentId, String content, Timestamp time, Users senderId, ForumPosts forumId) {
         super(commentId, content, time);
         this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.forumId = forumId;
     }
 
-    public Comments(Users senderId, Users receiverId) {
+    public Comments(Users senderId, ForumPosts forumId) {
         this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.forumId = forumId;
     }
 }
 

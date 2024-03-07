@@ -15,15 +15,17 @@ public class RestUsers extends AUsers {
     private List<DocumentReference> reviews;
     private List<DocumentReference> forums;
     private List<DocumentReference> saved;
+    private List<DocumentReference> businesses;
     private int numReviews;
     private int numForums;
     private int numSaved;
 
-    public RestUsers(String userId, String username, String email, List<String> roles, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved) {
-        super(userId, username, email, roles);
+    public RestUsers(String userId, String username, String email, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved, List<DocumentReference> businesses) {
+        super(userId, username, email);
         this.reviews = reviews;
         this.forums = forums;
         this.saved = saved;
+        this.businesses = businesses;
     }
     // Setters and Getters for String parameters to perform Firestore queries
 
@@ -49,6 +51,15 @@ public class RestUsers extends AUsers {
         this.saved = new ArrayList<>();
         for(String forum: saves) {
             this.saved.add(Utility.retrieveDocumentReference("Saves", forum));
+        }
+
+    }
+
+    public void setBusiness(ArrayList<String> businesses) {
+
+        this.businesses = new ArrayList<>();
+        for(String forum: businesses) {
+            this.businesses.add(Utility.retrieveDocumentReference("Businesses", forum));
         }
 
     }

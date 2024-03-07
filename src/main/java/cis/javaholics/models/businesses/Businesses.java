@@ -15,8 +15,8 @@ public class Businesses extends ABusinesses {
     private List<Mentions> mentions;
     private int numReviews;
     private int numMentions;
-    public Businesses(String businessId, String category, int rating, List<Reviews> reviews, List<Mentions> mentions, int numReviews, int numMentions) {
-        super(businessId, category);
+    public Businesses(String businessId, String name,String category, int rating, List<Reviews> reviews, List<Mentions> mentions, int numReviews, int numMentions) {
+        super(businessId, name, category);
         this.rating = rating;
         this.reviews = reviews;
         this.mentions = mentions;
