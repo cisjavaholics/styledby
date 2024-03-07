@@ -278,3 +278,6 @@ Base URL: https://graph.instagram.com/
 | GET       | /businesses/{business-id}/media                 | Retrieves recent media uploaded by a specific business          |
 | GET       | /businesses/{business-id}/locations             | Retrieves locations associated with a specific business         |
 | GET       | /businesses/{business-id}/insights              | Retrieves insights for a specific business                      |
+
+### Build Progress
+![M3](M3.png)
