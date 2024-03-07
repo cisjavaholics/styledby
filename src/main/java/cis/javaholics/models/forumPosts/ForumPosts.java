@@ -1,12 +1,13 @@
 package cis.javaholics.models.forumPosts;
 
+/*
 <<<<<<< Updated upstream
 import cis.javaholics.models.Likes;
 =======
 import cis.javaholics.models.likes.Likes;
 import cis.javaholics.models.comments.Comments;
 import cis.javaholics.models.users.Users;
->>>>>>> Stashed changes
+>>>>>>> Stashed change*/
 import com.google.cloud.Timestamp;
 import lombok.Data;
 import lombok.NoArgsConstructor;
