@@ -1,6 +1,8 @@
 package cis.javaholics.models.forumPosts;
 
 import cis.javaholics.models.comments.Comments;
+import cis.javaholics.models.likes.Likes;
+import cis.javaholics.models.users.Users;
 import com.google.cloud.Timestamp;
 import lombok.Data;
 import lombok.NoArgsConstructor;
