@@ -1,6 +1,6 @@
 package cis.javaholics.models.likes;
 
-import cis.javaholics.models.users.Users;
+//import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentReference;

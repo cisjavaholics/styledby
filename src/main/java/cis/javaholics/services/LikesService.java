@@ -3,7 +3,7 @@ package cis.javaholics.services;
 
 import cis.javaholics.models.likes.Likes;
 import cis.javaholics.models.reviews.Reviews;
-import cis.javaholics.models.users.Users;
+//import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -23,7 +23,7 @@ public class LikesService {
     @Nullable
     private Likes documentSnapshotToLike(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
-            Users senderId = null;
+            //Users senderId = null;
             Reviews postId = null;
 
             // Retrieve senderId user details
@@ -31,7 +31,7 @@ public class LikesService {
             if (userRef != null) {
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
-                    senderId = userSnapshot.toObject(Users.class);
+                    //senderId = userSnapshot.toObject(Users.class);
                 }
             }
 
@@ -44,11 +44,13 @@ public class LikesService {
                 }
             }
 
-            return( new Likes(document.getId(),
+            /*return( new Likes(document.getId(),
                     document.getTimestamp("likedAt"),
-                    senderId,
+                    //senderId,
                     postId
             ) );
+
+             */
         }
         return null;
     }
