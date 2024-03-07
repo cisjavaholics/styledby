@@ -21,7 +21,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Required Must-have Stories**
 - User login
 - Homepage feed (recent reviews and popular community forum posts)
-- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures)
+- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures) (Completed)
 - User/Business Profile
 - Community Forum
 - Settings (Accessibility, Notification, General, etc.
@@ -78,31 +78,29 @@ A comprehensive application for individuals to anonymously review and seek opini
 
 ## Wireframes
 ### Low Fidelity 
-![Search](Home&Reviews.png)
-![Register](Register.png)
-![Add](Profile&Settings.png)
-![Search](Search.png)
-![Notifications](Notifications.png)
-![Profile](Profile.jpg)
+![Search](images/Home&Reviews.PNG)
+![Add](images/AddScreens.png)
+![Notifications](images/NotificationScreen.png)
+![Profile](images/Profile.jpg)
 
 ### High Fidelity 
-![Register](Register(HiFi).png)
-![Login](Login(HiFi).png)
-![Homepage](Homepage(HiFi).png)
-![Search](Search(HiFi).png)
-![SearchResults](SearchResults(HiFi).png)
-![UserProfile](UserProfile(HiFi).png)
-![BusinessProfile](BusinessProfile(HiFi).png)
-![Forum](ForumPage(HiFi).png)
-![AddForum](AddForum(HiFi).png)
-![AddReview](AddReview(HiFi).png)
-![ReviewPage](ReviewPage(HiFi).png)
-![Notifications](Notifications(HiFi).png)
-![Settings](Settings(HiFi).png)
+![Register](images/Register(HiFi).png)
+![Login](images/Login%20(HiFi).png)
+![Homepage](images/Homepage(HiFi).png)
+![Search](images/Search%20(HiFi).png)
+![SearchResults](images/SearchResults(HiFi).png)
+![UserProfile](images/UserProfile(HiFi).png)
+![BusinessProfile](images/BusinessProfile(HiFi).png)
+![Forum](images/ForumPage(HiFi).png)
+![AddForum](images/AddForum(HiFi).png)
+![AddReview](images/AddReview(HiFi).png)
+![ReviewPage](images/ReviewPage(HiFi).png)
+![Notifications](images/Notifications(HiFi).png)
+![Settings](images/Settings(HiFi).png)
 
 
 ### Interactive Prototype 
-![InteractivePrototype](StyledBy_InteractivePrototype.gif)
+![InteractivePrototype](images/StyledBy_InteractivePrototype.gif)
 
 ## Schema 
 ### Data Models 
@@ -139,17 +137,19 @@ A comprehensive application for individuals to anonymously review and seek opini
 | comments    | List\<Comments\>| Array of comments                                  |
 | postedAt    | Timestamp       | Timestamp of when post was made                    |
 
-**Review Post**
+**Review**
 | Property        | Type            | Description                                           |
 |-----------------|-----------------|-------------------------------------------------------|
 | rPostId         | String          | Unique identifier for post                            |
-| postedBy        | String          | Reference to user that posted the review              |
-| business        | String          | Reference to business reviewed                        |
-| serviceType     | List\<String\>  | Type of service (Hair, Skin, Nails, Other)           |
-| serviceDate     | Timestamp       | Date of service                                      |
-| content         | String          | Content of review                                    |
-| proofOfService  | List\<String\>  | Proof of service (booking, result)                   |
-| rating          | List\<Int\>     | Numerical rating of service (1, 2, 3, 4, 5)          |
+| createdBy       | User            | Reference to user that posted the review              |
+| business        | Business        | Reference to business reviewed                        |
+| serviceType     | String          | Type of service (Hair, Skin, Nails, Other)            |
+| description     | String          | Content of review                                     |
+| rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)           |
+| likes           | List\<Likes\>   | Array of likes                                        |
+| comments        | List\<Comments\>| Array of comments                                     |
+| photos          | List\<String\>  | Array of Strings, File path to photo                  |
+| createdAt       | Timestamp       | Time review was created at                            |
 
 **Notification**
 | Property         | Type       | Description                                    |
@@ -170,7 +170,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Like**
 | Property     | Type       | Description                                           |
 |--------------|------------|-------------------------------------------------------|
-| LikeId       | String     | Unique identifier for like                            |
+| likeId       | String     | Unique identifier for like                            |
 | senderId     | User       | UserId of user sending the like                       |
 | postId       | User       | UserId of user receiving the like                     |
 | likedAt      | Timestamp  | Timestamp of when the like was made                   |
@@ -180,8 +180,26 @@ A comprehensive application for individuals to anonymously review and seek opini
 |----------------|------------|-------------------------------------------------------|
 | ratingId       | String     | Unique identifier for rating                          |
 | userId         | User       | UserId of user who created the rating                 |
+| business       | Business   | businessId of business rating is for                  |
 | ratingTime     | Timestamp  | Timestamp of when the rating was created              |
-| ratingNum      | Array\<Int\>| Array of integers representing the rating (0-5)       |
+| ratingNum      | Array\<Int\>| Array of integers representing the rating (0-5)      |
+
+**Mention**
+| Property       | Type       | Description                                           |
+|----------------|------------|-------------------------------------------------------|
+| mentionId      | String     | Unique identifier for mention                         |
+| mentionedBy    | User       | UserId of user who created the mention                |
+| mentionedUser  | User       | UserId of user who created the mention                |
+| mentionedBus   | Business   | UserId of user who created the mention                |
+| mentionedAt    | Timestamp  | Timestamp of when the mention was created             |
+
+**Saves**
+| Property       | Type       | Description                                           |
+|----------------|------------|-------------------------------------------------------|
+| saveId         | String     | Unique identifier for save                            |
+| userId         | User       | UserId of user who created the save                   |
+| savedAt        | Timestamp  | Timestamp of when the rating was created              |
+| forumId        | ForumPost  | fPostId for post that was saved                       |
 
 ### Networking
 **List of network requests by screen:**

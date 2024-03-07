@@ -1,7 +1,6 @@
 package cis.javaholics.services;
 
-import cis.javaholics.models.Ratings;
-import cis.javaholics.models.businesses.Businesses;
+
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.concurrent.ExecutionException;
 
 @Service
