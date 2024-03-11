@@ -279,5 +279,6 @@ Base URL: https://graph.instagram.com/
 | GET       | /businesses/{business-id}/locations             | Retrieves locations associated with a specific business         |
 | GET       | /businesses/{business-id}/insights              | Retrieves insights for a specific business                      |
 
-### Build Progress
-![M3](M3.png)
+### Milestone 3 & 4 Build Progress Summary
+In Milestone 4, our team continued to create our services and controllers. We created services and controllers for 
+Users, Businesses, Comments, and Reviews. We also began the process of creating services and controllers for Likes and Forum Posts.
