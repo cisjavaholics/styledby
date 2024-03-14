@@ -1,6 +1,8 @@
 package cis.javaholics.services;
 
 
+import cis.javaholics.models.businesses.Businesses;
+import cis.javaholics.models.ratings.Ratings;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
