@@ -1,6 +1,8 @@
 package cis.javaholics.controllers;
 
 
+import cis.javaholics.models.ratings.Ratings;
+import cis.javaholics.services.RatingsService;
 import cis.javaholics.util.ApiResponseFormat;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,21 +12,25 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
+@Service
 @RequestMapping("api/ratings/")
 @Tag(name = "Ratings", description = "Operations related to business management")
 
 
-public class RatingController<Rating> {
-    private RatingService ratingService = null;
+public class RatingsController {
 
-    public RatingController(RatingService RatingsService) {
-        this.ratingService = ratingService;
+    private final RatingsService ratingsService;
+
+
+    public RatingsController(RatingsService ratingsService) {
+        this.ratingsService = ratingsService;
     }
 
     @Operation(summary = "Get rating by id")
@@ -38,7 +44,7 @@ public class RatingController<Rating> {
     @GetMapping("/rating_id/{rating_id}")
     public ResponseEntity<ApiResponseFormat<Object>> getRatingById(@PathVariable(name = "rating_id") String ratingId) {
         try {
-            Rating rating = ratingService.getRatingById(ratingId);
+            Ratings rating = ratingsService.getRatingById(ratingId);
             if (rating != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Rating found.", rating, null));
             } else {
@@ -62,7 +68,7 @@ public class RatingController<Rating> {
     @GetMapping("forum_id/{forum_id}")
     public ResponseEntity<ApiResponseFormat<Object>> getAllRatingsOnPost(@PathVariable(name = "forum_id") String forumId) {
         try {
-            List<Rating> ratings = ratingService.getAllRatingsOnPost(forumId);
+            List<Ratings> ratings = ratingsService.getAllRatingsOnPost(forumId);
             if (ratings != null) {
                 return ResponseEntity.ok(new ApiResponseFormat<>(true, "Ratings found.", ratings, null));
             } else {
@@ -76,9 +82,10 @@ public class RatingController<Rating> {
     }
 
     @Operation(summary = "Add rating")
-    public ResponseEntity<ApiResponseFormat<String>> addRating(@RequestBody Rating rating) {
+    public ResponseEntity<ApiResponseFormat<String>> addRating(@RequestBody Ratings rating) {
         try {
-            String ratingId = ratingService.addRating(rating);
+            Ratings Ratings = new Ratings();
+            String ratingId = ratingsService.addRating(Ratings);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ApiResponseFormat<>(true, "Rating successfully added.", ratingId, null));
         } catch (ExecutionException | InterruptedException e) {
@@ -89,14 +96,8 @@ public class RatingController<Rating> {
 
     @Operation(summary = "Delete rating")
     public ResponseEntity<ApiResponseFormat<Void>> deleteRating(@PathVariable(name = "rating_id") String ratingId) {
-        try {
-            ratingService.deleteRating(ratingId);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new ApiResponseFormat<>(true, "Rating successfully deleted.", null, null));
-        } catch (ExecutionException | InterruptedException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error deleting rating.", null, e));
-        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(new ApiResponseFormat<>(true, "Rating successfully deleted.", null, null));
     }
 
 }
