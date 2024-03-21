@@ -34,7 +34,7 @@ public class ForumPostsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiResponseFormat.class)))
     })
-    @GetMapping("rPostId/{rPostId}")
+    @GetMapping("fPostId/{fPostId}")
     public ResponseEntity<ApiResponseFormat<Object>> getForumPostById(@PathVariable(name = "fPostId")String fPostId) {
         try {
             ForumPosts forumPost = forumPostsService.getForumPostById(fPostId);
