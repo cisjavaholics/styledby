@@ -1,6 +1,10 @@
 package cis.javaholics.models.reviews;
 
 
+import cis.javaholics.models.businesses.Businesses;
+import cis.javaholics.models.ratings.Ratings;
+import cis.javaholics.models.users.Users;
+import com.google.cloud.Timestamp;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
