@@ -22,12 +22,8 @@ import java.util.concurrent.ExecutionException;
 @Service
 @RequestMapping("api/ratings/")
 @Tag(name = "Ratings", description = "Operations related to business management")
-
-
 public class RatingsController {
-
     private final RatingsService ratingsService;
-
 
     public RatingsController(RatingsService ratingsService) {
         this.ratingsService = ratingsService;

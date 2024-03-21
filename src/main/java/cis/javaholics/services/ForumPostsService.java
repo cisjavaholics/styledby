@@ -4,6 +4,7 @@ package cis.javaholics.services;
 import cis.javaholics.models.likes.Likes;
 import cis.javaholics.models.comments.Comments;
 import cis.javaholics.models.forumPosts.ForumPosts;
+import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
 import com.google.api.core.ApiFuture;
@@ -26,7 +27,7 @@ public class ForumPostsService {
     }
 
     @Nullable
-    private ForumPosts documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public ForumPosts documentSnapshotToForum(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             Users postedBy = null;
             List<Likes> likes = null;
@@ -37,7 +38,8 @@ public class ForumPostsService {
             if (userRef != null) {
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
-                    postedBy = userSnapshot.toObject(Users.class);
+                    UsersService service = new UsersService();
+                    postedBy = service.documentSnapshotToUser(userSnapshot);
                 }
             }
 
@@ -48,7 +50,9 @@ public class ForumPostsService {
                 DocumentSnapshot likeSnapshot = likeRef.get().get();
                 if(likeSnapshot.exists())
                 {
-                    likes.add(likeSnapshot.toObject(Likes.class));
+                    LikesService service = new LikesService();
+                    Likes like = service.documentSnapshotToLike(likeSnapshot);
+                    likes.add(like);
                 }
             }
 
@@ -59,7 +63,9 @@ public class ForumPostsService {
                 DocumentSnapshot commentSnapshot = commentRef.get().get();
                 if(commentSnapshot.exists())
                 {
-                    comments.add(commentSnapshot.toObject(Comments.class));
+                    CommentsService service = new CommentsService();
+                    Comments comment = service.documentSnapshotToComment(commentSnapshot);
+                    comments.add(comment);
                 }
             }
 
@@ -82,7 +88,7 @@ public class ForumPostsService {
         CollectionReference forumPostsCollection = firestore.collection("fPostId");
         ApiFuture<DocumentSnapshot> future = forumPostsCollection.document(fPostId).get();
         DocumentSnapshot document = future.get();
-        return documentSnapshotToReview(document);
+        return documentSnapshotToForum(document);
     }
 
     @Nullable
@@ -98,7 +104,7 @@ public class ForumPostsService {
         ApiFuture<QuerySnapshot> future = forumPostCollection.get();
         List<ForumPosts> forumPostList = new ArrayList<>();
         for (DocumentSnapshot document : future.get().getDocuments()) {
-            ForumPosts forumPost = documentSnapshotToReview(document);
+            ForumPosts forumPost = documentSnapshotToForum(document);
             if (forumPost != null) {
                 forumPostList.add(forumPost);
             }

@@ -21,7 +21,7 @@ public class RatingsService {
     }
 
     @Nullable
-    private Ratings documentSnapshotToRating(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Ratings documentSnapshotToRating(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             Users senderId = null;
             ForumPosts forumId = null;
@@ -47,8 +47,7 @@ public class RatingsService {
             return (new Ratings(document.getId(),
                     document.getString("content"),
                     document.getTimestamp("time"),
-                    senderId,
-                    forumId
+                    senderId
             ));
         }
         return null;

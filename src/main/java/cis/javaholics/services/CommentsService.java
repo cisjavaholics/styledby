@@ -25,51 +25,52 @@ public class CommentsService {
         this.firestore = FirestoreClient.getFirestore();
     }
     @Nullable
-    private Comments documentSnapshotToComment(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Comments documentSnapshotToComment(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+        Users user = null;
+        ForumPosts forumPost = null;
         if (document.exists()) {
-            Users senderId = null;
-            ForumPosts forumId = null;
-
             // Retrieve senderId user details
-            DocumentReference userRef = (DocumentReference) document.get("userId");
+            DocumentReference userRef = (DocumentReference) document.get("senderId");
             if (userRef != null) {
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
-                    senderId = userSnapshot.toObject(Users.class);
+                    UsersService service = new UsersService();
+                    user = service.documentSnapshotToUser(userSnapshot);
                 }
             }
 
             // Retrieve forum post details
-            DocumentReference forumRef = (DocumentReference) document.get("fPostId");
+            DocumentReference forumRef = (DocumentReference) document.get("forumId");
             if (forumRef != null) {
                 DocumentSnapshot forumSnapshot = forumRef.get().get();
                 if (forumSnapshot.exists()) {
-                    forumId = forumSnapshot.toObject(ForumPosts.class);
+                    ForumPostsService service = new ForumPostsService();
+                    forumPost = service.documentSnapshotToForum(forumSnapshot);
                 }
             }
 
-            return( new Comments(document.getId(),
+            return (new Comments(document.getId(),
                     document.getString("content"),
                     document.getTimestamp("time"),
-                    senderId,
-                    forumId
-            ) );
+                    user,
+                    forumPost
+            ));
         }
-        return null;
+            return null;
     }
 
     @Nullable
     public Comments getCommentById(String commentId) throws ExecutionException, InterruptedException {
-        CollectionReference commentsCollection = firestore.collection("commentId");
-        ApiFuture<DocumentSnapshot> future = commentsCollection.document(commentId).get();
+        DocumentReference jobRef = firestore.collection("Comment").document(commentId);
+        ApiFuture<DocumentSnapshot> future = jobRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToComment(document);
     }
 
     @Nullable
     public List<Comments> getAllCommentsOnPost(String forumId) throws ExecutionException, InterruptedException {
-        DocumentReference commentRef = Utility.retrieveDocumentReference("Comments", forumId);
-        Query query = firestore.collection("Comments").whereEqualTo("forumId", forumId);
+        DocumentReference commentRef = Utility.retrieveDocumentReference("Comment", forumId);
+        Query query = firestore.collection("Comment").whereEqualTo("forumId", forumId);
         return getCommentList(query);
     }
 
@@ -85,14 +86,14 @@ public class CommentsService {
     }
 
     public String addComment(Comments comment) throws ExecutionException, InterruptedException {
-        CollectionReference commentsCollection = firestore.collection("Comments");
+        CollectionReference commentsCollection = firestore.collection("Comment");
         ApiFuture<DocumentReference> future = commentsCollection.add(comment);
         DocumentReference docRef = future.get();
         return docRef.getId();
     }
 
     public WriteResult deleteComment(String commentId) throws ExecutionException, InterruptedException {
-        DocumentReference commentRef = firestore.collection("Comments").document(commentId);
+        DocumentReference commentRef = firestore.collection("Comment").document(commentId);
         return commentRef.delete().get();
     }
 }

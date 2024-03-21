@@ -2,6 +2,7 @@ package cis.javaholics.services;
 
 import cis.javaholics.models.businesses.Businesses;
 import cis.javaholics.models.forumPosts.ForumPosts;
+import cis.javaholics.models.likes.Likes;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.saves.Saves;
 import cis.javaholics.models.users.Users;
@@ -24,11 +25,12 @@ public class UsersService {
     }
 
     @Nullable
-    private Users documentSnapshotToUser(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Users documentSnapshotToUser(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             List<Reviews> reviews = new ArrayList<>();
             List<ForumPosts> forums = new ArrayList<>();
             List<Saves> saves = new ArrayList<>();
+            @jakarta.annotation.Nullable
             List<Businesses> businesses = new ArrayList<>();
             int numReviews = 0;
             int numForums = 0;
@@ -36,11 +38,13 @@ public class UsersService {
 
 
             //Retrieve reviews
-            List<DocumentReference> userReviews = (List<DocumentReference>) document.get("Reviews");
-            for (DocumentReference userReview : userReviews) {
-                DocumentSnapshot itemSnapshot = userReview.get().get();
+            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("Reviews");
+            for (DocumentReference businessReview : businessReviews) {
+                DocumentSnapshot itemSnapshot = businessReview.get().get();
                 if (itemSnapshot.exists()) {
-                    reviews.add(itemSnapshot.toObject(Reviews.class));
+                    ReviewsService service = new ReviewsService();
+                    Reviews review = service.documentSnapshotToReview(itemSnapshot);
+                    reviews.add(review);
                 }
             }
 
@@ -49,7 +53,9 @@ public class UsersService {
             for (DocumentReference userForum : userForums) {
                 DocumentSnapshot itemSnapshot = userForum.get().get();
                 if (itemSnapshot.exists()) {
-                    forums.add(itemSnapshot.toObject(ForumPosts.class));
+                    ForumPostsService service = new ForumPostsService();
+                    ForumPosts forumPost = service.documentSnapshotToForum(itemSnapshot);
+                    forums.add(forumPost);
                 }
             }
 
@@ -58,16 +64,21 @@ public class UsersService {
             for (DocumentReference userSave : userSaves) {
                 DocumentSnapshot itemSnapshot = userSave.get().get();
                 if (itemSnapshot.exists()) {
-                    saves.add(itemSnapshot.toObject(Saves.class));
+                    SavesService service = new SavesService();
+                    Saves save = service.documentSnapshotToSave(itemSnapshot);
+                    saves.add(save);
                 }
             }
 
+            @jakarta.annotation.Nullable
             //Retrieve businesses
             List<DocumentReference> userBusinesses = (List<DocumentReference>) document.get("Businesses");
             for (DocumentReference userBusiness : userBusinesses) {
                 DocumentSnapshot itemSnapshot = userBusiness.get().get();
                 if (itemSnapshot.exists()) {
-                    businesses.add(itemSnapshot.toObject(Businesses.class));
+                    BusinessesService service = new BusinessesService();
+                    Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
+                    businesses.add(business);
                 }
             }
 

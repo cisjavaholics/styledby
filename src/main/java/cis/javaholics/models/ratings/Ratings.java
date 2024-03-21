@@ -13,25 +13,14 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-
-
 public class Ratings extends ARatings {
+    private Users userId;
 
-    @DocumentId
-    private @Nullable String ratingId;
-    private String userId;
-    private Timestamp ratingTime;
-    private List<Integer> ratingNum;
-    private String content;
-
-
-    public Ratings(String ratingId, String content, Timestamp time, Users senderId, ForumPosts forumId) {
-        super(ratingId, content);
-        String rating = " ";
-        this.ratingId = rating;
+    public Ratings(@Nullable String ratingId, String content, Timestamp time, Users userId) {
+        super(ratingId, content, time);
         this.userId = userId;
-        this.content = content;
     }
+
+
 }
 

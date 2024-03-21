@@ -4,6 +4,7 @@ package cis.javaholics.services;
 import cis.javaholics.models.likes.Likes;
 import cis.javaholics.models.reviews.Reviews;
 //import cis.javaholics.models.users.Users;
+import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
@@ -23,17 +24,18 @@ public class LikesService {
         this.firestore = FirestoreClient.getFirestore();
     }
     @Nullable
-    private Likes documentSnapshotToLike(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Likes documentSnapshotToLike(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+        Users senderId = null;
+        Reviews postId = null;
         if (document.exists()) {
-            //Users senderId = null;
-            Reviews postId = null;
 
             // Retrieve senderId user details
             DocumentReference userRef = (DocumentReference) document.get("userId");
             if (userRef != null) {
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
-                    //senderId = userSnapshot.toObject(Users.class);
+                    UsersService service = new UsersService();
+                    senderId = service.documentSnapshotToUser(userSnapshot);
                 }
             }
 
@@ -42,25 +44,26 @@ public class LikesService {
             if (postRef != null) {
                 DocumentSnapshot postSnapshot = postRef.get().get();
                 if (postSnapshot.exists()) {
-                    postId = postSnapshot.toObject(Reviews.class);
+                    ReviewsService service = new ReviewsService();
+                    postId = service.documentSnapshotToReview(postSnapshot);
                 }
             }
 
-            /*return( new Likes(document.getId(),
+            return( new Likes(document.getId(),
                     document.getTimestamp("likedAt"),
-                    //senderId,
+                    senderId,
                     postId
             ) );
 
-             */
+
         }
         return null;
     }
 
     @Nullable
     public Likes getLikeById(String likeId) throws ExecutionException, InterruptedException {
-        CollectionReference likesCollection = firestore.collection("likeId");
-        ApiFuture<DocumentSnapshot> future = likesCollection.document(likeId).get();
+        DocumentReference likeRef = firestore.collection("Like").document(likeId);
+        ApiFuture<DocumentSnapshot> future = likeRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToLike(document);
     }
