@@ -1,9 +1,8 @@
 package cis.javaholics.services;
 
-import cis.javaholics.models.Likes;
-import cis.javaholics.models.Ratings;
+
 import cis.javaholics.models.businesses.Businesses;
-import cis.javaholics.models.comments.Comments;
+import cis.javaholics.models.ratings.Ratings;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -96,8 +95,16 @@ public class ReviewsService {
     }
 
     public List<Reviews> getAllReviews() throws ExecutionException, InterruptedException {
-        CollectionReference reviewsCollection = firestore.collection("Reviews");
-        return getReviewList(reviewsCollection);
+        CollectionReference reviewCollection = firestore.collection("Reviews");
+        ApiFuture<QuerySnapshot> future = reviewCollection.get();
+        List<Reviews> reviewList = new ArrayList<>();
+        for (DocumentSnapshot document : future.get().getDocuments()) {
+            Reviews review = documentSnapshotToReview(document);
+            if (review != null) {
+                reviewList.add(review);
+            }
+        }
+        return reviewList;
     }
 
 

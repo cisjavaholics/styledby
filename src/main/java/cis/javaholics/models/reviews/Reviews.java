@@ -1,12 +1,6 @@
 package cis.javaholics.models.reviews;
 
-import cis.javaholics.models.Likes;
-import cis.javaholics.models.Ratings;
-import cis.javaholics.models.businesses.Businesses;
-import cis.javaholics.models.comments.Comments;
-import cis.javaholics.models.users.Users;
-import com.google.cloud.Timestamp;
-import com.google.firebase.database.annotations.Nullable;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;

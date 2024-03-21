@@ -9,6 +9,10 @@
 ### Description 
 A comprehensive application for individuals to anonymously review and seek opinions on local service providers, fostering a community-driven approach to sharing experiences with barbers, stylists, nail techs, and more. The app creates a space for users to rate and provide unbiased feedback on these professionals, facilitating informed decisions for others seeking quality services. 
 
+## Build Progress
+![buildporg1.gif](buildporg1.gif)
+![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
+This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
 ## App Evaluation
 - **Category**: Lifestyle/Social Forum & Community Chats
 - **Story**: Allows users to anonymously review local service providers and share/inquire about experiences and recommendations.
@@ -128,6 +132,7 @@ A comprehensive application for individuals to anonymously review and seek opini
 | Property    | Type            | Description                                        |
 |-------------|-----------------|----------------------------------------------------|
 | fPostId     | String          | Unique identifier for post                         |
+| postedBy    | User            | Reference to user that posted the forum post       |
 | topic       | String          | Topic of post (can be null)                        |
 | description | String          | Description of post                                |
 | photos      | List\<String\>  | Array of Strings, File path to photo               |
@@ -171,8 +176,8 @@ A comprehensive application for individuals to anonymously review and seek opini
 |--------------|------------|-------------------------------------------------------|
 | likeId       | String     | Unique identifier for like                            |
 | senderId     | User       | UserId of user sending the like                       |
-| receiverId   | User       | UserId of user receiving the like                     |
-| time         | Timestamp  | Timestamp of when the like was made                   |
+| postId       | User       | UserId of user receiving the like                     |
+| likedAt      | Timestamp  | Timestamp of when the like was made                   |
 
 **Rating**
 | Property       | Type       | Description                                           |
@@ -277,3 +282,7 @@ Base URL: https://graph.instagram.com/
 | GET       | /businesses/{business-id}/media                 | Retrieves recent media uploaded by a specific business          |
 | GET       | /businesses/{business-id}/locations             | Retrieves locations associated with a specific business         |
 | GET       | /businesses/{business-id}/insights              | Retrieves insights for a specific business                      |
+
+### Milestone 3 & 4 Build Progress Summary
+In Milestone 4, our team continued to create our services and controllers. We created services and controllers for 
+Users, Businesses, Comments, and Reviews. We also began the process of creating services and controllers for Likes and Forum Posts.
