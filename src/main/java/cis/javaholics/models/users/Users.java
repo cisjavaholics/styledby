@@ -17,18 +17,12 @@ public class Users extends AUsers {
     private List<ForumPosts> forums;
     private List<Saves> saved;
     private List<Businesses> businesses;
-    private int numReviews;
-    private int numForums;
-    private int numSaved;
-    public Users(String userId, String username, String email, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, List<Businesses> businesses, int numReviews, int numForums, int numSaved) {
+    public Users(String userId, String username, String email, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, List<Businesses> businesses) {
         super(userId, username, email);
         this.reviews = reviews;
         this.forums = forums;
         this.saved = saved;
         this.businesses = businesses;
-        this.numReviews = numReviews;
-        this.numForums = numForums;
-        this.numSaved = numSaved;
 
     }
 }

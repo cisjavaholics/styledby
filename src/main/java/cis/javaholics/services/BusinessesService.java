@@ -24,7 +24,7 @@ public class BusinessesService {
     }
 
     @Nullable
-    private Businesses documentSnapshotToBusiness(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Businesses documentSnapshotToBusiness(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             int rating = 0;
             List<Reviews> reviews = new ArrayList<>();

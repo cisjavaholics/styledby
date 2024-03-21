@@ -24,7 +24,7 @@ public class UsersService {
     }
 
     @Nullable
-    private Users documentSnapshotToUser(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Users documentSnapshotToUser(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             List<Reviews> reviews = new ArrayList<>();
             List<ForumPosts> forums = new ArrayList<>();
@@ -36,38 +36,53 @@ public class UsersService {
 
 
             //Retrieve reviews
+
             List<DocumentReference> userReviews = (List<DocumentReference>) document.get("Reviews");
-            for (DocumentReference userReview : userReviews) {
-                DocumentSnapshot itemSnapshot = userReview.get().get();
-                if (itemSnapshot.exists()) {
-                    reviews.add(itemSnapshot.toObject(Reviews.class));
+            if(userReviews != null) {
+                for (DocumentReference userReview : userReviews) {
+                    DocumentSnapshot itemSnapshot = userReview.get().get();
+                    if (itemSnapshot.exists()) {
+                        ReviewsService service = new ReviewsService();
+                        Reviews review = service.documentSnapshotToReview(itemSnapshot);
+                        reviews.add(review);
+                    }
                 }
             }
 
             //Retrieve forums
             List<DocumentReference> userForums = (List<DocumentReference>) document.get("Forums");
-            for (DocumentReference userForum : userForums) {
-                DocumentSnapshot itemSnapshot = userForum.get().get();
-                if (itemSnapshot.exists()) {
-                    forums.add(itemSnapshot.toObject(ForumPosts.class));
+            if(userForums != null) {
+                for (DocumentReference userForum : userForums) {
+                    DocumentSnapshot itemSnapshot = userForum.get().get();
+                    if (itemSnapshot.exists()) {
+                        ForumPostsService service = new ForumPostsService();
+                        ForumPosts forumPost = service.documentSnapshotToForumPost(itemSnapshot);
+                        forums.add(forumPost);
+                    }
                 }
             }
 
             //Retrieve saves
             List<DocumentReference> userSaves = (List<DocumentReference>) document.get("Saves");
-            for (DocumentReference userSave : userSaves) {
-                DocumentSnapshot itemSnapshot = userSave.get().get();
-                if (itemSnapshot.exists()) {
-                    saves.add(itemSnapshot.toObject(Saves.class));
+            if(userSaves != null) {
+                for (DocumentReference userSave : userSaves) {
+                    DocumentSnapshot itemSnapshot = userSave.get().get();
+                    if (itemSnapshot.exists()) {
+
+                    }
                 }
             }
 
             //Retrieve businesses
             List<DocumentReference> userBusinesses = (List<DocumentReference>) document.get("Businesses");
-            for (DocumentReference userBusiness : userBusinesses) {
-                DocumentSnapshot itemSnapshot = userBusiness.get().get();
-                if (itemSnapshot.exists()) {
-                    businesses.add(itemSnapshot.toObject(Businesses.class));
+            if(userBusinesses != null) {
+                for (DocumentReference userBusiness : userBusinesses) {
+                    DocumentSnapshot itemSnapshot = userBusiness.get().get();
+                    if (itemSnapshot.exists()) {
+                        BusinessesService service = new BusinessesService();
+                        Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
+                        businesses.add(business);
+                    }
                 }
             }
 
@@ -77,10 +92,7 @@ public class UsersService {
                     reviews,
                     forums,
                     saves,
-                    businesses,
-                    numReviews,
-                    numForums,
-                    numSaved
+                    businesses
             ));
         }
         return null;

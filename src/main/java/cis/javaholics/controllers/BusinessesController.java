@@ -35,7 +35,7 @@ public class BusinessesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Businesses found."),
             @ApiResponse(responseCode = "204", description = "No businesses found."),
-            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "business/json", schema = @Schema(implementation = ApiResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
     })
     public ResponseEntity<ApiResponseFormat<List<Businesses>>> getAllBusinesses() {
         try {
@@ -54,7 +54,7 @@ public class BusinessesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Business found."),
             @ApiResponse(responseCode = "204", description = "No business found."),
-            @ApiResponse(responseCode = "500", description = "Unable to retrieve business.", content = @Content(mediaType = "business/json", schema = @Schema(implementation = ApiResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve business.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
     })
     public ResponseEntity<ApiResponseFormat<Businesses>> getBusinessById(@PathVariable(name="id") String businessId) {
         try {
@@ -76,7 +76,7 @@ public class BusinessesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Businesses found."),
             @ApiResponse(responseCode = "204", description = "No businesses found."),
-            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "business/json", schema = @Schema(implementation = ApiResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
     })
     public ResponseEntity<ApiResponseFormat<List<Businesses>>> getBusinessByUserId(@PathVariable(name="user_id") String userId) {
         try {
@@ -95,7 +95,7 @@ public class BusinessesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Businesses found."),
             @ApiResponse(responseCode = "204", description = "No businesses found."),
-            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "business/json", schema = @Schema(implementation = ApiResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
     })
     public ResponseEntity<ApiResponseFormat<List<Businesses>>> getBusinessByCategory(@PathVariable(name="category") String category) {
         try {
@@ -114,7 +114,7 @@ public class BusinessesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Businesses found."),
             @ApiResponse(responseCode = "204", description = "No businesses found."),
-            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "business/json", schema = @Schema(implementation = ApiResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve businesses.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiResponse.class))),
     })
     public ResponseEntity<ApiResponseFormat<List<Businesses>>> getBusinessByName(@PathVariable(name="name") String name) {
         try {

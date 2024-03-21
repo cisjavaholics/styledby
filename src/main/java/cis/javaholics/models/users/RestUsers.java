@@ -16,9 +16,6 @@ public class RestUsers extends AUsers {
     private List<DocumentReference> forums;
     private List<DocumentReference> saved;
     private List<DocumentReference> businesses;
-    private int numReviews;
-    private int numForums;
-    private int numSaved;
 
     public RestUsers(String userId, String username, String email, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved, List<DocumentReference> businesses) {
         super(userId, username, email);

@@ -27,7 +27,7 @@ public class ReviewsService {
     }
 
     @Nullable
-    private Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             Users createdBy = null;
             Businesses business = null;
