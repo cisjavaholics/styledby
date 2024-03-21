@@ -23,8 +23,7 @@ public class BusinessesService {
         this.firestore = FirestoreClient.getFirestore();
     }
 
-    @Nullable
-    private Businesses documentSnapshotToBusiness(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Businesses documentSnapshotToBusiness(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
             int rating = 0;
             List<Reviews> reviews = new ArrayList<>();
@@ -34,20 +33,24 @@ public class BusinessesService {
 
 
             //Retrieve reviews
-            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("Reviews");
+            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("reviews");
             for (DocumentReference businessReview : businessReviews) {
                 DocumentSnapshot itemSnapshot = businessReview.get().get();
                 if (itemSnapshot.exists()) {
-                    reviews.add(itemSnapshot.toObject(Reviews.class));
+                    ReviewsService service = new ReviewsService();
+                    Reviews review = service.documentSnapshotToReview(itemSnapshot);
+                    reviews.add(review);
                 }
             }
 
             //Retrieve mentions
-            List<DocumentReference> businessMentions = (List<DocumentReference>) document.get("Mentions");
+            List<DocumentReference> businessMentions = (List<DocumentReference>) document.get("mentions");
             for (DocumentReference businessMention : businessMentions) {
                 DocumentSnapshot itemSnapshot = businessMention.get().get();
                 if (itemSnapshot.exists()) {
-                    mentions.add(itemSnapshot.toObject(Mentions.class));
+                    MentionsService service = new MentionsService();
+                    Mentions mention = service.documentSnapshotToMention(itemSnapshot);
+                    mentions.add(mention);
                 }
             }
 
@@ -64,7 +67,7 @@ public class BusinessesService {
         return null;
     }
     public List<Businesses> getAllBusinesses() throws InterruptedException, ExecutionException {
-        CollectionReference businessCollection = firestore.collection("Businesses");
+        CollectionReference businessCollection = firestore.collection("Business");
         Future<QuerySnapshot> future = businessCollection.get();
         QuerySnapshot documents = future.get();
 
@@ -78,7 +81,7 @@ public class BusinessesService {
         return businessesList;
     }
     public Businesses getBusinessByBusinessId(String businessId) throws InterruptedException, ExecutionException {
-        DocumentReference businessRef = firestore.collection("Businesses").document(businessId);
+        DocumentReference businessRef = firestore.collection("Business").document(businessId);
         Future<DocumentSnapshot> future = businessRef.get();
         DocumentSnapshot documentSnapshot = future.get();
         return documentSnapshotToBusiness(documentSnapshot);
@@ -93,15 +96,15 @@ public class BusinessesService {
 
     public List<Businesses> getBusinessesByUserId(String userId) throws InterruptedException, ExecutionException {
         List<Businesses> businesses= new ArrayList<>();
-        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Businesses")
-                .whereEqualTo("userId", Utility.retrieveDocumentReference("Users", userId)).get();
+        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Business")
+                .whereEqualTo("userId", Utility.retrieveDocumentReference("User", userId)).get();
         processBusinesses(appFuture.get(), businesses);
         return businesses;
     }
 
     public List<Businesses> getBusinessesByCategory(String category) throws InterruptedException, ExecutionException {
         List<Businesses> businesses= new ArrayList<>();
-        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Businesses")
+        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Business")
                 .whereEqualTo("category", category).get();
         processBusinesses(appFuture.get(), businesses);
         return businesses;
@@ -109,14 +112,14 @@ public class BusinessesService {
 
     public List<Businesses> getBusinessesByName(String name) throws InterruptedException, ExecutionException {
         List<Businesses> businesses= new ArrayList<>();
-        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Businesses")
+        ApiFuture<QuerySnapshot> appFuture = firestore.collection("Business")
                 .whereEqualTo("name", name).get();
         processBusinesses(appFuture.get(), businesses);
         return businesses;
     }
 
     public String createBusiness(Businesses business) throws ExecutionException, InterruptedException {
-        CollectionReference businessesCollection = firestore.collection("Businesses");
+        CollectionReference businessesCollection = firestore.collection("Business");
         ApiFuture<DocumentReference> future = businessesCollection.add(business);
         DocumentReference docRef = future.get();
         return docRef.getId();
@@ -136,7 +139,7 @@ public class BusinessesService {
 
             }
         }
-        DocumentReference busDoc = firestore.collection("Businesses").document(id);
+        DocumentReference busDoc = firestore.collection("Business").document(id);
         ApiFuture<WriteResult> result = busDoc.update(formattedValues);
         return result.get();
     }

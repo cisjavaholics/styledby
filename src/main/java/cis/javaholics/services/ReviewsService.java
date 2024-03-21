@@ -25,19 +25,18 @@ public class ReviewsService {
         this.firestore = FirestoreClient.getFirestore();
     }
 
-    @Nullable
-    private Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+    public Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
+        Users createdBy = null;
+        Businesses business = null;
+        Ratings rating = null;
         if (document.exists()) {
-            Users createdBy = null;
-            Businesses business = null;
-            Ratings rating = null;
-
             // Retrieve createdBy user details
             DocumentReference userRef = (DocumentReference) document.get("createdBy");
             if (userRef != null) {
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
-                    createdBy = userSnapshot.toObject(Users.class);
+                    UsersService service = new UsersService();
+                    createdBy = service.documentSnapshotToUser(userSnapshot);
                 }
             }
 
@@ -46,7 +45,8 @@ public class ReviewsService {
             if (userRef != null) {
                 DocumentSnapshot busSnapshot = businessRef.get().get();
                 if (busSnapshot.exists()) {
-                    business = busSnapshot.toObject(Businesses.class);
+                    BusinessesService service = new BusinessesService();
+                    business = service.documentSnapshotToBusiness(busSnapshot);
                 }
             }
 
@@ -55,7 +55,8 @@ public class ReviewsService {
             if (userRef != null) {
                 DocumentSnapshot ratingSnapshot = ratingRef.get().get();
                 if (ratingSnapshot.exists()) {
-                    rating = ratingSnapshot.toObject(Ratings.class);
+                    RatingsService service = new RatingsService();
+                    rating = service.documentSnapshotToRating(ratingSnapshot);
                 }
             }
 
@@ -74,8 +75,8 @@ public class ReviewsService {
 
     @Nullable
     public Reviews getReviewById(String rPostId) throws ExecutionException, InterruptedException {
-        CollectionReference reviewsCollection = firestore.collection("rPostId");
-        ApiFuture<DocumentSnapshot> future = reviewsCollection.document(rPostId).get();
+        DocumentReference reviewRef = firestore.collection("Review").document(rPostId);
+        ApiFuture<DocumentSnapshot> future = reviewRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToReview(document);
     }
@@ -115,7 +116,10 @@ public class ReviewsService {
         List<Reviews> reviewList = new ArrayList<>();
 
         for (DocumentSnapshot document : documentSnapshots) {
-            reviewList.add(document.toObject(Reviews.class));
+            Reviews review = documentSnapshotToReview(document);
+            if (review != null) {
+                reviewList.add(review);
+            }
         }
 
         return reviewList;
