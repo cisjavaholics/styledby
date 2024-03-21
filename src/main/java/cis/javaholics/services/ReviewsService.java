@@ -116,7 +116,10 @@ public class ReviewsService {
         List<Reviews> reviewList = new ArrayList<>();
 
         for (DocumentSnapshot document : documentSnapshots) {
-            reviewList.add(document.toObject(Reviews.class));
+            Reviews review = documentSnapshotToReview(document);
+            if (review != null) {
+                reviewList.add(review);
+            }
         }
 
         return reviewList;
