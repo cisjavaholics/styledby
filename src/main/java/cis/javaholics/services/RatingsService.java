@@ -56,7 +56,7 @@ public class RatingsService {
 
     @Nullable
     public Ratings getRatingById(String ratingId) throws ExecutionException, InterruptedException {
-        CollectionReference ratingsCollection = firestore.collection("ratings");
+        CollectionReference ratingsCollection = firestore.collection("Rating");
         ApiFuture<DocumentSnapshot> future = ratingsCollection.document(ratingId).get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToRating(document);
@@ -64,7 +64,7 @@ public class RatingsService {
 
     @Nullable
     public List<Ratings> getAllRatingsOnPost(String forumId) throws ExecutionException, InterruptedException {
-        Query query = firestore.collection("ratings").whereEqualTo("forumId", forumId);
+        Query query = firestore.collection("Rating").whereEqualTo("forumId", forumId);
         return getRatingList(query);
     }
 
@@ -80,14 +80,14 @@ public class RatingsService {
     }
 
     public String addRating(Ratings rating) throws ExecutionException, InterruptedException {
-        CollectionReference ratingsCollection = firestore.collection("ratings");
+        CollectionReference ratingsCollection = firestore.collection("Rating");
         ApiFuture<DocumentReference> future = ratingsCollection.add(rating);
         DocumentReference docRef = future.get();
         return docRef.getId();
     }
 
     public WriteResult deleteRating(String ratingId) throws ExecutionException, InterruptedException {
-        DocumentReference ratingRef = firestore.collection("ratings").document(ratingId);
+        DocumentReference ratingRef = firestore.collection("Rating").document(ratingId);
         return ratingRef.delete().get();
     }
 

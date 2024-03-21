@@ -75,7 +75,7 @@ public class ReviewsService {
 
     @Nullable
     public Reviews getReviewById(String rPostId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = firestore.collection("Review").document(rPostId);
+        DocumentReference reviewRef = firestore.collection("reviews").document(rPostId);
         ApiFuture<DocumentSnapshot> future = reviewRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToReview(document);
@@ -83,20 +83,20 @@ public class ReviewsService {
 
     @Nullable
     public List<Reviews> getReviewsByUserId(String userId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = Utility.retrieveDocumentReference("Reviews", userId);
-        Query query = firestore.collection("Reviews").whereEqualTo("createdBy", userId);
+        DocumentReference reviewRef = Utility.retrieveDocumentReference("reviews", userId);
+        Query query = firestore.collection("reviews").whereEqualTo("createdBy", userId);
         return getReviewList(query);
     }
 
     @Nullable
     public List<Reviews> getReviewsByBusiness(String businessId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = Utility.retrieveDocumentReference("Reviews", businessId);
-        Query query = firestore.collection("Reviews").whereEqualTo("businessId", businessId);
+        DocumentReference reviewRef = Utility.retrieveDocumentReference("reviews", businessId);
+        Query query = firestore.collection("reviews").whereEqualTo("businessId", businessId);
         return getReviewList(query);
     }
 
     public List<Reviews> getAllReviews() throws ExecutionException, InterruptedException {
-        CollectionReference reviewCollection = firestore.collection("Reviews");
+        CollectionReference reviewCollection = firestore.collection("reviews");
         ApiFuture<QuerySnapshot> future = reviewCollection.get();
         List<Reviews> reviewList = new ArrayList<>();
         for (DocumentSnapshot document : future.get().getDocuments()) {
@@ -126,14 +126,14 @@ public class ReviewsService {
     }
 
     public String createReview(Reviews review) throws ExecutionException, InterruptedException {
-        CollectionReference reviewsCollection = firestore.collection("Reviews");
+        CollectionReference reviewsCollection = firestore.collection("reviews");
         ApiFuture<DocumentReference> future = reviewsCollection.add(review);
         DocumentReference docRef = future.get();
         return docRef.getId();
     }
 
     public WriteResult deleteReview(String rPostId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = firestore.collection("Reviews").document(rPostId);
+        DocumentReference reviewRef = firestore.collection("reviews").document(rPostId);
         return reviewRef.delete().get();
     }
 
