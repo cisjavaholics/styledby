@@ -15,10 +15,10 @@ public class RestSaves extends ASaves{
     private DocumentReference forumId;
 
     public void setUserId(String userId) {
-        this.userId = Utility.retrieveDocumentReference("Users", userId);
+        this.userId = Utility.retrieveDocumentReference("User", userId);
     }
 
     public void setForumId(String forumId) {
-        this.forumId = Utility.retrieveDocumentReference("ForumPosts", forumId);
+        this.forumId = Utility.retrieveDocumentReference("ForumPost", forumId);
     }
 }

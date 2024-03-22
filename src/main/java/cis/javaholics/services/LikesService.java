@@ -62,7 +62,7 @@ public class LikesService {
 
     @Nullable
     public Likes getLikeById(String likeId) throws ExecutionException, InterruptedException {
-        DocumentReference likeRef = firestore.collection("Like").document(likeId);
+        DocumentReference likeRef = firestore.collection("Likes").document(likeId);
         ApiFuture<DocumentSnapshot> future = likeRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToLike(document);
@@ -94,7 +94,7 @@ public class LikesService {
     }
 
     public WriteResult deleteLike(String likeId) throws ExecutionException, InterruptedException {
-        DocumentReference likeRef = firestore.collection("Likes").document(likeId);
+        DocumentReference likeRef = firestore.collection("Like").document(likeId);
         return likeRef.delete().get();
     }
 }

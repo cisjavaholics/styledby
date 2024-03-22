@@ -34,23 +34,27 @@ public class BusinessesService {
 
             //Retrieve reviews
             List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("reviews");
-            for (DocumentReference businessReview : businessReviews) {
-                DocumentSnapshot itemSnapshot = businessReview.get().get();
-                if (itemSnapshot.exists()) {
-                    ReviewsService service = new ReviewsService();
-                    Reviews review = service.documentSnapshotToReview(itemSnapshot);
-                    reviews.add(review);
+            if (businessReviews != null) {
+                for (DocumentReference businessReview : businessReviews) {
+                    DocumentSnapshot itemSnapshot = businessReview.get().get();
+                    if (itemSnapshot.exists()) {
+                        ReviewsService service = new ReviewsService();
+                        Reviews review = service.documentSnapshotToReview(itemSnapshot);
+                        reviews.add(review);
+                    }
                 }
             }
 
             //Retrieve mentions
             List<DocumentReference> businessMentions = (List<DocumentReference>) document.get("mentions");
-            for (DocumentReference businessMention : businessMentions) {
-                DocumentSnapshot itemSnapshot = businessMention.get().get();
-                if (itemSnapshot.exists()) {
-                    MentionsService service = new MentionsService();
-                    Mentions mention = service.documentSnapshotToMention(itemSnapshot);
-                    mentions.add(mention);
+            if (businessMentions != null) {
+                for (DocumentReference businessMention : businessMentions) {
+                    DocumentSnapshot itemSnapshot = businessMention.get().get();
+                    if (itemSnapshot.exists()) {
+                        MentionsService service = new MentionsService();
+                        Mentions mention = service.documentSnapshotToMention(itemSnapshot);
+                        mentions.add(mention);
+                    }
                 }
             }
 

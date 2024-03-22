@@ -45,27 +45,27 @@ public class ForumPostsService {
 
             // Retrieve Likes details
             List<DocumentReference> likeList = (List<DocumentReference>) document.get("likes");
-            for(DocumentReference likeRef : likeList)
-            {
-                DocumentSnapshot likeSnapshot = likeRef.get().get();
-                if(likeSnapshot.exists())
-                {
-                    LikesService service = new LikesService();
-                    Likes like = service.documentSnapshotToLike(likeSnapshot);
-                    likes.add(like);
+            if (likeList != null) {
+                for(DocumentReference likeRef : likeList) {
+                    DocumentSnapshot likeSnapshot = likeRef.get().get();
+                    if (likeSnapshot.exists()) {
+                        LikesService service = new LikesService();
+                        Likes like = service.documentSnapshotToLike(likeSnapshot);
+                        likes.add(like);
+                    }
                 }
             }
 
             // Retrieve comments details
             List<DocumentReference> commentList = (List<DocumentReference>) document.get("comments");
-            for(DocumentReference commentRef : commentList)
-            {
-                DocumentSnapshot commentSnapshot = commentRef.get().get();
-                if(commentSnapshot.exists())
-                {
-                    CommentsService service = new CommentsService();
-                    Comments comment = service.documentSnapshotToComment(commentSnapshot);
-                    comments.add(comment);
+            if (commentList != null) {
+                for(DocumentReference commentRef : commentList) {
+                    DocumentSnapshot commentSnapshot = commentRef.get().get();
+                    if (commentSnapshot.exists()) {
+                        CommentsService service = new CommentsService();
+                        Comments comment = service.documentSnapshotToComment(commentSnapshot);
+                        comments.add(comment);
+                    }
                 }
             }
 
@@ -94,13 +94,13 @@ public class ForumPostsService {
     @Nullable
     public List<ForumPosts> getForumPostsByUserId(String userId) throws ExecutionException, InterruptedException {
         DocumentReference forumPostRef = Utility.retrieveDocumentReference("Reviews", userId);
-        Query query = firestore.collection("ForumPosts").whereEqualTo("postedBy", userId);
+        Query query = firestore.collection("ForumPost").whereEqualTo("postedBy", userId);
         return getForumPostList(query);
     }
 
 
     public List<ForumPosts> getAllForumPosts() throws ExecutionException, InterruptedException {
-        CollectionReference forumPostCollection = firestore.collection("ForumPosts");
+        CollectionReference forumPostCollection = firestore.collection("ForumPost");
         ApiFuture<QuerySnapshot> future = forumPostCollection.get();
         List<ForumPosts> forumPostList = new ArrayList<>();
         for (DocumentSnapshot document : future.get().getDocuments()) {
@@ -127,14 +127,14 @@ public class ForumPostsService {
     }
 
     public String createForumPost(ForumPosts forumPost) throws ExecutionException, InterruptedException {
-        CollectionReference forumPostsCollection = firestore.collection("ForumPosts");
+        CollectionReference forumPostsCollection = firestore.collection("ForumPost");
         ApiFuture<DocumentReference> future = forumPostsCollection.add(forumPost);
         DocumentReference docRef = future.get();
         return docRef.getId();
     }
 
     public WriteResult deleteForumPost(String fPostId) throws ExecutionException, InterruptedException {
-        DocumentReference forumPostRef = firestore.collection("ForumPosts").document(fPostId);
+        DocumentReference forumPostRef = firestore.collection("ForumPost").document(fPostId);
         return forumPostRef.delete().get();
     }
 }

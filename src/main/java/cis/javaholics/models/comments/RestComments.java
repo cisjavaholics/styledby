@@ -15,11 +15,11 @@ public class RestComments extends AComments {
 
     public void setSenderId(String senderId) {
         // Perform Firebase Firestore query to retrieve DocumentReference for createBy
-        this.senderId = Utility.retrieveDocumentReference("Users", senderId);
+        this.senderId = Utility.retrieveDocumentReference("User", senderId);
     }
     public void setforumId(String forumId) {
         // Perform Firebase Firestore query to retrieve DocumentReference for createBy
-        this.forumId = Utility.retrieveDocumentReference("Users", forumId);
+        this.forumId = Utility.retrieveDocumentReference("User", forumId);
     }
 
 

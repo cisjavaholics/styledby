@@ -17,6 +17,6 @@ public class RestRatings extends ARatings {
     private DocumentReference userId;
 
     public void setUserId(String userId) {
-        this.userId = Utility.retrieveDocumentReference("Users", userId);
+        this.userId = Utility.retrieveDocumentReference("User", userId);
     }
 }

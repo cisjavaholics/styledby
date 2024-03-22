@@ -60,7 +60,7 @@ public class SavesService {
 
     @Nullable
     public Saves getSaveById(String saveId) throws ExecutionException, InterruptedException {
-        DocumentReference saveRef = firestore.collection("saves").document(saveId);
+        DocumentReference saveRef = firestore.collection("Saves").document(saveId);
         ApiFuture<DocumentSnapshot> future = saveRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToSave(document);

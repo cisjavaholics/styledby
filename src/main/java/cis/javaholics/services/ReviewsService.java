@@ -42,7 +42,7 @@ public class ReviewsService {
 
             // Retrieve Business details
             DocumentReference businessRef = (DocumentReference) document.get("business");
-            if (userRef != null) {
+            if (businessRef != null) {
                 DocumentSnapshot busSnapshot = businessRef.get().get();
                 if (busSnapshot.exists()) {
                     BusinessesService service = new BusinessesService();

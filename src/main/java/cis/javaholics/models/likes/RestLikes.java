@@ -22,9 +22,9 @@ public class RestLikes extends ALikes{
     }
 
     public void setSenderId(String senderId) {
-        this.senderId = Utility.retrieveDocumentReference("Users", senderId);
+        this.senderId = Utility.retrieveDocumentReference("User", senderId);
     }
     public void setPostId(String postId) {
-        this.postId = Utility.retrieveDocumentReference("Reviews", postId);
+        this.postId = Utility.retrieveDocumentReference("reviews", postId);
     }
 }

@@ -26,7 +26,7 @@ public class RestForumPosts extends AForumPosts {
     }
 
     public void setPostedBy(String postedBy) {
-        this.postedBy = Utility.retrieveDocumentReference("Users", postedBy);
+        this.postedBy = Utility.retrieveDocumentReference("User", postedBy);
     }
 
     public void setLikes(ArrayList<String> likes) {

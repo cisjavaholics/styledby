@@ -30,14 +30,14 @@ public class RestBusinesses extends ABusinesses {
     public void setReviews(ArrayList<String> review) {
         this.reviews = new ArrayList<>();
         for (String tempRev : review) {
-            this.reviews.add(Utility.retrieveDocumentReference("Reviews", tempRev));
+            this.reviews.add(Utility.retrieveDocumentReference("reviews", tempRev));
         }
     }
 
     public void setMentions(ArrayList<String> forum) {
         this.mentions = new ArrayList<>();
         for (String tempFor : forum) {
-            this.mentions.add(Utility.retrieveDocumentReference("Forums", tempFor));
+            this.mentions.add(Utility.retrieveDocumentReference("ForumPost", tempFor));
         }
     }
 }

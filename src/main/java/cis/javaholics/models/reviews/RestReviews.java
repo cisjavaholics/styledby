@@ -17,14 +17,14 @@ public class RestReviews extends AReviews {
     private DocumentReference rating;
 
     public void setCreatedBy(String createdBy) {
-        this.createdBy = Utility.retrieveDocumentReference("Users", createdBy);
+        this.createdBy = Utility.retrieveDocumentReference("User", createdBy);
     }
     public void setBusiness(String business) {
-        this.business = Utility.retrieveDocumentReference("Businesses", business);
+        this.business = Utility.retrieveDocumentReference("Business", business);
     }
 
     public void setRating(String rating) {
-        this.rating = Utility.retrieveDocumentReference("Ratings", rating);
+        this.rating = Utility.retrieveDocumentReference("Rating", rating);
     }
 
 

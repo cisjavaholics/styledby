@@ -31,19 +31,19 @@ public class RestMentions extends AMentions {
     }
 
     public void setForumId(String forumId) {
-        this.forumId = Utility.retrieveDocumentReference("Forums", forumId);
+        this.forumId = Utility.retrieveDocumentReference("ForumPost", forumId);
     }
     public void setMentionedUsers(ArrayList<String> mentionedUsers) {
         this.mentionedUsers = new ArrayList<>();
         for (String user : mentionedUsers) {
-            this.mentionedUsers.add(Utility.retrieveDocumentReference("Users", user));
+            this.mentionedUsers.add(Utility.retrieveDocumentReference("User", user));
         }
     }
 
     public void setMentionedBus(ArrayList<String> mentionedBus) {
         this.mentionedBus = new ArrayList<>();
         for (String business : mentionedBus) {
-            this.mentionedBus.add(Utility.retrieveDocumentReference("Businesses", business));
+            this.mentionedBus.add(Utility.retrieveDocumentReference("Business", business));
         }
     }
 }

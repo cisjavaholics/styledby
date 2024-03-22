@@ -30,55 +30,55 @@ public class UsersService {
             List<Reviews> reviews = new ArrayList<>();
             List<ForumPosts> forums = new ArrayList<>();
             List<Saves> saves = new ArrayList<>();
-            @jakarta.annotation.Nullable
-            List<Businesses> businesses = new ArrayList<>();
-            int numReviews = 0;
-            int numForums = 0;
-            int numSaved = 0;
+            Businesses business = null;
 
 
             //Retrieve reviews
-            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("Reviews");
-            for (DocumentReference businessReview : businessReviews) {
-                DocumentSnapshot itemSnapshot = businessReview.get().get();
-                if (itemSnapshot.exists()) {
-                    ReviewsService service = new ReviewsService();
-                    Reviews review = service.documentSnapshotToReview(itemSnapshot);
-                    reviews.add(review);
+            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("reviews");
+            if (businessReviews != null) {
+                for (DocumentReference businessReview : businessReviews) {
+                    DocumentSnapshot itemSnapshot = businessReview.get().get();
+                    if (itemSnapshot.exists()) {
+                        ReviewsService service = new ReviewsService();
+                        Reviews review = service.documentSnapshotToReview(itemSnapshot);
+                        reviews.add(review);
+                    }
                 }
             }
 
             //Retrieve forums
-            List<DocumentReference> userForums = (List<DocumentReference>) document.get("Forums");
-            for (DocumentReference userForum : userForums) {
-                DocumentSnapshot itemSnapshot = userForum.get().get();
-                if (itemSnapshot.exists()) {
-                    ForumPostsService service = new ForumPostsService();
-                    ForumPosts forumPost = service.documentSnapshotToForum(itemSnapshot);
-                    forums.add(forumPost);
+            List<DocumentReference> userForums = (List<DocumentReference>) document.get("forums");
+            if (userForums != null) {
+                for (DocumentReference userForum : userForums) {
+                    DocumentSnapshot itemSnapshot = userForum.get().get();
+                    if (itemSnapshot.exists()) {
+                        ForumPostsService service = new ForumPostsService();
+                        ForumPosts forumPost = service.documentSnapshotToForum(itemSnapshot);
+                        forums.add(forumPost);
+                    }
                 }
             }
 
             //Retrieve saves
-            List<DocumentReference> userSaves = (List<DocumentReference>) document.get("Saves");
-            for (DocumentReference userSave : userSaves) {
-                DocumentSnapshot itemSnapshot = userSave.get().get();
-                if (itemSnapshot.exists()) {
-                    SavesService service = new SavesService();
-                    Saves save = service.documentSnapshotToSave(itemSnapshot);
-                    saves.add(save);
+            List<DocumentReference> userSaves = (List<DocumentReference>) document.get("saved");
+            if (userSaves != null) {
+                for (DocumentReference userSave : userSaves) {
+                    DocumentSnapshot itemSnapshot = userSave.get().get();
+                    if (itemSnapshot.exists()) {
+                        SavesService service = new SavesService();
+                        Saves save = service.documentSnapshotToSave(itemSnapshot);
+                        saves.add(save);
+                    }
                 }
             }
 
-            @jakarta.annotation.Nullable
-            //Retrieve businesses
-            List<DocumentReference> userBusinesses = (List<DocumentReference>) document.get("Businesses");
-            for (DocumentReference userBusiness : userBusinesses) {
-                DocumentSnapshot itemSnapshot = userBusiness.get().get();
-                if (itemSnapshot.exists()) {
+            // Retrieve Business details
+            DocumentReference businessRef = (DocumentReference) document.get("business");
+            if (businessRef != null) {
+                DocumentSnapshot busSnapshot = businessRef.get().get();
+                if (busSnapshot.exists()) {
                     BusinessesService service = new BusinessesService();
-                    Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
-                    businesses.add(business);
+                    business = service.documentSnapshotToBusiness(busSnapshot);
                 }
             }
 
@@ -88,16 +88,14 @@ public class UsersService {
                     reviews,
                     forums,
                     saves,
-                    businesses,
-                    numReviews,
-                    numForums,
-                    numSaved
+                    business
             ));
         }
-        return null;
+            return null;
     }
+
     public List<Users> getAllUsers() throws InterruptedException, ExecutionException {
-        CollectionReference userCollection = firestore.collection("Users");
+        CollectionReference userCollection = firestore.collection("User");
         Future<QuerySnapshot> future = userCollection.get();
         QuerySnapshot documents = future.get();
 
@@ -111,13 +109,13 @@ public class UsersService {
         return userList;
     }
     public Users getUserByUserId(String userId) throws InterruptedException, ExecutionException {
-        DocumentReference userRef = firestore.collection("Users").document(userId);
+        DocumentReference userRef = firestore.collection("User").document(userId);
         Future<DocumentSnapshot> future = userRef.get();
         DocumentSnapshot documentSnapshot = future.get();
         return documentSnapshotToUser(documentSnapshot);
     }
     public String createUser(Users user) throws ExecutionException, InterruptedException {
-        CollectionReference usersCollection = firestore.collection("Users");
+        CollectionReference usersCollection = firestore.collection("User");
         ApiFuture<DocumentReference> future = usersCollection.add(user);
         DocumentReference docRef = future.get();
         return docRef.getId();
@@ -137,7 +135,7 @@ public class UsersService {
 
             }
         }
-        DocumentReference userDoc = firestore.collection("Users").document(id);
+        DocumentReference userDoc = firestore.collection("User").document(id);
         ApiFuture<WriteResult> result = userDoc.update(formattedValues);
         return result.get();
     }

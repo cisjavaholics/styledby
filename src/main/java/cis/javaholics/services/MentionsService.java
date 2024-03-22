@@ -43,23 +43,27 @@ public class MentionsService {
 
             // Retrieve Mentioned Users details
             List<DocumentReference> usersMentioned = (List<DocumentReference>) document.get("mentionedUsers");
-            for (DocumentReference userMentioned : usersMentioned) {
-                DocumentSnapshot itemSnapshot = userMentioned.get().get();
-                if (itemSnapshot.exists()) {
-                    UsersService service = new UsersService();
-                    Users user = service.documentSnapshotToUser(itemSnapshot);
-                    mentionedUsers.add(user);
+            if (usersMentioned != null) {
+                for (DocumentReference userMentioned : usersMentioned) {
+                    DocumentSnapshot itemSnapshot = userMentioned.get().get();
+                    if (itemSnapshot.exists()) {
+                        UsersService service = new UsersService();
+                        Users user = service.documentSnapshotToUser(itemSnapshot);
+                        mentionedUsers.add(user);
+                    }
                 }
             }
 
             // Retrieve Business details
             List<DocumentReference> mentionedBusinesses = (List<DocumentReference>) document.get("mentionedBus");
-            for (DocumentReference mentionedBusiness : mentionedBusinesses) {
-                DocumentSnapshot itemSnapshot = mentionedBusiness.get().get();
-                if (itemSnapshot.exists()) {
-                    BusinessesService service = new BusinessesService();
-                    Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
-                    mentionedBus.add(business);
+            if (mentionedBusinesses != null) {
+                for (DocumentReference mentionedBusiness : mentionedBusinesses) {
+                    DocumentSnapshot itemSnapshot = mentionedBusiness.get().get();
+                    if (itemSnapshot.exists()) {
+                        BusinessesService service = new BusinessesService();
+                        Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
+                        mentionedBus.add(business);
+                    }
                 }
             }
 
