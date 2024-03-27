@@ -15,14 +15,14 @@ public class RestUsers extends AUsers {
     private List<DocumentReference> reviews;
     private List<DocumentReference> forums;
     private List<DocumentReference> saved;
-    private DocumentReference business;
+    private List<DocumentReference> businesses;
 
-    public RestUsers(String userId, String username, String email, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved, DocumentReference business) {
+    public RestUsers(String userId, String username, String email, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved, List<DocumentReference> businesses) {
         super(userId, username, email);
         this.reviews = reviews;
         this.forums = forums;
         this.saved = saved;
-        this.business = business;
+        this.businesses = businesses;
     }
 
 
@@ -54,9 +54,11 @@ public class RestUsers extends AUsers {
 
     }
 
-    public void setBusiness(String business) {
+    public void setBusinesses(ArrayList<String> businesses) {
 
-        this.business = null;
-            this.business = Utility.retrieveDocumentReference("Business",business);
+        this.businesses = new ArrayList<>();
+        for(String business: businesses) {
+            this.businesses.add(Utility.retrieveDocumentReference("Businesses", business));
+        }
     }
 }

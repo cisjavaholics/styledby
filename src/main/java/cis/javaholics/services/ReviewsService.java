@@ -30,15 +30,6 @@ public class ReviewsService {
         Businesses business = null;
         Ratings rating = null;
         if (document.exists()) {
-            // Retrieve createdBy user details
-            DocumentReference userRef = (DocumentReference) document.get("createdBy");
-            if (userRef != null) {
-                DocumentSnapshot userSnapshot = userRef.get().get();
-                if (userSnapshot.exists()) {
-                    UsersService service = new UsersService();
-                    createdBy = service.documentSnapshotToUser(userSnapshot);
-                }
-            }
 
             // Retrieve Business details
             DocumentReference businessRef = (DocumentReference) document.get("business");
@@ -52,7 +43,7 @@ public class ReviewsService {
 
             // Retrieve createdBy rating
             DocumentReference ratingRef = (DocumentReference) document.get("rating");
-            if (userRef != null) {
+            if (ratingRef != null) {
                 DocumentSnapshot ratingSnapshot = ratingRef.get().get();
                 if (ratingSnapshot.exists()) {
                     RatingsService service = new RatingsService();
@@ -65,7 +56,7 @@ public class ReviewsService {
                     document.getString("description"),
                     (List<String>)document.get("photos"),
                     document.getTimestamp("createdAt"),
-                    createdBy,
+                    null,
                     business,
                     rating
             ) );

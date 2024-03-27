@@ -63,9 +63,7 @@ public class BusinessesService {
                     document.getString("category"),
                     rating,
                     reviews,
-                    mentions,
-                    numReviews,
-                    numMentions
+                    mentions
             ));
         }
         return null;

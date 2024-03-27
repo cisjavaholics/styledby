@@ -30,7 +30,7 @@ public class UsersService {
             List<Reviews> reviews = new ArrayList<>();
             List<ForumPosts> forums = new ArrayList<>();
             List<Saves> saves = new ArrayList<>();
-            Businesses business = null;
+            List<Businesses> businesses = new ArrayList<>();
 
 
             //Retrieve reviews
@@ -46,49 +46,27 @@ public class UsersService {
                 }
             }
 
-            //Retrieve forums
-            List<DocumentReference> userForums = (List<DocumentReference>) document.get("forums");
-            if (userForums != null) {
-                for (DocumentReference userForum : userForums) {
-                    DocumentSnapshot itemSnapshot = userForum.get().get();
+            //Retrieve businesses
+            List<DocumentReference> userBusinesses = (List<DocumentReference>) document.get("businesses");
+            if (userBusinesses != null) {
+                for (DocumentReference userBusiness : userBusinesses) {
+                    DocumentSnapshot itemSnapshot = userBusiness.get().get();
                     if (itemSnapshot.exists()) {
-                        ForumPostsService service = new ForumPostsService();
-                        ForumPosts forumPost = service.documentSnapshotToForum(itemSnapshot);
-                        forums.add(forumPost);
+                        BusinessesService service = new BusinessesService();
+                        Businesses business = service.documentSnapshotToBusiness(itemSnapshot);
+                        businesses.add(business);
                     }
                 }
             }
 
-            //Retrieve saves
-            List<DocumentReference> userSaves = (List<DocumentReference>) document.get("saved");
-            if (userSaves != null) {
-                for (DocumentReference userSave : userSaves) {
-                    DocumentSnapshot itemSnapshot = userSave.get().get();
-                    if (itemSnapshot.exists()) {
-                        SavesService service = new SavesService();
-                        Saves save = service.documentSnapshotToSave(itemSnapshot);
-                        saves.add(save);
-                    }
-                }
-            }
-
-            // Retrieve Business details
-            DocumentReference businessRef = (DocumentReference) document.get("business");
-            if (businessRef != null) {
-                DocumentSnapshot busSnapshot = businessRef.get().get();
-                if (busSnapshot.exists()) {
-                    BusinessesService service = new BusinessesService();
-                    business = service.documentSnapshotToBusiness(busSnapshot);
-                }
-            }
 
             return (new Users(document.getId(),
                     document.getString("username"),
                     document.getString("email"),
                     reviews,
-                    forums,
-                    saves,
-                    business
+                    null,
+                    null,
+                    businesses
             ));
         }
             return null;

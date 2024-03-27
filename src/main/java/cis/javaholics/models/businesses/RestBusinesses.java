@@ -15,16 +15,12 @@ public class RestBusinesses extends ABusinesses {
     private int rating;
     private List<DocumentReference> reviews;
     private List<DocumentReference> mentions;
-    private int numReviews;
-    private int numMentions;
 
-    public RestBusinesses(String businessId, String name, String category, int rating, List<DocumentReference> reviews, List<DocumentReference> mentions, int numReviews, int numMentions) {
+    public RestBusinesses(String businessId, String name, String category, int rating, List<DocumentReference> reviews, List<DocumentReference> mentions) {
         super(businessId, name, category);
         this.rating = rating;
         this.reviews = reviews;
         this.mentions = mentions;
-        this.numReviews = numReviews;
-        this.numMentions = numMentions;
     }
     // Setters and Getters for String parameters to perform Firestore queries
     public void setReviews(ArrayList<String> review) {

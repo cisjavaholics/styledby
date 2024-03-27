@@ -16,13 +16,13 @@ public class Users extends AUsers {
     private List<Reviews> reviews;
     private List<ForumPosts> forums;
     private List<Saves> saved;
-    private Businesses business;
+    private List<Businesses> businesses;
 
-    public Users(String userId, String username, String email, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, Businesses business) {
+    public Users(String userId, String username, String email, List<Reviews> reviews, List<ForumPosts> forums, List<Saves> saved, List <Businesses> business) {
         super(userId, username, email);
         this.reviews = reviews;
         this.forums = forums;
         this.saved = saved;
-
+        this.businesses = businesses;
     }
 }

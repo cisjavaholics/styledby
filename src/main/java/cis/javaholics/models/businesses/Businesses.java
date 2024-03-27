@@ -13,14 +13,10 @@ public class Businesses extends ABusinesses {
     private int rating;
     private List<Reviews> reviews;
     private List<Mentions> mentions;
-    private int numReviews;
-    private int numMentions;
-    public Businesses(String businessId, String name,String category, int rating, List<Reviews> reviews, List<Mentions> mentions, int numReviews, int numMentions) {
+    public Businesses(String businessId, String name,String category, int rating, List<Reviews> reviews, List<Mentions> mentions) {
         super(businessId, name, category);
         this.rating = rating;
         this.reviews = reviews;
         this.mentions = mentions;
-        this.numReviews = numReviews;
-        this.numMentions = numMentions;
     }
 }
