@@ -291,5 +291,5 @@ This sprint we built our main services and controllers for our data models. We a
 ### Milestone 6 Build Progress Summary
 ![template](template.png)
 ![login](login.png)
-![home](home.png)
+![home](home.jpeg)
 In Milestone 6, our team fixed errors that we were facing with our completed services and controllers. We also began creating on front end. Specifically, we began working on our template, login/register, and home page.
