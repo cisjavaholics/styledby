@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000; /* Set text color to black */
+    background-color: #fff; /* Set background color to white */
+  }
+
+  .header {
+    text-align: center; /* Center-align the text in the header */
+    padding: 10px 0;
+    background-color: #FDFEFE ;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .navigation {
+    width: 200px; /* Set the width of the navigation menu */
+    background-color: #FDFEFE;
+    color: #000; /* Set text color to black */
+    height: 100vh; /* Set the height to full viewport height */
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-top: 60px; /* Space for the header */
+    border-right: 1px solid #ddd; /* Add a border on the right side */
+  }
+
+  .navigation a {
+    display: block;
+    padding: 10px 20px;
+    color: #000; /* Set text color to black */
+    text-decoration: none;
+  }
+
+  .content {
+    margin-left: 200px; /* Adjust the content area to the right of the navigation */
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 1px;
+    text-align: center;
+  }
+
+  .forum {
+    margin-bottom: 20px;
+  }
+
+  .trending-stylists {
+    text-align: left;
+  }
+
+  .trending-stylists ol {
+    padding-left: 0; /* Remove default padding */
+    list-style-position: inside; /* Align list items inside the numbers */
+  }
+
+  .trending-stylists ol li {
+    margin-bottom: 5px; /* Adjust the spacing between list items */
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">StyledBy</div>
+  </div>
+  <div class="navigation">
+    <a href="#">Review</a>
+    <a href="#">Forum</a>
+    <a href="#">Notification</a>
+    <a href="#">Settings</a>
+    <a href="#">Help</a>
+  </div>
+  <div class="content">
+    <h2>Latest Reviews</h2>
+    <table>
+      <tr>
+        <td><img src="IMG-1.PNG" alt="Image 1"></td>
+        <td><img src="IMG-1.PNG" alt="Image 2"></td>
+        <td><img src="IMG-1.PNG" alt="Image 3"></td>
+      </tr>
+    </table>
+    <h2>Forum</h2>
+    <div class="forum">
+      <h3>Hair Growth Tips</h3>
+      <textarea placeholder="Input your response here..." rows="4" cols="50"></textarea>
+    </div>
+    <h2>Trending Stylists</h2>
+    <div class="trending-stylists">
+      <ol>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <li>Stylist Name</li>
+        <!-- Add more list items for the remaining names -->
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
