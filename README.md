@@ -283,7 +283,7 @@ Base URL: https://graph.instagram.com/
 ### Milestone 3 & 4 Build Progress Summary
 In Milestone 4, our team continued to create our services and controllers. We created services and controllers for 
 Users, Businesses, Comments, and Reviews. We also began the process of creating services and controllers for Likes and Forum Posts.
-## Milestonne 5 Build Progress
+## Milestone 5 Build Progress
 ![buildporg1.gif](buildporg1.gif)
 ![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
 This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
