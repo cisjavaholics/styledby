@@ -283,7 +283,7 @@ Base URL: https://graph.instagram.com/
 ### Milestone 3 & 4 Build Progress Summary
 In Milestone 4, our team continued to create our services and controllers. We created services and controllers for 
 Users, Businesses, Comments, and Reviews. We also began the process of creating services and controllers for Likes and Forum Posts.
-## Milestone 5 Build Progress
+### Milestone 5 Build Progress
 ![buildporg1.gif](buildporg1.gif)
 ![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
 This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
@@ -293,3 +293,7 @@ This sprint we built our main services and controllers for our data models. We a
 ![login](login.png)
 ![home](home.jpeg)
 In Milestone 6, our team fixed errors that we were facing with our completed services and controllers. We also began creating on front end. Specifically, we began working on our template, login/register, and home page.
+
+### Milestone 7 Build Progress Summary
+![M7buildprogress](M7buildprogress.gif)
+In Milestone 7, continued to work on our front end, specifically designing our login, home page, and create reviews/forum posts. We made adjustments to these pages from the last milestone to incorporate bootstrap styling. We also continued to debug our services and controllers
