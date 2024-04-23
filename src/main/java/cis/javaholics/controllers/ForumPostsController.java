@@ -1,6 +1,7 @@
 package cis.javaholics.controllers;
 
 import cis.javaholics.models.forumPosts.ForumPosts;
+import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.services.ForumPostsService;
 import cis.javaholics.util.ApiResponseFormat;
 import io.swagger.v3.oas.annotations.Operation;
@@ -94,7 +95,8 @@ public class ForumPostsController {
     }
 
     @Operation(summary = "Create a forum post")
-    public ResponseEntity<ApiResponseFormat<String>> createForumPost(@RequestBody ForumPosts forumPost) {
+    @PostMapping("/create/")
+    public ResponseEntity<ApiResponseFormat<String>> createForumPost(@RequestBody(required = false) ForumPosts forumPost) {
         try {
             String forumPostId = forumPostsService.createForumPost(forumPost);
             return ResponseEntity.status(HttpStatus.CREATED)

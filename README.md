@@ -9,10 +9,7 @@
 ### Description 
 A comprehensive application for individuals to anonymously review and seek opinions on local service providers, fostering a community-driven approach to sharing experiences with barbers, stylists, nail techs, and more. The app creates a space for users to rate and provide unbiased feedback on these professionals, facilitating informed decisions for others seeking quality services. 
 
-## Build Progress
-![buildporg1.gif](buildporg1.gif)
-![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
-This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
+
 ## App Evaluation
 - **Category**: Lifestyle/Social Forum & Community Chats
 - **Story**: Allows users to anonymously review local service providers and share/inquire about experiences and recommendations.
@@ -36,6 +33,23 @@ This sprint we built our main services and controllers for our data models. We a
 - Service Verification  ( confirm bookings)
 - Updates on review interactions (likes, comments, replies)
 - Automated forum responses based on generalized reviews
+
+## Build Progress
+![buildporg1.gif](buildporg1.gif)
+![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
+This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
+
+### Midpoint Progress
+
+**Endpoints**
+
+- api/users/
+- api/users/{user_id}
+- api/users/create
+- api/business/
+- api/business/{business_id}
+- api/forumPosts/
+- api/forumPosts/{fPost_id}
 
 ## 2. Screens
 - Login

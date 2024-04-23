@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Service
 public class CommentsService {
@@ -59,6 +60,20 @@ public class CommentsService {
             return null;
     }
 
+    public List<Comments> getAllComments() throws InterruptedException, ExecutionException {
+        CollectionReference commentCollection = firestore.collection("Comment");
+        Future<QuerySnapshot> future = commentCollection.get();
+        QuerySnapshot documents = future.get();
+
+        List<Comments> commentList = new ArrayList<>();
+        for (DocumentSnapshot document : documents) {
+            Comments comment = documentSnapshotToComment(document);
+            if (comment != null) {
+                commentList.add(comment);
+            }
+        }
+        return commentList;
+    }
     @Nullable
     public Comments getCommentById(String commentId) throws ExecutionException, InterruptedException {
         DocumentReference jobRef = firestore.collection("Comment").document(commentId);

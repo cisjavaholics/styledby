@@ -2,6 +2,7 @@ package cis.javaholics.controllers;
 
 
 import cis.javaholics.models.likes.Likes;
+import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.services.LikesService;
 import cis.javaholics.util.ApiResponseFormat;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +28,24 @@ public class LikesController {
         this.likesService = likesService;
     }
 
+    @Operation(summary = "Get all likes")
+    @ApiResponses(value ={
+            @ApiResponse(responseCode = "200", description = "Likes found"),
+            @ApiResponse(responseCode = "204", description = "No likes Found"),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve likes..",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiResponseFormat.class)))
+    })
+    @GetMapping("/")
+    public ResponseEntity<ApiResponseFormat<Likes>> getAllLikes() {
+        try {
+            List<Likes> likesList = likesService.getAllLikes();
+            return ResponseEntity.ok(new ApiResponseFormat<>(true, "Likes successfully retrieved.", likesList, null));
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error retrieving likes",null, e));
+        }
+    }
     @Operation(summary = "Get like by id")
     @ApiResponses(value ={
             @ApiResponse(responseCode = "200", description = "Like found"),

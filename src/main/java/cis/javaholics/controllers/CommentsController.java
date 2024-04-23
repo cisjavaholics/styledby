@@ -28,6 +28,24 @@ public class CommentsController {
         this.commentsService = commentsService;
     }
 
+    @Operation(summary = "Get all comments")
+    @ApiResponses(value ={
+            @ApiResponse(responseCode = "200", description = "Comments found"),
+            @ApiResponse(responseCode = "204", description = "No comments Found"),
+            @ApiResponse(responseCode = "500", description = "Unable to retrieve comments..",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiResponseFormat.class)))
+    })
+    @GetMapping("/")
+    public ResponseEntity<ApiResponseFormat<Reviews>> getAllComments() {
+        try {
+            List<Comments> commentList = commentsService.getAllComments();
+            return ResponseEntity.ok(new ApiResponseFormat<>(true, "Comment successfully retrieved.",commentList, null));
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error retrieving comments",null, e));
+        }
+    }
     @Operation(summary = "Get comment by id")
     @ApiResponses(value ={
             @ApiResponse(responseCode = "200", description = "Comment found"),

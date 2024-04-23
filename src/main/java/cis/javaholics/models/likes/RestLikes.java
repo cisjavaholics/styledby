@@ -15,10 +15,10 @@ public class RestLikes extends ALikes{
     private DocumentReference senderId;
     private DocumentReference postId;
 
-    public RestLikes(@Nullable String likeId, Timestamp likedAt, DocumentReference senderId, DocumentReference postId) {
+    public RestLikes(@Nullable String likeId, Timestamp likedAt, String senderId, String postId) {
         super(likeId, likedAt);
-        this.senderId = senderId;
-        this.postId = postId;
+        setSenderId(senderId);
+        setPostId(postId);
     }
 
     public void setSenderId(String senderId) {

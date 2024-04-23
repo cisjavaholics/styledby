@@ -15,8 +15,8 @@ import java.text.ParseException;
 @NoArgsConstructor
 public abstract class ALikes {
     @DocumentId
-    private @Nullable String likeId;
-    private Timestamp likedAt;
+    protected @Nullable String likeId;
+    protected Timestamp likedAt;
 
     public void setLikedAt(String likedAt) throws ParseException {
         this.likedAt = Timestamp.fromProto(Timestamps.parse(likedAt));

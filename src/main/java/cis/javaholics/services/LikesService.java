@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Service
 public class LikesService {
@@ -28,7 +29,10 @@ public class LikesService {
         Users senderId = null;
         Reviews postId = null;
         if (document.exists()) {
-
+            Likes like = new Likes();
+            like.setLikeId(document.getId());
+            // error: java.lang.ClassCastException: class java.lang.String cannot be cast to class com.google.cloud.Timestamp (java.lang.String is in module java.base of loader 'bootstrap'; com.google.cloud.Timestamp is in unnamed module of loader 'app')
+            //like.setLikedAt(document.getTimestamp("likedAt"));
             // Retrieve senderId user details
             DocumentReference userRef = (DocumentReference) document.get("userId");
             if (userRef != null) {
@@ -37,6 +41,7 @@ public class LikesService {
                     UsersService service = new UsersService();
                     senderId = service.documentSnapshotToUser(userSnapshot);
                 }
+                like.setSenderId(senderId);
             }
 
             // Retrieve post details
@@ -47,17 +52,29 @@ public class LikesService {
                     ReviewsService service = new ReviewsService();
                     postId = service.documentSnapshotToReview(postSnapshot);
                 }
+                like.setPostId(postId);
             }
 
-            return( new Likes(document.getId(),
-                    document.getTimestamp("likedAt"),
-                    senderId,
-                    postId
-            ) );
+            return like;
 
 
         }
         return null;
+    }
+
+    public List<Likes> getAllLikes() throws InterruptedException, ExecutionException {
+        CollectionReference likeCollection = firestore.collection("Likes");
+        Future<QuerySnapshot> future = likeCollection.get();
+        QuerySnapshot documents = future.get();
+
+        List<Likes> likesList = new ArrayList<>();
+        for (DocumentSnapshot document : documents) {
+            Likes like = documentSnapshotToLike(document);
+            if (like != null) {
+                likesList.add(like);
+            }
+        }
+        return likesList;
     }
 
     @Nullable

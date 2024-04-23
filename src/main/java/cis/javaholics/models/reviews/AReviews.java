@@ -17,17 +17,24 @@ import java.util.List;
 public abstract class AReviews {
     @DocumentId
     @Schema(example = "12345", description = "Unique ID of the review")
-    private String rPostId;
+    protected String rPostId;
     @Schema(example = "Hair", description = "Type of service that review is made on")
-    private String type;
+    protected String type;
+    @Schema(example = "4", description = "Number 1-5 representing users rating of service")
+    protected long rating;
     @Schema(example = "Great work.", description = "Description of review")
-    private String description;
+    protected String description;
     @Schema(example = "images/image.jpeg", description = "List of photos of service (file paths)")
-    private @Nullable List<String> photos;
+    protected @Nullable List<String> photos;
     @Schema(example = "January 25, 2024 at 6:56:59PM", description = "Time that review was created")
-    private Timestamp createdAt;
+    protected Timestamp createdAt;
 
     public void setCreatedAt(String createdAt) throws ParseException {
         this.createdAt = Timestamp.fromProto(Timestamps.parse(createdAt));
+    }
+
+    public void setCreatedAtS(Timestamp createdAt) {
+
+        this.createdAt = createdAt;
     }
 }

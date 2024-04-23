@@ -15,13 +15,11 @@ import java.util.List;
 public class ForumPosts extends AForumPosts {
     private Users postedBy;
     private List<Likes> likes;
-    private List<Comments> comments;
 
-    public ForumPosts(@Nullable String fPostId, String topic, String description, String title, List<String> photos, Timestamp postedAt, Users postedBy, List<Likes> likes, List<Comments> comments) {
+    public ForumPosts(@Nullable String fPostId, String topic, String description, String title, List<String> photos, Timestamp postedAt, Users postedBy, List<Likes> likes) {
         super(fPostId, topic, description, title, photos, postedAt);
         this.postedBy = postedBy;
         this.likes = likes;
-        this.comments = comments;
     }
 
 }

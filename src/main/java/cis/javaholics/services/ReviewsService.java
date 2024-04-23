@@ -2,7 +2,6 @@ package cis.javaholics.services;
 
 
 import cis.javaholics.models.businesses.Businesses;
-import cis.javaholics.models.ratings.Ratings;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
@@ -28,38 +27,29 @@ public class ReviewsService {
     public Reviews documentSnapshotToReview(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         Users createdBy = null;
         Businesses business = null;
-        Ratings rating = null;
         if (document.exists()) {
+            Reviews review = new Reviews();
+            review.setRPostId(document.getId());
+            review.setType(document.getString("type"));
+            review.setRating(document.getLong("rating"));
+            review.setDescription(document.getString("description"));
+            review.setPhotos((List<String>)document.get("photos"));
+            review.setCreatedAtS(document.getTimestamp("createdAt"));
 
-            // Retrieve Business details
-            DocumentReference businessRef = (DocumentReference) document.get("business");
-            if (businessRef != null) {
-                DocumentSnapshot busSnapshot = businessRef.get().get();
-                if (busSnapshot.exists()) {
-                    BusinessesService service = new BusinessesService();
-                    business = service.documentSnapshotToBusiness(busSnapshot);
+            // Retrieve user details
+            DocumentReference userRef = (DocumentReference) document.get("createdBy");
+            if (userRef != null) {
+                DocumentSnapshot userSnapshot = userRef.get().get();
+                if (userSnapshot.exists()) {
+                    UsersService service = new UsersService();
+                    createdBy = service.documentSnapshotToUser(userSnapshot);
+                    review.setCreatedBy(createdBy);
                 }
             }
 
-            // Retrieve createdBy rating
-            DocumentReference ratingRef = (DocumentReference) document.get("rating");
-            if (ratingRef != null) {
-                DocumentSnapshot ratingSnapshot = ratingRef.get().get();
-                if (ratingSnapshot.exists()) {
-                    RatingsService service = new RatingsService();
-                    rating = service.documentSnapshotToRating(ratingSnapshot);
-                }
-            }
 
-            return( new Reviews(document.getId(),
-                    document.getString("type"),
-                    document.getString("description"),
-                    (List<String>)document.get("photos"),
-                    document.getTimestamp("createdAt"),
-                    null,
-                    business,
-                    rating
-            ) );
+
+            return review;
         }
         return null;
     }

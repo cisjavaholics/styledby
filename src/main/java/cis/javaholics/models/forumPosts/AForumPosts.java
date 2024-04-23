@@ -16,14 +16,18 @@ import java.util.List;
 @NoArgsConstructor
 public abstract class AForumPosts {
     @DocumentId
-    private @Nullable String fPostId;
-    private String topic;
-    private String description;
-    private String title;
-    private List<String> photos;
-    private Timestamp postedAt;
+    protected @Nullable String fPostId;
+    protected String topic;
+    protected String description;
+    protected String title;
+    protected List<String> photos;
+    protected Timestamp postedAt;
 
     public void setPostedAt(String postedAt) throws ParseException {
         this.postedAt = Timestamp.fromProto(Timestamps.parse(postedAt));
+    }
+
+    public void setPostedAtS(Timestamp postedAt) {
+        this.postedAt = postedAt;
     }
 }

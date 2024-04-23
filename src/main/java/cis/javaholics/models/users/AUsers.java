@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor //creates no argument constructor automatically
 public abstract class AUsers {
     @DocumentId
-    private @Nullable String userId;
-    private String username;
-    private String email;
+    protected @Nullable String userId;
+    protected String username;
+    protected String email;
 }
