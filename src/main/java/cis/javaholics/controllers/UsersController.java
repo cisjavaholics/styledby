@@ -70,8 +70,8 @@ public class UsersController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<ApiResponseFormat<String>> addUser(@RequestBody Users user) {
+    @PostMapping("/create/")
+    public ResponseEntity<ApiResponseFormat<String>> addUser(@RequestBody(required = false) Users user) {
         try{
             String id = usersService.createUser(user);
             return ResponseEntity.status(HttpStatus.CREATED)

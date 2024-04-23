@@ -15,15 +15,13 @@ public class RestMentions extends AMentions {
 
     private DocumentReference mentionedBy;
     private DocumentReference forumId;
-    private List<DocumentReference> mentionedUsers;
-    private List<DocumentReference> mentionedBus;
+    private DocumentReference mentionedBus;
 
-    public RestMentions(String mentionId, Timestamp mentionedAt, DocumentReference mentionedBy, List<DocumentReference> mentionedsers, List<DocumentReference> mentionedBus, DocumentReference forumId) {
+    public RestMentions(String mentionId, Timestamp mentionedAt, String mentionedBy, String mentionedBus, String forumId) {
         super(mentionId, mentionedAt);
-        this.mentionedBy = mentionedBy;
-        this.forumId = forumId;
-        this.mentionedUsers = mentionedsers;
-        this.mentionedBus = mentionedBus;
+        setMentionedBy(mentionedBy);
+        setForumId(forumId);
+        setMentionedBus(mentionedBus);
     }
     // Setters and Getters for String parameters to perform Firestore queries
     public void setMentionedBy(String mentionedBy) {
@@ -33,17 +31,8 @@ public class RestMentions extends AMentions {
     public void setForumId(String forumId) {
         this.forumId = Utility.retrieveDocumentReference("ForumPost", forumId);
     }
-    public void setMentionedUsers(ArrayList<String> mentionedUsers) {
-        this.mentionedUsers = new ArrayList<>();
-        for (String user : mentionedUsers) {
-            this.mentionedUsers.add(Utility.retrieveDocumentReference("User", user));
-        }
-    }
 
-    public void setMentionedBus(ArrayList<String> mentionedBus) {
-        this.mentionedBus = new ArrayList<>();
-        for (String business : mentionedBus) {
-            this.mentionedBus.add(Utility.retrieveDocumentReference("Business", business));
-        }
+    public void setMentionedBus(String mentionedBus) {
+        this.mentionedBus = Utility.retrieveDocumentReference("Business", mentionedBus);
     }
 }

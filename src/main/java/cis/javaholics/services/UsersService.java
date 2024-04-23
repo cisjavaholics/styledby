@@ -27,24 +27,14 @@ public class UsersService {
     @Nullable
     public Users documentSnapshotToUser(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
+            Users user = new Users();
+            user.setUserId(document.getId());
+            user.setUsername(document.getString("username"));
+            user.setEmail(document.getString("email"));
             List<Reviews> reviews = new ArrayList<>();
-            List<ForumPosts> forums = new ArrayList<>();
             List<Saves> saves = new ArrayList<>();
             List<Businesses> businesses = new ArrayList<>();
 
-
-            //Retrieve reviews
-            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("reviews");
-            if (businessReviews != null) {
-                for (DocumentReference businessReview : businessReviews) {
-                    DocumentSnapshot itemSnapshot = businessReview.get().get();
-                    if (itemSnapshot.exists()) {
-                        ReviewsService service = new ReviewsService();
-                        Reviews review = service.documentSnapshotToReview(itemSnapshot);
-                        reviews.add(review);
-                    }
-                }
-            }
 
             //Retrieve businesses
             List<DocumentReference> userBusinesses = (List<DocumentReference>) document.get("businesses");
@@ -57,19 +47,13 @@ public class UsersService {
                         businesses.add(business);
                     }
                 }
+                user.setBusinesses(businesses);
             }
 
 
-            return (new Users(document.getId(),
-                    document.getString("username"),
-                    document.getString("email"),
-                    reviews,
-                    null,
-                    null,
-                    businesses
-            ));
+            return user;
         }
-            return null;
+        return null;
     }
 
     public List<Users> getAllUsers() throws InterruptedException, ExecutionException {
@@ -116,6 +100,11 @@ public class UsersService {
         DocumentReference userDoc = firestore.collection("User").document(id);
         ApiFuture<WriteResult> result = userDoc.update(formattedValues);
         return result.get();
+    }
+
+    public WriteResult deleteUser(String id) throws ExecutionException, InterruptedException {
+        DocumentReference userRef = firestore.collection("User").document(id);
+        return userRef.delete().get();
     }
 
 }

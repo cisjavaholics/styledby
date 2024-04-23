@@ -1,6 +1,9 @@
 package cis.javaholics.models.reviews;
 
+import cis.javaholics.models.businesses.Businesses;
+import cis.javaholics.models.users.Users;
 import cis.javaholics.util.Utility;
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +17,12 @@ import java.util.List;
 public class RestReviews extends AReviews {
     private DocumentReference createdBy;
     private DocumentReference business;
-    private DocumentReference rating;
 
+    public RestReviews(String rPostId, String type, long rating, String description, @jakarta.annotation.Nullable List<String> photos, Timestamp createdAt, String createdBy, String business) {
+        super(rPostId, type, rating, description, photos, createdAt);
+        setCreatedBy(createdBy);
+        setBusiness(business);
+    }
     public void setCreatedBy(String createdBy) {
         this.createdBy = Utility.retrieveDocumentReference("User", createdBy);
     }
@@ -23,9 +30,6 @@ public class RestReviews extends AReviews {
         this.business = Utility.retrieveDocumentReference("Business", business);
     }
 
-    public void setRating(String rating) {
-        this.rating = Utility.retrieveDocumentReference("Rating", rating);
-    }
 
 
 }

@@ -29,9 +29,16 @@ public class ForumPostsService {
     @Nullable
     public ForumPosts documentSnapshotToForum(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
+            ForumPosts forum = new ForumPosts();
+            forum.setFPostId(document.getId());
+            forum.setTopic(document.getString("topic"));
+            forum.setDescription(document.getString("description"));
+            forum.setTitle(document.getString("title"));
+            forum.setPhotos((List<String>)document.get("photos"));
+            forum.setPostedAtS(document.getTimestamp("postedAt"));
             Users postedBy = null;
-            List<Likes> likes = null;
-            List<Comments> comments = null;
+            List<Likes> likes = new ArrayList<>();
+            List<Comments> comments = new ArrayList<>();
 
             // Retrieve postedBy user details
             DocumentReference userRef = (DocumentReference) document.get("postedBy");
@@ -40,8 +47,10 @@ public class ForumPostsService {
                 if (userSnapshot.exists()) {
                     UsersService service = new UsersService();
                     postedBy = service.documentSnapshotToUser(userSnapshot);
+                    forum.setPostedBy(postedBy);
                 }
             }
+
 
             // Retrieve Likes details
             List<DocumentReference> likeList = (List<DocumentReference>) document.get("likes");
@@ -54,31 +63,11 @@ public class ForumPostsService {
                         likes.add(like);
                     }
                 }
+                forum.setLikes(likes);
             }
 
-            // Retrieve comments details
-            List<DocumentReference> commentList = (List<DocumentReference>) document.get("comments");
-            if (commentList != null) {
-                for(DocumentReference commentRef : commentList) {
-                    DocumentSnapshot commentSnapshot = commentRef.get().get();
-                    if (commentSnapshot.exists()) {
-                        CommentsService service = new CommentsService();
-                        Comments comment = service.documentSnapshotToComment(commentSnapshot);
-                        comments.add(comment);
-                    }
-                }
-            }
 
-            return( new ForumPosts(document.getId(),
-                    document.getString("topic"),
-                    document.getString("description"),
-                    document.getString("title"),
-                    (List<String>)document.get("photos"),
-                    document.getTimestamp("postedAt"),
-                    postedBy,
-                    likes,
-                    comments
-            ) );
+            return forum;
         }
         return null;
     }

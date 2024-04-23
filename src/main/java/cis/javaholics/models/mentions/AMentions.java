@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor //creates no argument constructor automatically
 public abstract class AMentions {
     @DocumentId
-    private @Nullable String mentionId;
-    private Timestamp mentionedAt;
+    protected @Nullable String mentionId;
+    protected Timestamp mentionedAt;
     public void setMentionedAt(String mentionedAt) throws ParseException {
         this.mentionedAt = Timestamp.fromProto(Timestamps.parse(mentionedAt));
     }

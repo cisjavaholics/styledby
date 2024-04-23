@@ -25,46 +25,16 @@ public class BusinessesService {
 
     public Businesses documentSnapshotToBusiness(DocumentSnapshot document) throws ExecutionException, InterruptedException {
         if (document.exists()) {
-            int rating = 0;
+            Businesses business = new Businesses();
+            business.setBusinessId(document.getId());
+            business.setName(document.getString("name"));
+            business.setCategory(document.getString("category"));
+            business.setRating(document.getLong("rating"));
             List<Reviews> reviews = new ArrayList<>();
-            List<Mentions> mentions = new ArrayList<>();
-            int numReviews = 0;
-            int numMentions = 0;
 
 
-            //Retrieve reviews
-            List<DocumentReference> businessReviews = (List<DocumentReference>) document.get("reviews");
-            if (businessReviews != null) {
-                for (DocumentReference businessReview : businessReviews) {
-                    DocumentSnapshot itemSnapshot = businessReview.get().get();
-                    if (itemSnapshot.exists()) {
-                        ReviewsService service = new ReviewsService();
-                        Reviews review = service.documentSnapshotToReview(itemSnapshot);
-                        reviews.add(review);
-                    }
-                }
-            }
 
-            //Retrieve mentions
-            List<DocumentReference> businessMentions = (List<DocumentReference>) document.get("mentions");
-            if (businessMentions != null) {
-                for (DocumentReference businessMention : businessMentions) {
-                    DocumentSnapshot itemSnapshot = businessMention.get().get();
-                    if (itemSnapshot.exists()) {
-                        MentionsService service = new MentionsService();
-                        Mentions mention = service.documentSnapshotToMention(itemSnapshot);
-                        mentions.add(mention);
-                    }
-                }
-            }
-
-            return (new Businesses(document.getId(),
-                    document.getString("name"),
-                    document.getString("category"),
-                    rating,
-                    reviews,
-                    mentions
-            ));
+            return business;
         }
         return null;
     }

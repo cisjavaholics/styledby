@@ -15,14 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 public class RestForumPosts extends AForumPosts {
     private DocumentReference postedBy;
-    private List<DocumentReference> likes;
-    private List<DocumentReference> comments;
+    private ArrayList<DocumentReference> likes;
 
-    public RestForumPosts(@Nullable String fPostId, String topic, String description, String title, List<String> photos, Timestamp postedAt, DocumentReference postedBy, List<DocumentReference> likes, List<DocumentReference> comments) {
+    public RestForumPosts(@Nullable String fPostId, String topic, String description, String title, List<String> photos, Timestamp postedAt, String postedBy, ArrayList<String> likes) {
         super(fPostId, topic, description, title, photos, postedAt);
-        this.postedBy = postedBy;
-        this.likes = likes;
-        this.comments = comments;
+        setPostedBy(postedBy);
+        setLikes(likes);
     }
 
     public void setPostedBy(String postedBy) {
@@ -37,13 +35,7 @@ public class RestForumPosts extends AForumPosts {
         }
     }
 
-    public void setComments(ArrayList<String> comments) {
 
-        this.comments = new ArrayList<>();
-        for(String comment : comments) {
-            this.comments.add(Utility.retrieveDocumentReference("Comments", comment));
-        }
-    }
 
 
 }

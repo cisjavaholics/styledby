@@ -112,7 +112,7 @@ public class ReviewsController {
             return ResponseEntity.ok(new ApiResponseFormat<>(true, "Review successfully retrieved.",reviewList, null));
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponseFormat<>(false, "Error retrieving users",null, e));
+                    .body(new ApiResponseFormat<>(false, "Error retrieving reviews",null, e));
         }
     }
 

@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api/bus")
+@RequestMapping("/api/business")
 @Tag(name = "Businesses", description = "Operations related to business management")
 
 public class BusinessesController {

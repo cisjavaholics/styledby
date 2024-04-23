@@ -12,17 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 public class RestUsers extends AUsers {
 
-    private List<DocumentReference> reviews;
-    private List<DocumentReference> forums;
-    private List<DocumentReference> saved;
-    private List<DocumentReference> businesses;
+    private ArrayList<DocumentReference> reviews;
+    private ArrayList<DocumentReference> saved;
+    private ArrayList<DocumentReference> businesses;
 
-    public RestUsers(String userId, String username, String email, List<DocumentReference> reviews, List<DocumentReference> forums, List<DocumentReference> saved, List<DocumentReference> businesses) {
+    public RestUsers(String userId, String username, String email, ArrayList<String> reviews, ArrayList<String> saved, ArrayList<String> businesses) {
         super(userId, username, email);
-        this.reviews = reviews;
-        this.forums = forums;
-        this.saved = saved;
-        this.businesses = businesses;
+        setReviews(reviews);
+        setSaved(saved);
+        setBusinesses(businesses);
     }
 
 
@@ -33,14 +31,6 @@ public class RestUsers extends AUsers {
         this.reviews = new ArrayList<>();
         for(String tempRev: review) {
             this.saved.add(Utility.retrieveDocumentReference("reviews", tempRev));
-        }
-
-    }
-    public void setForums(ArrayList<String> forum) {
-
-        this.forums = new ArrayList<>();
-        for(String tempFor: forum) {
-            this.saved.add(Utility.retrieveDocumentReference("ForumPost", tempFor));
         }
 
     }
