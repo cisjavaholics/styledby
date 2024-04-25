@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import Menu from "../fragments/Menu";
+import ReviewComponent from "../components/ReviewComponent";
 
 
 class Home extends Component {
@@ -31,34 +32,11 @@ class Home extends Component {
                 <Menu/>
                 <div className="row">
                     <div className="col-12">
-                        <h1 className="mt-3 display-3">Latest Posts</h1>
+                        <h1 className="mt-3 display-3">Home</h1>
                     </div>
                 </div>
-                {
-                    this.state.posts ?
 
-                        this.state.posts.map((post) => {
-                            const categories = this.state.post.forumPostId.map((category, idx) => {
-                                return category.title
-                            });
-
-                            return (
-                                <div className="card shadow-lg p-3 mb-4" key={post.postId}>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{post.title}</h5>
-                                        <h6 className="card-subtitle mb-2 text-muted">by {post.authorId.username}</h6>
-                                        <p className="card-text">{post.summary}</p>
-                                        <p className="mb-1"><small>Category: {categories.join(", ")}</small></p>
-                                        <p className="mb-1"><small>tags: {post.tags.map((tag, idx) => {
-                                            return <span className="badge bg-secondary me-2" key={idx}>{tag}</span>
-                                        })
-                                        }</small></p>
-                                    </div>
-                                </div>
-                            )
-                        })
-                        : "Loading..."
-                }
+                <ReviewComponent type={"hair"} rating={2} review={"Worst food everrrrrrrrrr"} company={"Braids BY Brandee"} user={"taby212"} createdAt={"Janary 30, 2023"} width={500} height={600}/>
             </div>
         );
     }
