@@ -29,14 +29,14 @@ h2{
 .desc {
     font-size: 1.5em;
 }
-.photo-container{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px
-;
+.rev-photo-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-.photo-container img{
+
+.photo-img{
     height: auto;
-    width: 100%;
-    margin-bottom: 10px;
+    width: 35%;
+    margin: 5px;
 }

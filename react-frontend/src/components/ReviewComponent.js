@@ -1,5 +1,7 @@
 import React from 'react';
 import './ReviewComponent.css';
+import braidsImage from './braids.png';
+
 
 function ReviewComponent(props) {
 
@@ -55,11 +57,11 @@ function ReviewComponent(props) {
                     <p>
                         Social Media or Website: <a href="#">Website</a>
                     </p>
-                    <div className="photo-container">
-                        <img src="braids.png"  />
-                        <img src="braids.png" className="img-fluid" />
-                        <img src="braids.png" className="img-fluid" />
-                        <img src="braids.png" className="img-fluid" />
+                    <div className="rev-photo-container">
+                        <img src={braidsImage} className={"photo-img"}/>
+                        <img src={braidsImage} className={"photo-img"} />
+                        <img src={braidsImage} className={"photo-img"}/>
+                        <img src={braidsImage}  className={"photo-img"}/>
                     </div>
                 </div>
         </>
