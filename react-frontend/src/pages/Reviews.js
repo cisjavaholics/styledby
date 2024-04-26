@@ -4,7 +4,7 @@ import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 
 
-class Home extends Component {
+class Reviews extends Component {
     constructor(props) {
         super(props);
         this.state = {posts: null}
@@ -32,7 +32,7 @@ class Home extends Component {
                 <Menu/>
                 <div className="row">
                     <div className="col-12">
-                        <h1 className="mt-3 display-4 text-center">Home</h1>
+                        <h1 className="mt-3 display-4 text-center">Reviews</h1>
                     </div>
                 </div>
 
@@ -42,4 +42,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Reviews;
