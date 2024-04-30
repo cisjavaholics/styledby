@@ -5,6 +5,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,10 +28,11 @@ public class StyledByApplication {
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
-        if(FirebaseApp.getApps().isEmpty())
+        if (FirebaseApp.getApps().isEmpty())
             FirebaseApp.initializeApp(options);
 
         SpringApplication.run(StyledByApplication.class, args);
     }
+
 
 }
