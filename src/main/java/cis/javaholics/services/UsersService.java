@@ -93,7 +93,18 @@ public class UsersService {
         for(Map.Entry<String, Object> entry : updateValues.entrySet()) {
             String key = entry.getKey();
             if(allowedFields.contains(key)) {
-                formattedValues.put(key, entry.getValue());
+                if(key != "forumPosts")
+                    formattedValues.put(key, entry.getValue());
+                else {
+                    ArrayList<DocumentReference> list = new ArrayList<>();
+                    LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>)entry.getValue();
+                    ArrayList<HashMap<String, String>> refMap = (ArrayList<HashMap<String, String>>)(map.get("references"));
+                    for(HashMap<String, String> ref :  refMap){
+                        DocumentReference doc = firestore.collection("ForumPost").document(ref.get("id"));
+                        list.add(doc);
+                    }
+                    formattedValues.put(key, list);
+                }
 
             }
         }

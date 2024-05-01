@@ -10,7 +10,7 @@ class Reviews extends Component {
         this.state = {posts: null}
     }
     componentDidMount() {
-        const url = "http://localhost:8080/api/forumPosts"
+        const url = "http://localhost:8080/api/reviews/"
         const getPosts = async () => {
             await  axios.get(url).then((response) => {
 
