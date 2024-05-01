@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from "axios";
 import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
+import {Link} from "react-router-dom";
 
 
 class Reviews extends Component {
@@ -33,6 +34,7 @@ class Reviews extends Component {
                 <div className="row">
                     <div className="col-12">
                         <h1 className="mt-3 display-4 text-center">Reviews</h1>
+                        <Link className="btn create-btn" to="/reviewForm" style={{ float: "right" }}>Write A Review</Link>
                     </div>
                 </div>
 
