@@ -6,6 +6,8 @@ import UserComponent from "./components/UserComponent";
 import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
 import ReviewForm from "./pages/ReviewForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
   return (

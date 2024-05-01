@@ -117,6 +117,7 @@ public class ReviewsController {
     }
 
     @Operation(summary = "Create a review")
+    @PostMapping("/create/")
     public ResponseEntity<ApiResponseFormat<String>> createReview(@RequestBody Reviews review) {
         try {
             String reviewId = reviewsService.createReview(review);
