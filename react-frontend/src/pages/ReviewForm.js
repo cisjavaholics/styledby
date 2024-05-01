@@ -3,10 +3,11 @@ import Menu from '../fragments/Menu';
 import axios from 'axios';
 import Toast from "../fragments/Toast";
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
+import {Timestamp} from "firebase/firestore";
 
 const ReviewForm = () => {
-    const [business, setBusiness] = useState('');
-    const [username, setUsername] = useState('');
+    const [businessName, setBusinessName] = useState('');
+    const [userId, setUserId] = useState('');
     const [type, setType] = useState('');
     const [rating, setRating] = useState('');
     const [description, setDescription] = useState('');
@@ -19,8 +20,10 @@ const ReviewForm = () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/users/2egpUjARYPvn0yGEGOlx`);
                 const user = response.data;
-                const username = user.username;
-                setUsername(username);
+                console.log(user);
+                const userId = user.userId;
+                setUserId(userId);
+                console.log(userId);
             } catch (error) {
                 console.error('Error fetching username:', error);
             }
@@ -42,27 +45,50 @@ const ReviewForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!business || !type || !description) {
+        if (!businessName || !type || !description) {
             setToastColor("danger");
             setToastMessage("Please fill in all required fields.");
             showToast();
             return;
         }
 
+        let businessId = null;
+
+        try {
+            // Check if business already exists
+            const response = await axios.get(`http://localhost:8080/api/business/name/${businessName}`);
+
+            if (response.data != null) {
+                // Use existing business ID
+                businessId = response.data.businessId;
+            } else {
+                // Create new business
+                const createResponse = await axios.post("http://localhost:8080/api/business/", { name: businessName });
+                businessId = createResponse.data.businessId;
+            }
+        } catch (error) {
+            console.error('Error finding/creating business:', error);
+            setToastColor("danger");
+            setToastMessage("An error occurred while processing the business.");
+            showToast();
+            return;
+        }
+
         let data = {
-            business,
+            business: businessId,
             type,
             description,
             photos: photos.length > 0 ? photos : null, // Check if photos are selected
-            createdBy: username,
-            createdAt: Date.now()
+            createdBy: userId,
+            createdAt: Timestamp.now()
         }
 
         try {
+            console.log(businessId, " ", userId);
             const response = await axios.post("http://localhost:8080/api/reviews/create/", data);
             if (response.status === 200) {
                 // reset form fields
-                setBusiness("");
+                setBusinessName("");
                 setDescription("");
                 setType("");
                 setPhotos("");
@@ -70,7 +96,7 @@ const ReviewForm = () => {
                 setToastMessage("Post successfully created.");
             }
         } catch (error) {
-            console.error('Error creating post:', error);
+            console.error('Error creating review:', error);
             setToastColor("danger");
             setToastMessage("An error occurred and the review was not created.");
         } finally {
@@ -93,10 +119,10 @@ const ReviewForm = () => {
                             type="text"
                             className="form-control"
                             required="required"
-                            id="business"
+                            id="businessName"
                             placeholder="Enter business name"
-                            value={business}
-                            onChange={event => setBusiness(event.target.value) } />
+                            value={businessName}
+                            onChange={event => setBusinessName(event.target.value) } />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Service Type</label>
