@@ -7,7 +7,7 @@ import {Timestamp} from "firebase/firestore";
 
 const ReviewForm = () => {
     const [businessName, setBusinessName] = useState('');
-    const [userId, setUserId] = useState('');
+    const [user, setUser] = useState('');
     const [type, setType] = useState('');
     const [rating, setRating] = useState('');
     const [description, setDescription] = useState('');
@@ -18,12 +18,10 @@ const ReviewForm = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:8080/api/users/2egpUjARYPvn0yGEGOlx`);
-                const user = response.data;
+                const userResponse = await axios.get(`http://localhost:8080/api/users/2egpUjARYPvn0yGEGOlx`);
+                const user = userResponse.data.data;
                 console.log(user);
-                const userId = user.userId;
-                setUserId(userId);
-                console.log(userId);
+                setUser(user);
             } catch (error) {
                 console.error('Error fetching username:', error);
             }
@@ -52,19 +50,19 @@ const ReviewForm = () => {
             return;
         }
 
-        let businessId = null;
+        let business = {        }
 
         try {
             // Check if business already exists
-            const response = await axios.get(`http://localhost:8080/api/business/name/${businessName}`);
+            const busResponse = await axios.get(`http://localhost:8080/api/business/name/${businessName}`);
 
-            if (response.data != null) {
+            if (busResponse.data.data != null) {
                 // Use existing business ID
-                businessId = response.data.businessId;
+                business = busResponse.data.data[0];
             } else {
                 // Create new business
                 const createResponse = await axios.post("http://localhost:8080/api/business/", { name: businessName });
-                businessId = createResponse.data.businessId;
+                business = createResponse.data.data;
             }
         } catch (error) {
             console.error('Error finding/creating business:', error);
@@ -75,16 +73,16 @@ const ReviewForm = () => {
         }
 
         let data = {
-            business: businessId,
+            business: business,
             type,
             description,
             photos: photos.length > 0 ? photos : null, // Check if photos are selected
-            createdBy: userId,
+            createdBy: user,
             createdAt: Timestamp.now()
         }
 
         try {
-            console.log(businessId, " ", userId);
+            console.log(business, " ", user);
             const response = await axios.post("http://localhost:8080/api/reviews/create/", data);
             if (response.status === 200) {
                 // reset form fields

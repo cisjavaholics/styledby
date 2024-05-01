@@ -4,6 +4,7 @@ import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 import './Home.css';
 import ReviewsListHorizontal from "../components/ReviewsListHorizontal";
+import {Link} from "react-router-dom";
 
 class Home extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className={"review-page-container"}>
+                        <p><Link to="/reviews">Reviews</Link></p>
                         <ReviewsListHorizontal rWidth={400} rHeight={500}/>
                     </div>
                 </div>
