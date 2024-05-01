@@ -6,11 +6,10 @@ import UserComponent from "./components/UserComponent";
 import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
 import ReviewForm from "./pages/ReviewForm";
-import {AuthProvider} from "./context/AuthContext";
 
 function App() {
   return (
-    <AuthProvider>
+    <>
         <Router>
             <div className="container">
                 <Routes>
@@ -22,7 +21,7 @@ function App() {
             </div>
             <Footer />
         </Router>
-    </AuthProvider>
+    </>
   );
 }
 
