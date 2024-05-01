@@ -29,7 +29,7 @@ function ReviewsListHorizontal(props) {
                     <ReviewComponent
                         type={'Loading'}
                         rating={0}
-                        review={'Reviews are loading'}
+                        description={'Reviews are loading'}
                         business={'Loading'}
                         createdBy={'Loading'}
                         createdAt={'Loading'}
@@ -39,7 +39,7 @@ function ReviewsListHorizontal(props) {
                     <ReviewComponent
                         type={'Loading'}
                         rating={0}
-                        review={'Reviews are loading'}
+                        description={'Reviews are loading'}
                         business={'Loading'}
                         createdBy={'Loading'}
                         createdAt={'Loading'}
@@ -53,8 +53,8 @@ function ReviewsListHorizontal(props) {
                         key={review.id}
                         type={review.type}
                         rating={review.rating}
-                        review={review.review}
-                        business={review.business}
+                        description={review.description}
+                        business={review.business ? review.business.name : "loading"}
                         createdBy={review.createdBy.username}
                         createdAt={new Date(review.createdAt.seconds * 1000).toDateString()}
                         width={props.rWidth}
