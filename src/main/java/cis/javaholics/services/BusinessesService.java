@@ -29,7 +29,8 @@ public class BusinessesService {
             business.setBusinessId(document.getId());
             business.setName(document.getString("name"));
             business.setCategory(document.getString("category"));
-            business.setRating(document.getLong("rating"));
+            Long rating = document.getLong("rating");
+            business.setRating((rating == null) ? 0 : rating);
             List<Reviews> reviews = new ArrayList<>();
 
 

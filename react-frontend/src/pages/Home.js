@@ -3,6 +3,7 @@ import axios from "axios";
 import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 import './Home.css';
+import ReviewsListHorizontal from "../components/ReviewsListHorizontal";
 
 class Home extends Component {
     constructor(props) {
@@ -22,14 +23,8 @@ class Home extends Component {
                             <h1 className="mt-3 display-3">Home</h1>
                         </div>
                     </div>
-                    <div className={"review-scroll-container"}>
-                        <p>example review cards</p>
-                        <ReviewComponent type={"Hair"} rating={2} review={"Worst stylist everrrrrrrrrr"}
-                                         company={"Braids By Brandee"} user={"taby212"} createdAt={"Janary 30, 2023"}
-                                         width={500} height={600}/>
-                        <ReviewComponent type={"Makeup"} rating={5} review={"Best beat and good prices!!"}
-                                         company={"BeatByBella"} user={"opal101302"} createdAt={"October 13, 2023"}
-                                         width={500} height={600}/>
+                    <div className={"review-page-container"}>
+                        <ReviewsListHorizontal rWidth={400} rHeight={500}/>
                     </div>
                 </div>
             </>

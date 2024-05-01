@@ -1,25 +1,69 @@
-import React, {useState} from 'react';
-import axios from "axios";
-import ReviewComponent from "./ReviewComponent";
-function ReviewListHorizontal(props) {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ReviewComponent from './ReviewComponent';
+import './ReviewsListHorizontal.css';
 
-        const url = "http://localhost:8080/api/reviews/"
-        const [reviews, setReviews] = useState([]);
-        const getReviews = async () => {
-            await  axios.get(url).then((response) => {
-                setReviews(response.data);
-                return reviews.map(review =>
-                    <ReviewComponent type={review.type} rating={review.rating} review={review.description}
-                                     company={review.company} user={review.createdBy} createdAt={review.createdAt}
-                                     width={500} height={600}/> );
+function ReviewsListHorizontal(props) {
+    const url = 'http://localhost:8080/api/reviews/';
+    const [reviews, setReviews] = useState([]);
 
+    useEffect(() => {
+        // Fetch reviews when the component mounts
+        getReviews();
+    }, []);
 
-            }).catch( (err) => {
-                console.log(err);
-            })
+    const getReviews = async () => {
+        try {
+            const response = await axios.get(url);
+            setReviews(response.data.data);
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
         }
+    };
 
-        //calls the function
-        getReviews().then(null);
+    return (
+        <>
+            <link rel="stylesheet" href="ReviewsListHorizontal.css" />
+            {reviews.length === 0 ? (
+                <>
+                    <ReviewComponent
+                        type={'Loading'}
+                        rating={0}
+                        review={'Reviews are loading'}
+                        business={'Loading'}
+                        createdBy={'Loading'}
+                        createdAt={'Loading'}
+                        width={props.rWidth}
+                        height={props.rHeight}
+                    />
+                    <ReviewComponent
+                        type={'Loading'}
+                        rating={0}
+                        review={'Reviews are loading'}
+                        business={'Loading'}
+                        createdBy={'Loading'}
+                        createdAt={'Loading'}
+                        width={props.rWidth}
+                        height={props.rHeight}
+                    />
+                </>
+            ) : (
+                reviews.map((review) => (
+                    <ReviewComponent
+                        key={review.id}
+                        type={review.type}
+                        rating={review.rating}
+                        review={review.review}
+                        business={review.business}
+                        createdBy={review.createdBy.username}
+                        createdAt={new Date(review.createdAt.seconds * 1000).toDateString()}
+                        width={props.rWidth}
+                        height={props.rHeight}
+                    />
+                ))
+            )}
+        </>
+    );
 }
-export default ReviewListHorizontal;
+
+export default ReviewsListHorizontal;

@@ -10,7 +10,7 @@ class Forum extends Component {
         this.state = {posts: null}
     }
     componentDidMount() {
-        const url = "http://localhost:8080/api/forumPosts"
+        const url = "http://localhost:8080/api/forumPosts/"
         const getPosts = async () => {
             await  axios.get(url).then((response) => {
 
