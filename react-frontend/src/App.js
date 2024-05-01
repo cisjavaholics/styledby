@@ -5,6 +5,7 @@ import Footer from "./fragments/Footer";
 import UserComponent from "./components/UserComponent";
 import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
+import ReviewForm from "./pages/ReviewForm";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route element = {<Home/>}  path="/"/>
                     <Route element ={<Reviews/>} path= "/reviews" />
+                    <Route element ={<ReviewForm/>} path= "/reviewForm" />
                     <Route element ={<Forum/>} path= "/forum" />
                 </Routes>
             </div>
