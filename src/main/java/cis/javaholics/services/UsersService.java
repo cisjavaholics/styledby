@@ -85,7 +85,7 @@ public class UsersService {
 
     public WriteResult updateUser(String id, Map<String, Object> updateValues) throws ExecutionException, InterruptedException {
 
-        String[] allowed = {"username", "email", "businesses", "reviews", "forumPosts", "saved"};
+        String[] allowed = {"username", "email", "businesses", "reviews", "forums", "saved"};
 
         List<String> allowedFields = Arrays.asList(allowed);
         Map<String, Object> formattedValues = new HashMap<>();
@@ -93,7 +93,7 @@ public class UsersService {
         for(Map.Entry<String, Object> entry : updateValues.entrySet()) {
             String key = entry.getKey();
             if(allowedFields.contains(key)) {
-                if(key != "forumPosts")
+                if(key != "forums")
                     formattedValues.put(key, entry.getValue());
                 else {
                     ArrayList<DocumentReference> list = new ArrayList<>();

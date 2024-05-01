@@ -27,7 +27,7 @@ function ReviewComponent(props) {
                     <div className={"review-header"}>
                         <p style={{ float: "right" }}>{props.createdAt}</p>
                         <h2>
-                            {props.business}{" "}
+                            {props.business}
                             <span className="badge text-bg-secondary.bg-{#800080}">{props.type}</span>
                         </h2>
                         <a href="userProfile.html" style={{ textDecoration: "none" }}>
@@ -39,7 +39,7 @@ function ReviewComponent(props) {
                     </div>
                     <div className="desc">
                         <p>
-                            {props.review}
+                            {props.description}
                         </p>
                         <p>
                             Social Media or Website: <a href="#">Website</a>

@@ -47,6 +47,17 @@ public class ReviewsService {
                 }
             }
 
+            // Retrieve user details
+            DocumentReference busRef = (DocumentReference) document.get("business");
+            if (busRef != null) {
+                DocumentSnapshot busSnapshot = busRef.get().get();
+                if (busSnapshot.exists()) {
+                    BusinessesService service = new BusinessesService();
+                    business = service.documentSnapshotToBusiness(busSnapshot);
+                    review.setBusiness(business);
+                }
+            }
+
 
 
             return review;
