@@ -44,11 +44,11 @@ const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider
             value={{
-                currentUser,
-                isLoggedIn,
-                setCurrentUser,
-                login
-            }} >
+            currentUser,
+            isLoggedIn,
+            setCurrentUser,
+            login
+        }}>
             {children}
         </AuthContext.Provider>
     );

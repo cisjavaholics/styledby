@@ -5,11 +5,12 @@ import Toast from "../fragments/Toast";
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Timestamp} from "firebase/firestore";
 import {AuthContext} from "../context/AuthContext";
+import {useParams} from "react-router-dom";
 
-const ReviewForm = () => {
+const UpdateReview = () => {
     const context = useContext(AuthContext);
     const userId = "2egpUjARYPvn0yGEGOlx";
-
+    const {reviewId} = useParams();
     const [businessName, setBusinessName] = useState('');
     const [user, setUser] = useState('');
     const [type, setType] = useState('');
@@ -33,6 +34,21 @@ const ReviewForm = () => {
         getUserData();
     }, []);
 
+    const getPost = async ()=>{
+        await axios
+            .get("http://localhost:8080/api/reviews/" + reviewId)
+            .then((response) => {
+                const review = response.data.post;
+                setDescription(review.description);
+                setType(review.description);
+                setRating(review.rating)
+                setToastColor("success");
+                setToastMessage("Post successfully updated.");
+
+            })
+            .catch((error) => console.error(error));
+    }
+
     const handleRatingChange = (value) => {
         setRating(value);
     };
@@ -46,37 +62,16 @@ const ReviewForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!businessName || !type || !description) {
+        if ( !type || !description || !rating) {
             setToastColor("danger");
             setToastMessage("Please fill in all required fields.");
             showToast();
             return;
         }
 
-        let business = {        }
-
-        try {
-            // Check if business already exists
-            const busResponse = await axios.get(`http://localhost:8080/api/business/name/${businessName}`);
-
-            if (busResponse.data.data != null) {
-                // Use existing business ID
-                business = busResponse.data.data[0];
-            } else {
-                // Create new business
-                const createResponse = await axios.post("http://localhost:8080/api/business/", { name: businessName });
-                business = createResponse.data.data;
-            }
-        } catch (error) {
-            console.error('Error finding/creating business:', error);
-            setToastColor("danger");
-            setToastMessage("An error occurred while processing the business.");
-            showToast();
-            return;
-        }
 
         let data = {
-            business: business,
+            businessName,
             type,
             description,
             photos: photos.length > 0 ? photos : null, // Check if photos are selected
@@ -84,25 +79,15 @@ const ReviewForm = () => {
             createdAt: Timestamp.now()
         }
 
-        try {
-            console.log(business, " ", user);
-            const response = await axios.post("http://localhost:8080/api/reviews/create/", data);
-            if (response.status === 200) {
-                // reset form fields
-                setBusinessName("");
-                setDescription("");
-                setType("");
-                setPhotos("");
-                setToastColor("success");
-                setToastMessage("Post successfully created.");
-            }
-        } catch (error) {
-            console.error('Error creating review:', error);
+        await axios.put("http://localhost:8080/api/reviews/" + reviewId, data).then(()=>{
+
+        }).catch(e => {
+            console.log(e);
             setToastColor("danger");
-            setToastMessage("An error occurred and the review was not created.");
-        } finally {
+            setToastMessage("An error occurred and the review was not updated.")
+        }).finally(() =>{
             showToast();
-        }
+        })
     };
 
     const stars = [1, 2, 3, 4, 5];
@@ -112,7 +97,7 @@ const ReviewForm = () => {
             <Menu />
             <br />
             <div className="container">
-                <h3 className="text-center">Write a Review</h3>
+                <h3 className="text-center">Update A Review</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="busName" className="form-label">Business Name</label>
@@ -180,4 +165,4 @@ const ReviewForm = () => {
     );
 };
 
-export default ReviewForm;
+export default UpdateReview;
