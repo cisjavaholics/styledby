@@ -88,20 +88,20 @@ public class ForumPostsService {
 
 
     public List<ForumPosts> getAllForumPosts() throws ExecutionException, InterruptedException {
-        CollectionReference forumPostCollection = firestore.collection("ForumPost");
-        ApiFuture<QuerySnapshot> future = forumPostCollection.get();
+        CollectionReference forumCollection = firestore.collection("ForumPost");
+        ApiFuture<QuerySnapshot> future = forumCollection.get();
         List<ForumPosts> forumPostList = new ArrayList<>();
         for (DocumentSnapshot document : future.get().getDocuments()) {
-            ForumPosts forumPost = documentSnapshotToForum(document);
-            if (forumPost != null) {
-                forumPostList.add(forumPost);
+            ForumPosts forum = documentSnapshotToForum(document);
+            if (forum != null) {
+                forumPostList.add(forum);
             }
         }
         return forumPostList;
     }
 
 
-    @Nullable
+@Nullable
     private List<ForumPosts> getForumPostList(Query query) throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = query.get();
         List<QueryDocumentSnapshot> documentSnapshots = future.get().getDocuments();

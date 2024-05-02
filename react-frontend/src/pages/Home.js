@@ -4,6 +4,7 @@ import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 import './Home.css';
 import ReviewsListHorizontal from "../components/ReviewsListHorizontal";
+import ForumPostList from "../components/ForumPostList";
 
 class Home extends Component {
     constructor(props) {
@@ -23,8 +24,13 @@ class Home extends Component {
                             <h1 className="mt-3 display-3 text-center">Home</h1>
                         </div>
                     </div>
+                    <h1 className="mt-3 display-5 text-center">Recent Reviews</h1>
                     <div className={"reviews-grid-container"}>
-                        <ReviewsListHorizontal rWidth={400} rHeight={500}/>
+                        <ReviewsListHorizontal rWidth={400} rHeight={500} maxItems={5}/>
+                    </div>
+                    <h1 className="mt-3 display-5 text-center">Recent Forum Posts</h1>
+                    <div className={"forum-list-container"}>
+                        <ForumPostList rWidth={400} rHeight={500} maxItems={5}/>
                     </div>
                 </div>
             </>

@@ -1,0 +1,8 @@
+.forum-list-container {
+    display: block;
+    gap: 20px;
+}
+
+.forum-link:hover {
+    color: #0062ab !important;
+}
