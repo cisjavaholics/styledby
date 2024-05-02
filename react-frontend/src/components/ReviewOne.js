@@ -1,11 +1,11 @@
 import React, {Component, useEffect, useState} from 'react';
 import axios from "axios";
 import Menu from "../fragments/Menu";
-import ReviewComponent from "../components/ReviewComponent";
-import './Home.css';
+import ReviewComponent from "./ReviewComponent";
+import '../pages/Home.css';
 import {useParams} from "react-router-dom";
 
-const ReviewOnePage = () => {
+const ReviewOne = () => {
     const [review, setReview] = useState(null);
     let {reviewId} = useParams();
     console.log(reviewId);
@@ -57,4 +57,4 @@ const ReviewOnePage = () => {
         );
 }
 
-export default ReviewOnePage;
+export default ReviewOne;

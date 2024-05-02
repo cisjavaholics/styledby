@@ -7,7 +7,7 @@ import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
 import ReviewForm from "./pages/ReviewForm";
 import ReviewComponent from "./components/ReviewComponent";
-import ReviewOne from "./pages/ReviewOnePage";
+import ReviewOne from "./components/ReviewOne";
 
 function App() {
   return (
