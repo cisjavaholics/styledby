@@ -7,7 +7,7 @@ import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
 import ReviewForm from "./pages/ReviewForm";
 import ReviewComponent from "./components/ReviewComponent";
-import ReviewOne from "./pages/ReviewOnePage";
+import ReviewOne from "./components/ReviewOne";
 import {AuthProvider} from "./context/AuthContext";
 import UpdateReview from "./pages/UpdateReview";
 
@@ -21,7 +21,6 @@ function App() {
                         <Route element = {<Home/>}  path="/"/>
                         <Route element ={<Reviews/>} path= "/reviews" />
                         <Route  path= "/reviewOne/:reviewId" element ={<ReviewOne/>} />
-                        <Route element ={<ReviewOne/>} path= "/reviewOne" />
                         <Route element ={<ReviewForm/>} path= "/reviewForm" />
                         <Route element ={<UpdateReview/>} path= "/updateReview" />
                         <Route element ={<Forum/>} path= "/forum" />

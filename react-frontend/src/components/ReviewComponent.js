@@ -1,6 +1,8 @@
 import React from 'react';
 import './ReviewComponent.css';
 import braidsImage from './braids.png';
+import {Link} from "react-router-dom";
+import axios from "axios";
 
 function ReviewComponent(props) {
 
@@ -14,7 +16,17 @@ function ReviewComponent(props) {
         }
         return <div className="rating-container">{stars}</div>; // Wrap stars in a container div
     };
-
+    const handleDelete = async () => {
+        try {
+            // Make an HTTP DELETE request to your backend API to delete the review
+            await axios.delete(`http://localhost:8080/api/reviews/${props.id}`);
+            // Optionally, you can add a callback to inform the parent component that the review has been deleted
+            // For example: props.onDelete(props.id);
+        } catch (error) {
+            console.error('Error deleting review:', error);
+            // Handle error appropriately (e.g., show a message to the user)
+        }
+    };
     return (
         <>
             <link rel="stylesheet" href="ReviewComponent.css"/>
@@ -47,8 +59,8 @@ function ReviewComponent(props) {
                 <div className="dropdown-menu">
                     <button className="dropbtn">&#8942;</button>
                     <div className="dropdown-content">
-                        <a href="#">Update</a>
-                        <a href="#">Delete</a>
+                        <Link className="btn create-btn" to="/updateReview">Update</Link>
+                        <button className="btn create-btn" onClick={handleDelete}>Delete</button>
                     </div>
                 </div>
             </div>
