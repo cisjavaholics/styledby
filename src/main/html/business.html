@@ -14,13 +14,23 @@
             height: auto;
 
         }
-        .tableFixHead          { overflow: auto; height: 100px; }
-        .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+        .table-responsive          { overflow-x: scroll; height: 100px; width: 100%; }
+        .table-responsive thead th { position: sticky; top: 0; left: 0; z-index: 1; }
 
-        /* Just common table stuff. Really. */
-        table  { border-collapse: collapse; width: 100%; }
-        th, td { padding: 8px 16px; }
-        th     { background:#eee; }
+        table  {
+            border: 2px solid #dee2e6;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px 16px;
+        }
+        th {
+            background:#eee;
+        }
+        tb td {
+            height: 100px;
+        }
+
     </style>
 </head>
 <body>
@@ -78,52 +88,117 @@
 
 <nav>
     <div class="nav nav-underline flex-column flex-sm-row" id="nav-tab" role="tablist">
-        <a class="flex-sm-fill text-sm-center nav-link active" id="nav-service-tab" data-bs-toggle="tab" href="#nav-service" role="tab" aria-controls="nav-service" aria-selected="true">Services</a>
-        <a class="flex-sm-fill text-sm-center nav-link" id="nav-review-tab" data-bs-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false">Reviews</a>
+        <a class="flex-sm-fill text-sm-center nav-link" id="nav-service-tab" data-bs-toggle="tab" href="#nav-service" role="tab" aria-controls="nav-service" aria-selected="true">Services</a>
+        <a class="flex-sm-fill text-sm-center nav-link active" id="nav-review-tab" data-bs-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false">Reviews</a>
         <a class="flex-sm-fill text-sm-center nav-link" id="nav-mention-tab" data-bs-toggle="tab" href="#nav-mention" role="tab" aria-controls="nav-mention" aria-selected="false">Mentions</a>
     </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab">
-        <div class="service-container container-fluid">
-            <p style="float: right">April 22, 2024</p>
-            <h3>Hair Growth Tips <span class="badge text-bg-secondary.bg-{#800080}">Hair</span></h3>
-            <a href="businessProfile.html" style="text-decoration: none;"><i class="fa-regular fa-business">&nbsp;</i>screavalle</a>
-            <div class="desc">
-                <p> Use Humectants On Your Hair. Humectants love water molecules, so using them in your natural hair (which is often dry hair) is a must. Honey, aloe vera, flax seed gel, and glycerin are all great humectants. </p>
-            </div>
-        </div>
 
-        <div class="tableFixHead" >
+        <div class="table-responsive" >
 
             <table>
                 <thead>
-                <th colspan="12" >TH 1</th>
+                <th colspan="12" >Knotless</th>
                 </thead>
                 <tbody>
-                <td class="col">A1</td>
-                <td class="col">B1</td>
-                <td class="col">C1</td>
-                <td class="col">D1</td>
-                <td class="col">E1</td>
-                <td class="col">F1</td>
-                <td class="col">G1</td>
-                <td class="col">H1</td>
-                <td class="col">I1</td>
-                <td class="col">J1</td>
-                <td class="col">K1</td>
-                <td class="col">L1</td>
-                <td class="col">M1</td>
-                <td class="col">N1</td>
-                <td class="col">O1</td>
-
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
 
                 </tbody>
             </table>
+
+        </div>
+        <div class="table-responsive" >
+
+            <table>
+                <thead>
+                <th colspan="12" >Butterfly Locs</th>
+                </thead>
+                <tbody>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="table-responsive" >
+
+            <table>
+                <thead>
+                <th colspan="12" >Plaits</th>
+                </thead>
+                <tbody>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+                <td class="col-2">
+                    <img src="braids.png" class="img-fluid">
+                </td>
+
+                </tbody>
+            </table>
+
         </div>
 
     </div>
+
 
     <div class="tab-pane fade show active" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
         <div class="row">

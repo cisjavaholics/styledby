@@ -9,17 +9,12 @@ h2{
     font-size: 1.5em;
 }
 .forum-container {
-    border: 3px solid #800080;
+    border: 3px solid #0062ab;
     border-radius: 10px;
     padding: 20px;
     height: auto;
-    width: 1000px;
-}
-.badge{
-    background-color: #800080;
-    color: white;
-    border-radius: 40px;
-    font-size: 0.50em;
+    width: auto;
+    margin-bottom: 20px;
 }
 .like-button {
     font-size: 1.3em;

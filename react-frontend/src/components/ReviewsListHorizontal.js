@@ -22,6 +22,7 @@ function ReviewsListHorizontal(props) {
             console.error('Error fetching reviews:', error);
         }
     };
+    const limitedReviews = reviews.slice(0, props.maxItems);
 
 
     return (
@@ -51,7 +52,7 @@ function ReviewsListHorizontal(props) {
                     />
                 </>
             ) : (
-                reviews.map((review) => (
+                limitedReviews.map((review) => (
                     <Link to={`/reviewOne/${review.id}`} className="review-link">
                         <ReviewComponent
                         key={review.id}
