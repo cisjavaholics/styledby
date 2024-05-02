@@ -50,7 +50,7 @@ function ReviewsListHorizontal(props) {
                 </>
             ) : (
                 reviews.map((review) => (
-                    <Link key={review.id} to={`/reviewComponent/${review.id}`} className="review-link">
+                    <Link to={`/reviewOne/${review.id}`} className="review-link">
                         <ReviewComponent
                         key={review.id}
                         type={review.type}

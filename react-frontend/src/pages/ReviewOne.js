@@ -4,8 +4,9 @@ import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 import './Home.css';
 import ReviewsListHorizontal from "../components/ReviewsListHorizontal";
+import ReviewOne from "../components/ReviewOne";
 
-class Home extends Component {
+class ReviewOnePage extends Component {
     constructor(props) {
         super(props);
         this.state = {posts: null}
@@ -24,7 +25,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className={"reviews-grid-container"}>
-                        <ReviewsListHorizontal rWidth={400} rHeight={500}/>
+                        <ReviewOne />
                     </div>
                 </div>
             </>
@@ -32,4 +33,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default ReviewOnePage;
