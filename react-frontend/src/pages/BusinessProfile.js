@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function BusinessProfile() {
     const [searchQuery, setSearchQuery] = useState("");
-    
+
     return (
         <div>
             <header>
@@ -26,7 +26,7 @@ function BusinessProfile() {
                                         More
                                     </a>
                                     <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#">Service</a></li>
+                                        <li><a className="dropdown-item" href="#">Profile</a></li>
                                         <li><a className="dropdown-item" href="#">Reviews</a></li>
                                         <li><a className="dropdown-item" href="#">Notifications</a></li>
                                         <li><a className="dropdown-item" href="#">Settings</a></li>
