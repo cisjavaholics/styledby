@@ -20,10 +20,7 @@ function ReviewComponent(props) {
         <>
             <link rel="stylesheet" href="ReviewComponent.css"/>
             <title>One Review</title>
-                <div className="review-container container-fluid" style={{
-                    width: props.width,
-                    height: props.height
-                }}>
+                <div className="review-container container-fluid">
                     <div className={"review-header"}>
                         <p style={{ float: "right" }}>{props.createdAt}</p>
                         <h2>
@@ -40,9 +37,6 @@ function ReviewComponent(props) {
                     <div className="desc">
                         <p>
                             {props.description}
-                        </p>
-                        <p>
-                            Social Media or Website: <a href="#">Website</a>
                         </p>
                         <div className="rev-photo-container">
                             <img src={braidsImage} className={"photo-img"}/>

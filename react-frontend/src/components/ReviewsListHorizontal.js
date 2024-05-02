@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewComponent from './ReviewComponent';
 import './ReviewsListHorizontal.css';
+import {Link} from "react-router-dom";
 
 function ReviewsListHorizontal(props) {
     const url = 'http://localhost:8080/api/reviews/';
@@ -49,7 +50,8 @@ function ReviewsListHorizontal(props) {
                 </>
             ) : (
                 reviews.map((review) => (
-                    <ReviewComponent
+                    <Link key={review.id} to={`/reviewComponent/${review.id}`} className="review-link">
+                        <ReviewComponent
                         key={review.id}
                         type={review.type}
                         rating={review.rating}
@@ -60,6 +62,7 @@ function ReviewsListHorizontal(props) {
                         width={props.rWidth}
                         height={props.rHeight}
                     />
+                    </Link>
                 ))
             )}
         </>

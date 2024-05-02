@@ -1,6 +1,12 @@
+.reviews-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* gap between items */
+}
 
-.review-scroll-container {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
+.review-link {
+    color: black;
+}
+.review-link:hover {
+    color: #800080;
 }

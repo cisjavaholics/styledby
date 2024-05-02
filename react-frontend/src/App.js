@@ -6,6 +6,7 @@ import UserComponent from "./components/UserComponent";
 import Reviews from "./pages/Reviews";
 import Forum from "./pages/Forum";
 import ReviewForm from "./pages/ReviewForm";
+import ReviewComponent from "./components/ReviewComponent";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route element = {<Home/>}  path="/"/>
                     <Route element ={<Reviews/>} path= "/reviews" />
+                    <Route element ={<ReviewComponent/>} path= "/reviewComponent" />
                     <Route element ={<ReviewForm/>} path= "/reviewForm" />
                     <Route element ={<Forum/>} path= "/forum" />
                 </Routes>
