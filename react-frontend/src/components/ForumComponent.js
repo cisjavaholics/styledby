@@ -51,7 +51,7 @@ function ForumComponent(props) {
                 </button>
                 <h2>
                     {props.title}{" "}
-                    <span className="badge text-bg-secondary.bg-{#800080}">{props.topic}</span>
+                    <span className="badge-forum text-bg-secondary.bg-{#800080}">{props.topic}</span>
                 </h2>
                 <a href="userProfile.html" style={{textDecoration: "none"}}>
                     <i className="fa-regular fa-user">&nbsp;</i>{props.postedBy}

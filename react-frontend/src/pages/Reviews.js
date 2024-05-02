@@ -3,6 +3,7 @@ import axios from "axios";
 import Menu from "../fragments/Menu";
 import ReviewComponent from "../components/ReviewComponent";
 import {Link} from "react-router-dom";
+import ReviewsListHorizontal from "../components/ReviewsListHorizontal";
 
 
 class Reviews extends Component {
@@ -34,11 +35,13 @@ class Reviews extends Component {
                 <div className="row">
                     <div className="col-12">
                         <h1 className="mt-3 display-4 text-center">Reviews</h1>
-                        <Link className="btn create-btn" to="/reviewForm" style={{ float: "right" }}>Write A Review</Link>
+                        <Link className="btn create-btn" to="/reviewForm" style={{float: "right"}}>Write A Review</Link>
                     </div>
                 </div>
 
-                <ReviewComponent type={"hair"} rating={2} review={"Worst food everrrrrrrrrr"} company={"Braids BY Brandee"} user={"taby212"} createdAt={"Janary 30, 2023"} width={500} height={600}/>
+                <div className={"reviews-grid-container"}>
+                    <ReviewsListHorizontal rWidth={400} rHeight={500} maxItems={10000}/>
+                </div>
             </div>
         );
     }

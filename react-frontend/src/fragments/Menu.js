@@ -24,18 +24,11 @@ function Menu(props) {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/profile">Profile</Link>
                                 </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        More
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><Link className="dropdown-item" to="/forum">Forum</Link></li>
-                                        <li><Link className="dropdown-item" to="/reviews">Reviews</Link></li>
-                                        <li><Link className="dropdown-item" to="/notifications">Notifications</Link>
-                                        </li>
-                                        <li><Link className="dropdown-item" to="/settings">Settings</Link></li>
-                                    </ul>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/forum">Forum</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/reviews">Reviews</Link>
                                 </li>
                             </ul>
                             <form className="d-flex" role="search">
