@@ -23,8 +23,8 @@ class Home extends Component {
                             <h1 className="mt-3 display-3">Home</h1>
                         </div>
                     </div>
-                    <div className={"reviews-grid-container"}>
-                        <ReviewsListHorizontal/>
+                    <div className={"review-page-container"}>
+                        <ReviewsListHorizontal rWidth={400} rHeight={500}/>
                     </div>
                 </div>
             </>
