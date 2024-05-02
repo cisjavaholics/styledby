@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 function ReviewsListHorizontal(props) {
     const url = 'http://localhost:8080/api/reviews/';
     const [reviews, setReviews] = useState([]);
+    const [showReviewOne, setShowReviewOne] = useState(false);
 
     useEffect(() => {
         // Fetch reviews when the component mounts
@@ -22,6 +23,7 @@ function ReviewsListHorizontal(props) {
         }
     };
     const limitedReviews = reviews.slice(0, props.maxItems);
+
 
     return (
         <>
