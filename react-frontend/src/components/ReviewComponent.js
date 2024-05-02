@@ -10,11 +10,12 @@ function ReviewComponent(props) {
         for (let i = 0; i < props.rating; i++) {
             stars.push(<span className="rating">★</span>);
         }
-        for (let j = 0; j < 5-props.rating; j++) {
+        for (let j = 0; j < 5 - props.rating; j++) {
             stars.push(<span className="rating">☆</span>);
         }
-        return stars;
+        return <div className="rating-container">{stars}</div>; // Wrap stars in a container div
     };
+
 
     return (
         <>

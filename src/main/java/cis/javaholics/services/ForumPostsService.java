@@ -13,8 +13,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -74,8 +73,8 @@ public class ForumPostsService {
 
     @Nullable
     public ForumPosts getForumPostById(String fPostId) throws ExecutionException, InterruptedException {
-        CollectionReference forumPostsCollection = firestore.collection("fPostId");
-        ApiFuture<DocumentSnapshot> future = forumPostsCollection.document(fPostId).get();
+        DocumentReference forumRef = firestore.collection("ForumPost").document(fPostId);
+        ApiFuture<DocumentSnapshot> future = forumRef.get();
         DocumentSnapshot document = future.get();
         return documentSnapshotToForum(document);
     }
@@ -122,8 +121,26 @@ public class ForumPostsService {
         return docRef.getId();
     }
 
-    public WriteResult deleteForumPost(String fPostId) throws ExecutionException, InterruptedException {
-        DocumentReference forumPostRef = firestore.collection("ForumPost").document(fPostId);
-        return forumPostRef.delete().get();
+    public WriteResult updateForumPost(String id, Map<String, Object> updateValues) throws ExecutionException, InterruptedException {
+
+        String[] allowed = {"topic", "description", "title"};
+
+        List<String> allowedFields = Arrays.asList(allowed);
+        Map<String, Object> formattedValues = new HashMap<>();
+
+        for(Map.Entry<String, Object> entry : updateValues.entrySet()) {
+            String key = entry.getKey();
+            if(allowedFields.contains(key)) {
+                formattedValues.put(key, entry.getValue());
+
+            }
+        }
+        DocumentReference forumDoc = firestore.collection("ForumPost").document(id);
+        ApiFuture<WriteResult> result = forumDoc.update(formattedValues);
+        return result.get();
+    }
+    public WriteResult deleteForumPost(String id) throws ExecutionException, InterruptedException {
+        DocumentReference forumRef = firestore.collection("ForumPost").document(id);
+        return forumRef.delete().get();
     }
 }

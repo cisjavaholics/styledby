@@ -11,8 +11,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import io.micrometer.common.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import java.util.concurrent.ExecutionException;
 
@@ -124,8 +123,26 @@ public class ReviewsService {
         return docRef.getId();
     }
 
-    public WriteResult deleteReview(String rPostId) throws ExecutionException, InterruptedException {
-        DocumentReference reviewRef = firestore.collection("reviews").document(rPostId);
+    public WriteResult updateReview(String id, Map<String, Object> updateValues) throws ExecutionException, InterruptedException {
+
+        String[] allowed = {"type", "description", "rating"};
+
+        List<String> allowedFields = Arrays.asList(allowed);
+        Map<String, Object> formattedValues = new HashMap<>();
+
+        for(Map.Entry<String, Object> entry : updateValues.entrySet()) {
+            String key = entry.getKey();
+            if(allowedFields.contains(key)) {
+                formattedValues.put(key, entry.getValue());
+
+            }
+        }
+        DocumentReference reviewDoc = firestore.collection("reviews").document(id);
+        ApiFuture<WriteResult> result = reviewDoc.update(formattedValues);
+        return result.get();
+    }
+    public WriteResult deleteReview(String id) throws ExecutionException, InterruptedException {
+        DocumentReference reviewRef = firestore.collection("reviews").document(id);
         return reviewRef.delete().get();
     }
 

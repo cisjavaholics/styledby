@@ -3,6 +3,8 @@ package cis.javaholics.controllers;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.services.ReviewsService;
 import cis.javaholics.util.ApiResponseFormat;
+import cis.javaholics.util.Utility;
+import com.google.cloud.firestore.WriteResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -129,7 +132,21 @@ public class ReviewsController {
         }
     }
 
+    @PutMapping(path="/{rPostId}", produces = Utility.DEFAULT_MEDIA_TYPE, consumes =  Utility.DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<ApiResponseFormat<WriteResult>> updateReview(@PathVariable(name="rPostId") String id, @RequestBody Map<String,Object> updateValues){
+        try {
+            WriteResult result = reviewsService.updateReview(id, updateValues);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiResponseFormat<>(true, "Review successfully updated.", result, null));
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error updating review.", null, e));
+        }
+
+    }
+
     @Operation(summary = "Delete a review")
+    @DeleteMapping(path = "/{rPostId}")
     public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable (name = "rPostId") String rPostId) {
         try {
             reviewsService.deleteReview(rPostId);

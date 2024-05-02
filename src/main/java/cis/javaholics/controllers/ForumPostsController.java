@@ -4,6 +4,8 @@ import cis.javaholics.models.forumPosts.ForumPosts;
 import cis.javaholics.models.reviews.Reviews;
 import cis.javaholics.services.ForumPostsService;
 import cis.javaholics.util.ApiResponseFormat;
+import cis.javaholics.util.Utility;
+import com.google.cloud.firestore.WriteResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -107,12 +110,26 @@ public class ForumPostsController {
         }
     }
 
+    @PutMapping(path="/{fPostId}", produces = Utility.DEFAULT_MEDIA_TYPE, consumes =  Utility.DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<ApiResponseFormat<WriteResult>> updateForumPost(@PathVariable(name="fPostId") String id, @RequestBody Map<String,Object> updateValues){
+        try {
+            WriteResult result = forumPostsService.updateForumPost(id, updateValues);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiResponseFormat<>(true, "Forum post successfully updated.", result, null));
+        } catch (ExecutionException | InterruptedException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponseFormat<>(false, "Error updating forum post.", null, e));
+        }
+
+    }
+
     @Operation(summary = "Delete a forum post")
-    public ResponseEntity<ApiResponseFormat<Void>> deleteForumPost(@PathVariable (name = "fPostId") String fPostId) {
+    @DeleteMapping(path = "/{fPostId}")
+    public ResponseEntity<ApiResponseFormat<Void>> deleteReview(@PathVariable (name = "fPostId") String fPostId) {
         try {
             forumPostsService.deleteForumPost(fPostId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new ApiResponseFormat<>(true, "Forum Post successfully deleted.",null, null));
+                    .body(new ApiResponseFormat<>(true, "Forum post successfully deleted.",null, null));
         } catch (ExecutionException | InterruptedException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponseFormat<>(false, "Error deleting forum post.",null, e));
