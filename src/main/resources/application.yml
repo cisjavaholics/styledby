@@ -38,9 +38,13 @@ security:
   allowed-public-apis:
     - /favicon.ico
     - /
-    - /login
-    - /register
-    - /logout
+    - /api/login
+    - /api/register
+    - /api/logout
+    - /api/comments/{rpostId:\w+}
+    - /api/reviews/**
+    - /api/reviews/{rpostId:\w+}
+     - /api/reviews/c/{slug:\w+}
     - /css/**
     - /js/**
   exposed-headers:
