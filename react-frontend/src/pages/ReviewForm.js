@@ -22,8 +22,8 @@ const ReviewForm = () => {
     useEffect(() => {
         const getUserData = async () => {
 
-            await axios.get(`http://localhost:8080/api/User/${userId}`).then( (response)=> {
-                setUser(response.data.user);
+            await axios.get(`http://localhost:8080/api/users/${userId}`).then( (response)=> {
+                setUser(response.data.data.user);
 
             }).catch ((error) => {
                 console.error(error);
@@ -86,7 +86,7 @@ const ReviewForm = () => {
 
         try {
             console.log(business, " ", user);
-            const response = await axios.post("http://localhost:8080/api/reviews/create/", data);
+            const response = await axios.post("http://localhost:8080/api/reviews/create", data);
             if (response.status === 200) {
                 // reset form fields
                 setBusinessName("");
