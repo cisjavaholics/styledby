@@ -10,6 +10,7 @@ import ReviewComponent from "./components/ReviewComponent";
 import ReviewOne from "./components/ReviewOne";
 import {AuthProvider} from "./context/AuthContext";
 import UpdateReview from "./pages/UpdateReview";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                         <Route element ={<ReviewForm/>} path= "/reviewForm" />
                         <Route element ={<UpdateReview/>} path= "/updateReview" />
                         <Route element ={<Forum/>} path= "/forum" />
+                        <Route element ={<UserProfile/>} path= "/userProfile" />
 
                     </Routes>
                 </div>

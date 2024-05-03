@@ -22,7 +22,7 @@ function UserProfile() {
 
             <nav>
                 <div className="nav nav-underline flex-column flex-sm-row" id="nav-tab" role="tablist" style={
-                    {backgroundColor:"#800080"}
+                    {backgroundColor:"#800080", margin:"10px", borderRadius:"10px"}
                 }>
                     <a className="flex-sm-fill text-sm-center nav-link active" id="nav-review-tab" data-bs-toggle="tab"
                        href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="true" style={
