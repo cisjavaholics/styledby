@@ -22,34 +22,18 @@ A comprehensive application for individuals to anonymously review and seek opini
 **Required Must-have Stories**
 - User login
 - Homepage feed (recent reviews and popular community forum posts)
-- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures) (Completed)
-- User/Business Profile
+- Review page (details about the service provider (business name, date of service, service type, proof of service (booking and finished work), social media/contact), rating, and descriptive review, pictures)
+- User Profile
 - Community Forum
-- Settings (Accessibility, Notification, General, etc.
-- Notifications for: business owners when their business is mentioned;  users who asked a question on the forum and received a response; flagged or reported posts/reviews
-- Search for local businesses and see their reviews
 
 **Optional Nice-to-have Stories**
 - Service Verification  ( confirm bookings)
+- Business Profile
 - Updates on review interactions (likes, comments, replies)
 - Automated forum responses based on generalized reviews
-
-## Build Progress
-![buildporg1.gif](buildporg1.gif)
-![mile5buildprog2-ezgif.com-video-to-gif-converter.gif](mile5buildprog2-ezgif.com-video-to-gif-converter.gif)
-This sprint we built our main services and controllers for our data models. We added a Mentions and Ratings Data model as well.
-
-### Midpoint Progress
-
-**Endpoints**
-
-- api/users/
-- api/users/{user_id}
-- api/users/create
-- api/business/
-- api/business/{business_id}
-- api/forumPosts/
-- api/forumPosts/{fPost_id}
+- Settings (Accessibility, Notification, General, etc.
+- Notifications for: business owners when their business is mentioned;  users who asked a question on the forum and received a response; flagged or reported posts/reviews
+- Search for local businesses and see their reviews
 
 ## 2. Screens
 - Login
@@ -59,19 +43,13 @@ This sprint we built our main services and controllers for our data models. We a
   - Where users write reviews & forums
   - Hovering button on all tabs that lets you select review or forum to write
 - Add Review + Add Forum (2 pages)
-- Homepage - Recent reviews/ popular community forum posts
+- Homepage - Recent reviews/ community forum posts
   - “Leave a Review” Option
   - Filter Options
-- Notification Page - shows recent notifications users see
-  - Search
-    - Search a business and see their profile, recent reviews, and forums mentioning them
 - Profile Screen
-  - User - sees recent reviews, forum posts, and forum replies
-  - Business
-      - see mentioned reviews, forums, service type, overall rating
-- Settings Screen
-  - Top Right Icon in Profile
-  - Lets people change language and app notification settings.
+  - User - sees recent reviews and forum posts
+
+
 
 ## 3. Navigation
 **Tab Navigation** (Tab to Screen)
@@ -127,7 +105,7 @@ This sprint we built our main services and controllers for our data models. We a
 |-------------|--------------|----------------------------------------------------------|
 | userId      | String       | Unique identifier for user                               |
 | username    | String       | User's selected username, changeable                     |
-| role        | String       | Customer or business owner                               |
+| email       | String       | Email of user                                            |
 | reviews     | List<Reviews>| Array of reviews the user has written or commented on    |
 | forums      | List<Forums> | Array of forums the user has written or replied to       |
 | saved       | List<Forums> | Array of forums the user has saved                       |
@@ -137,10 +115,9 @@ This sprint we built our main services and controllers for our data models. We a
 |--------------|---------------|--------------------------------------------------------------------|
 | businessId   | String        | Unique identifier for business                                     |
 | category     | String        | Category of stylist (Hair, skin, nail, other/lifestyle)            |
-| role         | String        | Customer or business owner                                         |
 | numReviews   | List<Reviews> | Number of reviews on that individual                               |
-| review       | float         | Overall rating {1-5} of business based on reviews                  |
-| numMentions  | List<Reviews> | Number of times that person was mentioned                          |
+| rating       | float         | Overall rating {1-5} of business based on reviews                  |
+| reviews      | List<Reviews> | Reviews business was mentioned in                                  |
 
 **Forum Post**
 | Property    | Type            | Description                                        |
@@ -152,7 +129,6 @@ This sprint we built our main services and controllers for our data models. We a
 | photos      | List\<String\>  | Array of Strings, File path to photo               |
 | title       | String          | Title of post                                      |
 | likes       | List\<Likes\>   | Array of likes                                     |
-| comments    | List\<Comments\>| Array of comments                                  |
 | postedAt    | Timestamp       | Timestamp of when post was made                    |
 
 **Review**
@@ -164,17 +140,8 @@ This sprint we built our main services and controllers for our data models. We a
 | serviceType     | String          | Type of service (Hair, Skin, Nails, Other)            |
 | description     | String          | Content of review                                     |
 | rating          | Rating          | Numerical rating of service (1, 2, 3, 4, 5)           |
-| likes           | List\<Likes\>   | Array of likes                                        |
-| comments        | List\<Comments\>| Array of comments                                     |
 | photos          | List\<String\>  | Array of Strings, File path to photo                  |
 | createdAt       | Timestamp       | Time review was created at                            |
-
-**Notification**
-| Property         | Type       | Description                                    |
-|------------------|------------|------------------------------------------------|
-| notificationId   | String     | Unique identifier for notification             |
-| time             | Timestamp  | Timestamp of when the notification was made    |
-| content          | String     | Content within the notification                |
 
 **Comment**
 | Property     | Type       | Description                                         |
@@ -202,15 +169,6 @@ This sprint we built our main services and controllers for our data models. We a
 | ratingTime     | Timestamp  | Timestamp of when the rating was created              |
 | ratingNum      | Array\<Int\>| Array of integers representing the rating (0-5)      |
 
-**Mention**
-| Property       | Type       | Description                                           |
-|----------------|------------|-------------------------------------------------------|
-| mentionId      | String     | Unique identifier for mention                         |
-| mentionedBy    | User       | UserId of user who created the mention                |
-| mentionedUser  | User       | UserId of user who created the mention                |
-| mentionedBus   | Business   | UserId of user who created the mention                |
-| mentionedAt    | Timestamp  | Timestamp of when the mention was created             |
-
 **Saves**
 | Property       | Type       | Description                                           |
 |----------------|------------|-------------------------------------------------------|
@@ -220,6 +178,20 @@ This sprint we built our main services and controllers for our data models. We a
 | forumId        | ForumPost  | fPostId for post that was saved                       |
 
 ### Networking
+
+**Endpoints**
+
+- api/users/
+- api/users/{user_id}
+- api/users/create
+- api/business/
+- api/business/{businessId}
+- api/forumPosts/
+- api/forumPosts/{fPostId}
+- api/reviews/
+- api/reviews/rPostId{fPost_id}
+- api/reviews/create/
+
 **List of network requests by screen:**
 
 **Login Screen**
@@ -231,37 +203,22 @@ This sprint we built our main services and controllers for our data models. We a
 **Add Page**
 - (Create/POST) Create a new review.
 - (Create/POST) Create a new forum post.
-- (Create/POST) Create a new comment on a review or forum post.
+- (Create/POST) Create a new business.
 
 **Homepage**
 - (Read/GET) Query recent reviews.
-- (Read/GET) Query popular community forum posts.
+- (Read/GET) Query recent community forum posts.
 - (Create/POST) Create a new review.
 - (Create/POST) Create a new forum post.
 
-**Notification Page**
-- (Read/GET) Query recent notifications for the user.
-
-**Search Screen**
-- (Read/GET) Query business profile information.
-- (Read/GET) Query recent reviews for a specific business.
-- (Read/GET) Query recent forum posts mentioning a specific business.
-
 **Profile Screen (User)**
-- (Read/GET) Query recent reviews posted by the user.
+- (Read/GET) Query reviews posted by the user.
 - (Read/GET) Query recent forum posts created by the user.
-- (Read/GET) Query recent forum replies made by the user.
-- (Update/PUT) Update user profile information.
+- (Update/PUT) Update reviews information.
+- (Update/PUT) Update forum post information.
+- (Delete/DELETE) Delete review.
+- (Delete/DELETE) Delete forum post.
 
-**Profile Screen (Business)**
-- (Read/GET) Query reviews mentioning the business.
-- (Read/GET) Query forum posts mentioning the business.
-- (Read/GET) Query forum replies mentioning the business.
-- (Read/GET) Query overall rating for the business.
-
-**Settings Screen**
-- (Read/GET) Query user settings.
-- (Update/PUT) Update user settings.
 
 ### Existing API Endpoints
 
@@ -276,7 +233,6 @@ Base URL: https://maps.googleapis.com/
 | GET       | /api/places/autocomplete              | Provides autocomplete suggestions for business names/addresses|
 
 **Instagram Basic API**
-
 
 Base URL: https://graph.instagram.com/
 | **HTTP Verb** | **Endpoint**                                | **Description**                                                 |
@@ -314,3 +270,6 @@ In Milestone 6, our team fixed errors that we were facing with our completed ser
 ### Milestone 7 Build Progress Summary
 ![M7buildprogress](M7buildprogress.gif)
 In Milestone 7, continued to work on our front end, specifically designing our login, home page, and create reviews/forum posts. We made adjustments to these pages from the last milestone to incorporate bootstrap styling. We also continued to debug our services and controllers
+
+### Final Poster 
+![poster](FinalPoster.png)
