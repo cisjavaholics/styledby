@@ -16,6 +16,7 @@ import java.io.IOException;
 @SpringBootApplication
 public class StyledByApplication {
     public static void main(String[] args) throws IOException {
+        SpringApplication.run(StyledByApplication.class, args);
     }
 
 }

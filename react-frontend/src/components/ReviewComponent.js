@@ -1,21 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ReviewComponent.css';
 import braidsImage from './braids.png';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {Rating} from "react-simple-star-rating";
 
 function ReviewComponent(props) {
-
-    const loadStars = () => {
-        const stars = [];
-        for (let i = 0; i < props.rating; i++) {
-            stars.push(<span className="rating">★</span>);
-        }
-        for (let j = 0; j < 5 - props.rating; j++) {
-            stars.push(<span className="rating">☆</span>);
-        }
-        return <div className="rating-container">{stars}</div>; // Wrap stars in a container div
-    };
+    const { rating } = props;
     const handleDelete = async () => {
         try {
             // Make an HTTP DELETE request to your backend API to delete the review
@@ -34,15 +25,19 @@ function ReviewComponent(props) {
             <div className="review-container container-fluid">
                 <div className={"review-header"}>
                     <p style={{float: "right"}}>{props.createdAt}</p>
-                    <h2>
-                        {props.business}
-                    </h2>
+                    <Link to={`/reviewOne/${props.id}`} className="review-link">
+                        <h2>
+                            {props.business}
+                        </h2>
+                    </Link>
                     <span className="badge text-bg-secondary.bg-{#800080}" style={{float: "right"}}>{props.type}</span>
                     <a href="userProfile.html" style={{textDecoration: "none"}}>
                         <i className="fa-regular fa-user">&nbsp;</i>{props.createdBy}
                     </a>
                     <p>
-                        {loadStars()}
+                        <Rating initialValue={props.rating}>
+
+                        </Rating>
                     </p>
                 </div>
                 <div className="desc">

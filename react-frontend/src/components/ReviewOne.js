@@ -21,7 +21,7 @@ const ReviewOne = () => {
     const getReview = async () => {
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/reviews/${reviewId}`);
+            const response = await axios.get(`http://localhost:8080/api/reviews/rPostId/${reviewId}`);
             setReview(response.data.data);
         } catch (error) {
             console.error('Error fetching review:', error);
@@ -41,6 +41,7 @@ const ReviewOne = () => {
                         {review ? (
                             <ReviewComponent
                                 key={review.id}
+                                id={review.rPostId}
                                 type={review.type}
                                 rating={review.rating}
                                 description={review.description}

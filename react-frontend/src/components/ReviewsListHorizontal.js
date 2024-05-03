@@ -53,9 +53,10 @@ function ReviewsListHorizontal(props) {
                 </>
             ) : (
                 limitedReviews.map((review) => (
-                    <Link to={`/reviewOne/${review.id}`} className="review-link">
+
                         <ReviewComponent
                         key={review.id}
+                        id={review.rpostId}
                         type={review.type}
                         rating={review.rating}
                         description={review.description}
@@ -65,7 +66,8 @@ function ReviewsListHorizontal(props) {
                         width={props.rWidth}
                         height={props.rHeight}
                     />
-                    </Link>
+
+
                 ))
             )}
         </>
