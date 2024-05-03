@@ -118,6 +118,25 @@ public class UsersService {
         return userRef.delete().get();
     }
 
+    public Users getUserByUid(String uid) throws ExecutionException, InterruptedException {
+        Users user = null;
+
+        Query query = firestore.collection("User")
+                .whereEqualTo("uid", uid);
+        ApiFuture<QuerySnapshot> future = query.get();
+        List<QueryDocumentSnapshot> docs = future.get().getDocuments();
+
+        if(docs.size() == 1)
+            user = docs.get(0).toObject(Users.class);
+
+        return user;
+    }
+
+    public void updateLastLogin(String id){
+        DocumentReference docRef = firestore.collection("User").document(id);
+        ApiFuture<WriteResult> writeResult = docRef.update("lastLogin", FieldValue.serverTimestamp());
+
+    }
 
 
 }
