@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 
 function ReviewsListHorizontal(props) {
     const url = 'http://localhost:8080/api/reviews/';
+    const user = "";
     const [reviews, setReviews] = useState([]);
     const [showReviewOne, setShowReviewOne] = useState(false);
 
